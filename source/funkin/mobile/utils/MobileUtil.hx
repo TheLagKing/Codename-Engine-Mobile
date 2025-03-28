@@ -1,4 +1,4 @@
-package mobile.utils;
+package funkin.mobile.utils;
 
 #if android
 import android.os.Build.VERSION;
