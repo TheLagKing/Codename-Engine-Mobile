@@ -14,6 +14,7 @@ labels: compiling help
 [ ] Windows
 [ ] Linux
 [ ] Mac
+[ ] Android
 
 ### Explain your issue
 ##### Please check first if your issue haven't already been reported yet, and make sure you ran the `update.bat` file before building.

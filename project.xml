@@ -188,7 +188,7 @@
 	<haxelib name="format" />
 	<haxelib name="flxanimate" />
 	<haxelib name="nape-haxe4" if="NAPE_ENABLED"/>
-
+    <haxelib name="extension-androidtools" if="android" />
 	<haxelib name="hscript-improved" />
 	<haxelib name="hxdiscord_rpc" if="DISCORD_RPC"/>
 	<haxelib name="markdown" />
@@ -201,6 +201,20 @@
 	</section>
 
 	<haxeflag name="--macro" value="funkin.backend.system.macros.Macros.initMacros()" />
+
+	  <section if="android">    
+	  <config:android permission="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+	  <config:android permission="android.permission.MANAGE_MEDIA"/>
+	  <config:android permission="android.permission.READ_EXTERNAL_STORAGE"/>
+	  <config:android permission="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	  <config:android permission="android.permission.VIBRATE" />
+	  <config:android permission="android.permission.INTERNET" />
+	  <config:android permission="android.permission.ACCESS_WIFI_STATE"/>
+      <config:android permission="android.permission.ACCESS_NETWORK_STATE" />
+	  <config:android permission="android.permission.CAPTURE_AUDIO_OUTPUT" />
+	  <android target-sdk-version="34" />
+	  <android min-sdk-version="19" />
+	  </section>
 
 	<!-- Fix compiling issues -->
 	<setenv name="HAXEPATH" value="./"/>
