@@ -11,7 +11,10 @@ import android.Settings;
 import haxe.io.Path;
 import lime.system.System;
 import lime.app.Application;
+#if sys
 import sys.FileSystem;
+import sys.io.File;
+#end
 
 using StringTools;
 
