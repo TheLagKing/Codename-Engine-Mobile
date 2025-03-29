@@ -54,6 +54,10 @@ class ModsFolder {
 	 * Initialises `mods` folder.
 	 */
 	public static function init() {
+
+		if (!FileSystem.exists(Sys.getCwd() + modsPath)) FileSystem.createDirectory(Sys.getCwd() + modsPath);
+		if (!FileSystem.exists(Sys.getCwd() + addonsPath)) FileSystem.createDirectory(Sys.getCwd() + addonsPath);
+
 		if(!getModsList().contains(Options.lastLoadedMod))
 			Options.lastLoadedMod = null;
 	}
