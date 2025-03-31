@@ -140,7 +140,7 @@ class Main extends Sprite
 			ModsFolder.addonsPath = #if desktop './${pathBack}addons/' #else Sys.getCwd() + '${pathBack}addons/' #end;
 			#end
 		    Paths.assetsTree.__defaultLibraries.push(ModsFolder.loadLibraryFromFolder('assets', #if desktop './${pathBack}assets/' #else Sys.getCwd() + '${pathBack}assets/' #end, true));
-			#elseif USE_ADAPTED_ASSETS
+			#elseif (!mobile && USE_ADAPTED_ASSETS)
 			Paths.assetsTree.__defaultLibraries.push(ModsFolder.loadLibraryFromFolder('assets', #if desktop './assets/' #else Sys.getCwd() + 'assets/' #end, true));
 			#end
 
