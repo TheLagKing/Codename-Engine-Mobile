@@ -133,11 +133,11 @@ class Main extends Sprite
 		funkin.backend.scripting.GlobalScript.init();
 		#end
 
-		#if (sys && TEST_BUILD)
+		#if (sys /*&& TEST_BUILD*/)
 			trace("Used cne test / cne build. Switching into source assets.");
 			#if MOD_SUPPORT
-			ModsFolder.modsPath = #if desktop './${pathBack}mods/' #else Sys.getCwd() + '${pathBack}mods/' #end;
-			ModsFolder.addonsPath = #if desktop './${pathBack}addons/' #else Sys.getCwd() + '${pathBack}addons/' #end;
+			ModsFolder.modsPath = #if desktop './${pathBack}mods/' #else Sys.getCwd() + 'mods/' #end;
+			ModsFolder.addonsPath = #if desktop './${pathBack}addons/' #else Sys.getCwd() + '$addons/' #end;
 			#end
 		    Paths.assetsTree.__defaultLibraries.push(ModsFolder.loadLibraryFromFolder('assets', #if desktop './${pathBack}assets/' #else Sys.getCwd() + '${pathBack}assets/' #end, true));
 			#elseif (!mobile && USE_ADAPTED_ASSETS)
