@@ -34,7 +34,7 @@ class Main extends Sprite
 	public static var instance:Main;
 
 	public static var modToLoad:String = null;
-	public static var forceGPUOnlyBitmapsOff:Bool = #if windows false #else true #end;
+	public static var forceGPUOnlyBitmapsOff:Bool = #if (windows && mobile) false #else true #end;
 	public static var noTerminalColor:Bool = false;
 
 	public static var scaleMode:FunkinRatioScaleMode;
@@ -136,11 +136,11 @@ class Main extends Sprite
 		#if (sys /*&& TEST_BUILD*/)
 			trace("Used cne test / cne build. Switching into source assets.");
 			#if MOD_SUPPORT
-			ModsFolder.modsPath = #if desktop './${pathBack}mods/' #else Sys.getCwd() + 'mods/' #end;
-			ModsFolder.addonsPath = #if desktop './${pathBack}addons/' #else Sys.getCwd() + 'addons/' #end;
+			ModsFolder.modsPath = #if desktop './${pathBack}mods/' #else Sys.getCwd() + './${pathBack}mods/' #end;
+			ModsFolder.addonsPath = #if desktop './${pathBack}addons/' #else Sys.getCwd() + './${pathBack}addons/' #end;
 			#end
-		    Paths.assetsTree.__defaultLibraries.push(ModsFolder.loadLibraryFromFolder('assets', #if desktop './${pathBack}assets/' #else Sys.getCwd() + '${pathBack}assets/' #end, true));
-			#elseif (!mobile && USE_ADAPTED_ASSETS)
+		    Paths.assetsTree.__defaultLibraries.push(ModsFolder.loadLibraryFromFolder('assets', #if desktop './${pathBack}assets/' #else Sys.getCwd() + './${pathBack}assets/' #end, true));
+			#elseif USE_ADAPTED_ASSETS
 			Paths.assetsTree.__defaultLibraries.push(ModsFolder.loadLibraryFromFolder('assets', #if desktop './assets/' #else Sys.getCwd() + 'assets/' #end, true));
 			#end
 
