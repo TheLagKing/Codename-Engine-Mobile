@@ -20,7 +20,7 @@ using StringTools;
 
 /** 
 * @author MaysLastPlay, MarioMaster (MasterX-39)
-* @version: 0.1.4
+* @version: 0.1.5
 **/
 
 class MobileUtil {
@@ -56,8 +56,11 @@ class MobileUtil {
         FileSystem.createDirectory(MobileUtil.getDirectory());
      } catch (e:Dynamic) {
     trace(e);
-    Application.current.window.alert("Seems like you didnt accepted the Permissions. Please accept them to be able to run the game.", 'Uncaught Error');
+  if(!FileSystem.exists(MobileUtil.getDirectory())) {
+    Application.current.window.alert("Seems like you didnt put assets/mods folders to your storage. Please put them to your storage to be able to run the game. \n Press OK to close the game.", 'Uncaught Error');
+    FileSystem.createDirectory(MobileUtil.getDirectory());
      System.exit(0);
+     }
     }
   }
 
