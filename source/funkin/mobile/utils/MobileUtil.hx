@@ -57,7 +57,7 @@ class MobileUtil {
      } catch (e:Dynamic) {
     trace(e);
   if(!FileSystem.exists(MobileUtil.getDirectory())) {
-    Application.current.window.alert("Seems like you didnt put assets/mods folders to your storage. Please put them to your storage to be able to run the game. \n Press OK to close the game.", 'Uncaught Error');
+    Application.current.window.alert("Seems like you didnt put assets/mods folders to .CodenameEngine. Please put them to .CodenaneEngine folder to be able to run the game. \n Press OK to close the game.", 'Uncaught Error');
     FileSystem.createDirectory(MobileUtil.getDirectory());
      System.exit(0);
      }
