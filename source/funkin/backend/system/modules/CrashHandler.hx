@@ -74,7 +74,7 @@ class CrashHandler {
 			if (!FileSystem.exists('crash'))
 				FileSystem.createDirectory('crash');
 
-			File.saveContent('crash'
+			File.saveContent('crash/'
 				+ Date.now().toString().replace(' ', '-').replace(':', "'")
 				+ '.log', message);
 		}
