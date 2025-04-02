@@ -3,12 +3,10 @@ package funkin.mobile.utils;
 #if android
 import android.os.Build.VERSION;
 import android.os.Environment;
-import android.content.Context;
 import android.Permissions;
 import android.Settings;
 #end
 
-import haxe.io.Path;
 import lime.system.System;
 import lime.app.Application;
 #if sys
@@ -20,12 +18,15 @@ using StringTools;
 
 /** 
 * @author MaysLastPlay, MarioMaster (MasterX-39)
-* @version: 0.1.5
+* @version: 0.2.0
 **/
 
 class MobileUtil {
   public static var currentDirectory:String = null;
-  public static var path:String = '';
+
+  /**
+   * Get the directory for the application. (External for Android Platform and Internal for iOS Platform.)
+   */
 
   public static function getDirectory():String {
    #if android
@@ -37,16 +38,17 @@ class MobileUtil {
   }
 
     #if android
+
+  /**
+   * Requests Storage Permissions on Android Platform.
+   */
+
     public static function getPermissions():Void
     {
-    path = Path.addTrailingSlash(Environment.getExternalStorageDirectory() + '/.' + Application.current.meta.get('file'));
-  
-       if(VERSION.SDK_INT >= 33){
-		Permissions.requestPermissions(['READ_MEDIA_IMAGES', 'READ_MEDIA_VIDEO', 'READ_MEDIA_AUDIO']);
-	    if (!Environment.isExternalStorageManager()) {
-	    Settings.requestSetting('REQUEST_MANAGE_MEDIA');
-	    Settings.requestSetting('MANAGE_APP_ALL_FILES_ACCESS_PERMISSION');
-	    }
+    if(VERSION.SDK_INT >= 33){
+	   if (!Environment.isExternalStorageManager()) {
+	     Settings.requestSetting('MANAGE_APP_ALL_FILES_ACCESS_PERMISSION');
+	   }
       } else {
         Permissions.requestPermissions(['READ_EXTERNAL_STORAGE', 'WRITE_EXTERNAL_STORAGE']);
 	  }
@@ -57,19 +59,25 @@ class MobileUtil {
      } catch (e:Dynamic) {
     trace(e);
   if(!FileSystem.exists(MobileUtil.getDirectory())) {
-    Application.current.window.alert("Seems like you didnt put assets/mods folders to .CodenameEngine. Please put them to .CodenaneEngine folder to be able to run the game. \n Press OK to close the game.", 'Uncaught Error');
+    Application.current.window.alert("Seems like you didnt enabled permissions requested to run the game/didnt put assets to your storage. Please enable them/put assets/mods folders to .CodenameEngine folder to be able to run the game. \n Press OK to close the game.", 'Uncaught Error');
     FileSystem.createDirectory(MobileUtil.getDirectory());
      System.exit(0);
      }
     }
   }
 
+  /**
+   * Saves a file to the external storage.
+   */
+
 	public static function save(fileName:String = 'Ye', fileExt:String = '.json', fileData:String = 'you didnt cooked, try again!')
 	{
-		if (!FileSystem.exists(MobileUtil.getDirectory() + 'saved-content'))
-			FileSystem.createDirectory(MobileUtil.getDirectory() + 'saved-content');
+	  var savesDir:String = MobileUtil.getDirectory() + 'saved-content/';
 
-		File.saveContent(MobileUtil.getDirectory() + 'saved-content/' + fileName + fileExt, fileData);
+		if (!FileSystem.exists(savesDir);
+			FileSystem.createDirectory(savesDir);
+
+		File.saveContent(savesDir + fileName + fileExt, fileData);
 	}
   #end
 }
