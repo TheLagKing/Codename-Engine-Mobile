@@ -20,6 +20,10 @@ class CrashHandler {
 	}
 
 	public static function onUncaughtError(e:UncaughtErrorEvent) {
+		e.preventDefault();
+		e.stopPropagation();
+		e.stopImmediatePropagation();
+
 		var m:String = e.error;
 		if (Std.isOfType(e.error, Error)) {
 			var err = cast(e.error, Error);
@@ -49,12 +53,9 @@ class CrashHandler {
 			stackLabel += "\r\n";
 		}
 
-		e.preventDefault();
-		e.stopPropagation();
-		e.stopImmediatePropagation();
-
 		NativeAPI.showMessageBox("Codename Engine Crash Handler", 'Uncaught Error:$m\n\n$stackLabel', MSG_ERROR);
 		#if sys
+		saveUncaughtError('$m\n\n$stackLabel');
 		Sys.exit(1);
 		#end
 	}
@@ -65,4 +66,19 @@ class CrashHandler {
 		throw Std.string(message);
 	}
 	#end
+
+	#if sys
+	private static function saveErrorMessage(message:String):Void 
+	{
+		try {
+			if (!FileSystem.exists('crash'))
+				FileSystem.createDirectory('crash');
+
+			File.saveContent('crash'
+				+ Date.now().toString().replace(' ', '-').replace(':', "'")
+				+ '.log', message);
+		}
+	}
+	#end
+}
 }
