@@ -9,6 +9,11 @@ import openfl.errors.Error;
 import openfl.events.UncaughtErrorEvent;
 import haxe.CallStack;
 
+#if sys
+import sys.FileSystem;
+import sys.io.File;
+#end
+
 class CrashHandler {
 	public static function init() {
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onUncaughtError);
@@ -55,7 +60,7 @@ class CrashHandler {
 
 		NativeAPI.showMessageBox("Codename Engine Crash Handler", 'Uncaught Error:$m\n\n$stackLabel', MSG_ERROR);
 		#if sys
-		saveUncaughtError('$m\n\n$stackLabel');
+		saveErrorMessage('$m\n\n$stackLabel');
 		Sys.exit(1);
 		#end
 	}
@@ -80,5 +85,4 @@ class CrashHandler {
 		}
 	}
 	#end
-}
 }
