@@ -74,7 +74,7 @@ class MobileUtil {
 	{
 	  var savesDir:String = MobileUtil.getDirectory() + 'saved-content/';
 
-		if (!FileSystem.exists(savesDir)
+		if (!FileSystem.exists(savesDir))
 			FileSystem.createDirectory(savesDir);
 
 		File.saveContent(savesDir + fileName + fileExt, fileData);
