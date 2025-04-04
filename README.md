@@ -87,3 +87,11 @@ In the future (when the engine won't be a WIP anymore) we're gonna also publish 
 - Credits to Smokey555 for the backup Animate Atlas to spritesheet code
 - Credits to MAJigsaw77 for [hxvlc](https://github.com/MAJigsaw77/hxvlc) (video cutscene/mp4 support) and [hxdiscord_rpc](https://github.com/MAJigsaw77/hxdiscord_rpc) (discord rpc integration)
 </details>
+
+<details>
+  <summary><h2> Mobile Credits</h2></summary>
+[MaysLastPlay](https://youtube.com/@MaysLastPlay) - MobileUtil Creator and Mobile Porter
+[Idklool](https://youtube.com/@Idklool121) - TouchInput Creator and Mobile Porter
+[Stefan2008](https://github.com/Stefan2008Git) - Helper
+
+</details>
