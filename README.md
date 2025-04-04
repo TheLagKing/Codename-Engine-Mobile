@@ -93,5 +93,5 @@ In the future (when the engine won't be a WIP anymore) we're gonna also publish 
 
 - [MaysLastPlay](https://youtube.com/@MaysLastPlay) - MobileUtil Creator and Mobile Porter
 - [Idklool](https://youtube.com/@Idklool121) - TouchInput Creator and Mobile Porter
-- [Stefan2008](https://github.com/Stefan2008Git) - Helper
+- [Stefan2008](https://youtube.com/@stefan2008official) - Helper
 </details>
