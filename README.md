@@ -92,6 +92,6 @@ In the future (when the engine won't be a WIP anymore) we're gonna also publish 
   <summary><h2>Mobile Credits</h2></summary>
 
 - [MaysLastPlay](https://youtube.com/@MaysLastPlay) - MobileUtil Creator and Mobile Porter
-- [Idklool](https://youtube.com/@Idklool121) - TouchInput Creator and Mobile Porter
+- [Idklool](https://youtube.com/@Idklool122) - TouchInput Creator and Mobile Porter
 - [Stefan2008](https://youtube.com/@stefan2008official) - Helper
 </details>
