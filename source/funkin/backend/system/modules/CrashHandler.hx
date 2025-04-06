@@ -76,8 +76,8 @@ class CrashHandler {
 	private static function saveErrorMessage(message:String):Void 
 	{
 		try {
-			if (!FileSystem.exists('crash'))
-				FileSystem.createDirectory('crash');
+			if (!FileSystem.exists(Sys.getCwd() + 'crash'))
+				FileSystem.createDirectory(Sys.getCwd() + 'crash');
 
 			File.saveContent(Sys.getCwd() + 'crash/'
 				+ Date.now().toString().replace(' ', '-').replace(':', "'")
