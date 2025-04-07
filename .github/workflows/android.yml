@@ -16,13 +16,13 @@ jobs:
         id: setup-ndk
         uses: nttld/setup-ndk@main
         with:
-          ndk-version: r25c
+          ndk-version: r27
       - name: Setup Java JDK
 
         uses: actions/setup-java@main
         with:
           distribution: 'zulu'
-          java-version: '18'
+          java-version: '17'
       - name: Restore existing build cache for faster compilation
         uses: actions/cache@v3
         with:
