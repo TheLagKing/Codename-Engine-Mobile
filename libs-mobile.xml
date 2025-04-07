@@ -22,6 +22,6 @@
 
 <!-- Mobile Libraries -->
 <git name="hxcpp" url="https://github.com/HaxeFoundation/hxcpp" />
-<git name="extension-androidtools" url="https://github.com/MaysLastPlays-Stuff/extension-androidtools" skipDeps="true" />
+<git name="extension-androidtools" url="https://github.com/MAJigsaw77/extension-androidtools" skipDeps="true" />
 
 </libraries>
