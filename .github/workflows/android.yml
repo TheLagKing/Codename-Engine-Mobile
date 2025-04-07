@@ -41,8 +41,6 @@ jobs:
       - name: Building the game
         run: |
           haxelib run lime build android -final
-        env:
-          GRADLE_OPTS: "--no-daemon"
       - name: Clear Previous Cache
         uses: actions/github-script@main
         with:
