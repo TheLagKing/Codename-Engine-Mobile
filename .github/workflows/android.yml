@@ -31,6 +31,7 @@ jobs:
       - name: Installing/Updating libraries
         run: |
           haxe -cp commandline -D analyzer-optimize --run Main setup -s
+          haxelib run lime rebuild hxcpp
 
       - name: Configure Android
         run: |
@@ -40,7 +41,7 @@ jobs:
           haxelib run lime config JAVA_HOME $JAVA_HOME_17_X64
           haxelib run lime config ANDROID_SETUP true
         env:
-          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+          GRADLE_OPTS: "-Xmx4g"
       - name: Building the game
         run: |
           haxelib run lime build android -final
