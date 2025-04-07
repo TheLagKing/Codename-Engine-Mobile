@@ -11,18 +11,18 @@ jobs:
       - name: Setting up Haxe
         uses: krdlab/setup-haxe@v1
         with:
-          haxe-version: 4.3.4
+          haxe-version: 4.2.5
       - name: Setup Android NDK
         id: setup-ndk
         uses: nttld/setup-ndk@main
         with:
-          ndk-version: r27
+          ndk-version: r25c
       - name: Setup Java JDK
 
         uses: actions/setup-java@main
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: '18'
       - name: Restore existing build cache for faster compilation
         uses: actions/cache@v3
         with:
@@ -51,17 +51,12 @@ jobs:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
       - name: Building the game
         run: |
-          haxelib run lime build android -final
+          haxelib run lime build android
       - name: Uploading artifact (entire build)
         uses: actions/upload-artifact@v4
         with:
-          name: Codename Engine
+          name: Codename Engine Android
           path: export/release/android/bin/app/build/outputs/apk/debug
-      # - name: Uploading artifact (executable)
-      #   uses: actions/upload-artifact@v4
-      #   with:
-      #     name: Update-Windows
-      #     path: export/release/windows/bin/CodenameEngine.exe
       - name: Clearing already existing cache
         uses: actions/github-script@v6
         with:
