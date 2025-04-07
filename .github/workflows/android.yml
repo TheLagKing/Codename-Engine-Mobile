@@ -51,7 +51,7 @@ jobs:
           ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
       - name: Building the game
         run: |
-          haxelib run lime build android
+          haxelib run lime build android -final
       - name: Uploading artifact (entire build)
         uses: actions/upload-artifact@v4
         with:
