@@ -181,7 +181,7 @@
 	<haxelib name="flxanimate" />
 	<haxelib name="nape-haxe4" if="NAPE_ENABLED"/>
 	<haxelib name="hxp" if="android" />
-    <haxelib name="extension-androidtools" if="android" />
+   <!-- <haxelib name="extension-androidtools" if="android" /> -->
 	<haxelib name="hscript-improved" />
 	<haxelib name="hxdiscord_rpc" if="DISCORD_RPC"/>
 	<haxelib name="markdown" />
