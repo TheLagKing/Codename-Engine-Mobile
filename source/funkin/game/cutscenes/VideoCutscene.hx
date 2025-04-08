@@ -205,7 +205,7 @@ class VideoCutscene extends Cutscene {
 		if (loadingBackdrop != null) {
 			loadingBackdrop.x -= elapsed * FlxG.width * 0.5;
 		}
-		if (skippable && video.isPlaying && controls.ACCEPT) {
+		if (skippable && video.isPlaying && controls.ACCEPT #if mobile || TouchInput.BACK() #end) {
 			video.onEndReached.dispatch();
 		}
 		#else
