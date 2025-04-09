@@ -18,7 +18,7 @@ Codename Engine is a new Friday Night Funkin' Engine aimed at simplifying moddin
 
 ## How to download
 
-Latest builds for the engine can be found in the [Actions](https://github.com/YoshiCrafter29/CodenameEngine/actions) tab.<br>
+Latest builds for the engine can be found in the [Actions](https://github.com/CodenameCrew/CodenameEngine/actions) tab.<br>
 In the future (when the engine won't be a WIP anymore) we're gonna also publish the engine on platforms like Gamebanana; stay tuned!
 
 <details>
@@ -93,5 +93,7 @@ In the future (when the engine won't be a WIP anymore) we're gonna also publish 
 
 - [MaysLastPlay](https://youtube.com/@MaysLastPlay) - MobileUtil Creator and Mobile Porter
 - [Idklool](https://youtube.com/@Idklool122) - TouchInput Creator and Mobile Porter
+- [MarioMaster (MasterX-39)](https://youtube.com/@MarioMaster39)
+- [Ralsei](https://github.com/RalseiSmolToo)
 - [Stefan2008](https://youtube.com/@stefan2008official) - Helper
 </details>
