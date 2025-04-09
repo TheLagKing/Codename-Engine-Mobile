@@ -10,6 +10,11 @@ import funkin.backend.system.Conductor;
 import funkin.backend.system.Controls;
 import funkin.options.PlayerSettings;
 import flixel.FlxSubState;
+#if mobile
+import flixel.FlxCamera;
+import flixel.input.actions.FlxActionInput;
+import mobile.FlxVirtualPad;
+#end
 
 class MusicBeatSubstate extends FlxSubState implements IBeatReceiver
 {
@@ -91,6 +96,33 @@ class MusicBeatSubstate extends FlxSubState implements IBeatReceiver
 	inline function get_controlsP2():Controls
 		return PlayerSettings.player2.controls;
 
+	#if mobile
+	var vPad:FlxVirtualPad;
+	var trackedinputs:Array<FlxActionInput> = [];
+
+	public function addVPad(?DPad:FlxDPadMode, ?Action:FlxActionMode) {
+		vPad = new FlxVirtualPad(DPad, Action);
+		vPad.alpha = 0.35;
+		add(vPad);
+		controls.setUIVirtualPad(vPad, DPad, Action);
+		trackedinputs = controls.trackedUIinputs;
+		controls.trackedUIinputs = [];
+	}
+	
+	public function addVPadCamera() {
+	  var camcontrol = new FlxCamera(); 
+    FlxG.cameras.add(camcontrol, false); 
+    camcontrol.bgColor.alpha = 0; 
+    vPad.cameras = [camcontrol];
+	}
+
+	public function removeVPad() {
+	  if (vPad != null) {
+	    remove(vPad);
+	    controls.removeFlxInput(trackedinputs);
+	  }
+	}
+	#end
 
 	public function new(scriptsAllowed:Bool = true, ?scriptName:String) {
 		super();
@@ -226,9 +258,18 @@ class MusicBeatSubstate extends FlxSubState implements IBeatReceiver
 	}
 
 	public override function destroy() {
+	  #if mobile
+	  controls.removeFlxInput(trackedinputs);
+	  #end
 		super.destroy();
 		call("destroy");
 		stateScripts = FlxDestroyUtil.destroy(stateScripts);
+		#if mobile
+	  if (vPad != null) {
+	    vPad.destroy();
+	    vPad = null;
+	  }
+	  #end
 	}
 
 	public override function switchTo(nextState:FlxState) {
