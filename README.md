@@ -93,7 +93,7 @@ In the future (when the engine won't be a WIP anymore) we're gonna also publish 
 
 - [MaysLastPlay](https://youtube.com/@MaysLastPlay) - MobileUtil Creator and Mobile Porter
 - [Idklool](https://youtube.com/@Idklool122) - TouchInput Creator and Mobile Porter
-- [MarioMaster (MasterX-39)](https://youtube.com/@MarioMaster39)
-- [Ralsei](https://github.com/RalseiSmolToo)
+- [MarioMaster (MasterX-39)](https://youtube.com/@MarioMaster39) - Mobile Porter
+- [Ralsei](https://github.com/RalseiSmolToo) - Mobile Porter
 - [Stefan2008](https://youtube.com/@stefan2008official) - Helper
 </details>
