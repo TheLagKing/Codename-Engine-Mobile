@@ -66,7 +66,6 @@ class Main extends Sprite
 	    #if android
 		Sys.setCwd(haxe.io.Path.addTrailingSlash(MobileUtil.getDirectory()));
 		MobileUtil.getPermissions();
-		//MobileCrashHandler.checkUncaughtError(); // Gonna see if it'll show error now.
 		#elseif ios
 		Sys.setCwd(lime.system.System.applicationStorageDirectory);
         #end
