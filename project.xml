@@ -52,6 +52,7 @@
 	<set name="BUILD_DIR" value="latest/" if="beta" />
 
 	<source name="source" />
+	<assets path='assets/mobile' if='mobile'/>
 
 	<define name="PRELOAD_ALL" unless="web" />
 	<define name="NO_PRELOAD_ALL" unless="PRELOAD_ALL"/>
