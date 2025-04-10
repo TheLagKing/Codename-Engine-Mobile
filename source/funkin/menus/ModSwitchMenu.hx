@@ -34,6 +34,10 @@ class ModSwitchMenu extends MusicBeatSubstate {
 		}
 		add(alphabets);
 		changeSelection(0, true);
+		#if mobile
+		addVPad(NONE, A_B);
+		addVPadCamera();
+		#end
 	}
 
 	public override function update(elapsed:Float) {

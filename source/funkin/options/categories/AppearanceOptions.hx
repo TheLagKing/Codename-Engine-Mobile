@@ -47,6 +47,10 @@ class AppearanceOptions extends OptionsScreen {
 			"Auto Pause",
 			"If checked, switching windows will pause the game.",
 			"autoPause"));
+     #if mobile
+	 addVPad(NONE, A_B);
+	 addVPadCamera();
+	 #end
 	}
 
 	private function __changeFPS(change:Float) {

@@ -124,6 +124,10 @@ class StoryMenuState extends MusicBeatState {
 
 		DiscordUtil.call("onMenuLoaded", ["Story Menu"]);
 		CoolUtil.playMenuSong();
+		#if mobile
+		addVPad(FULL, A_B);
+		addVPadCamera();
+		#end
 	}
 
 	var __lastDifficultyTween:FlxTween;

@@ -45,6 +45,11 @@ class CreditsMain extends TreeMenu {
 		main = new OptionsScreen('Credits', 'The people who made this possible!', items);
 		super.create();
 
+        #if mobile
+		addVPad(NONE, A_B);
+		addVPadCamera();
+		#end
+
 		DiscordUtil.call("onMenuLoaded", ["Credits Menu"]);
 	}
 

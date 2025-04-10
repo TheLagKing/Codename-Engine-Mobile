@@ -28,5 +28,9 @@ class MiscOptions extends OptionsScreen {
 			function() {
 				// TODO: SAVE DATA RESETTING
 		}));
+		#if mobile
+		addVPad(NONE, A_B);
+		addVPadCamera();
+		#end
 	}
 }

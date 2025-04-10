@@ -34,6 +34,10 @@ class GameplayOptions extends OptionsScreen {
 			"Camera Zoom on Beat",
 			"If unchecked, will stop the camera from zooming in every 4 beats",
 			"camZoomOnBeat"));
+	  #if mobile
+	  addVPad(NONE, A_B);
+	  addVPadCamera();
+	  #end
 	}
 
 	private function __changeOffset(offset)

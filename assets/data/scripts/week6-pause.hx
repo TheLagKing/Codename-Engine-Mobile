@@ -62,6 +62,10 @@ function create(event) {
 	cameras = [pauseCam];
 
 	FlxG.sound.play(Paths.sound(isThorns ? 'pixel/ANGRY' : 'pixel/clickText'));
+	#if mobile
+	addVPad(NONE, A);
+	addVPadCamera();
+	#end
 }
 
 function confText(text) {

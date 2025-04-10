@@ -162,6 +162,10 @@ class KeybindsOptions extends MusicBeatSubstate {
 		}
 		add(alphabets);
 		add(camFollow);
+		#if mobile
+		addVPad(NONE, A_B);
+		addVPadCamera();
+		#end
 	}
 
 	public override function destroy() {
@@ -248,4 +252,4 @@ class KeybindsOptions extends MusicBeatSubstate {
 				camFollow.setPosition(FlxG.width / 2, FlxG.height / 2);
 		}
 	}
-}
+}u

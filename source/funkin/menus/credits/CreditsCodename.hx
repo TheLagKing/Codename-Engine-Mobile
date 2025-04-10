@@ -21,6 +21,9 @@ class CreditsCodename extends funkin.options.OptionsScreen {
 	{
 		super("Codename Engine", "All the contributors of the engine! - Press RESET to update the list (One reset per 2 minutes).");
 		tryUpdating(true);
+		addVPad(NONE, A_B);
+		addVPadCamera();
+		#end
 	}
 
 	// blame the secondary threads if the code has to look this bad  - Nex
