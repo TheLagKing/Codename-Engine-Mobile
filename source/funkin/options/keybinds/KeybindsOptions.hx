@@ -252,4 +252,4 @@ class KeybindsOptions extends MusicBeatSubstate {
 				camFollow.setPosition(FlxG.width / 2, FlxG.height / 2);
 		}
 	}
-}u
+}
