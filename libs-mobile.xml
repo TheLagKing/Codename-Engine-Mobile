@@ -7,6 +7,7 @@
 <!-- Flixel -->
 <git name="flixel" url="https://github.com/CodenameCrew/cne-flixel" />
 <git name="flixel-addons" url="https://github.com/CodenameCrew/cne-flixel-addons" />
+<lib name="flixel-ui" />
 
 <!-- Other Libraries -->
 <git name="hscript-improved" url="https://github.com/CodenameCrew/hscript-improved" ref="custom-classes" />
