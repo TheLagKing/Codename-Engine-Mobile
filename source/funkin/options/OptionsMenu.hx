@@ -88,6 +88,14 @@ class OptionsMenu extends TreeMenu {
 	  #end
 	}
 
+  #if mobile
+	public override function update(elapsed:Float) {
+		super.update(elapsed);
+		if (vPad.buttonC.justPressed)
+		FlxG.switchState(new CustomControlsState());
+	}
+	#end
+
 	public override function exit() {
 		Options.save();
 		Options.applySettings();
