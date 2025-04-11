@@ -28,7 +28,7 @@ class OptionsScreen extends FlxTypedSpriteGroup<OptionType> {
 		var controls = PlayerSettings.solo.controls;
 
     #if mobile
-    if (vPad.buttonC.justPressed)
+    if (MusicBeatState.instance.vPad.buttonC.justPressed)
     MusicBeatState.switchState(new mobile.CustomControlsState());
     #end
 
