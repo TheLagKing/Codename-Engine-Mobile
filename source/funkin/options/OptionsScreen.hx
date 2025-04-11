@@ -27,11 +27,6 @@ class OptionsScreen extends FlxTypedSpriteGroup<OptionType> {
 
 		var controls = PlayerSettings.solo.controls;
 
-    #if mobile
-    if (MusicBeatState.instance.vPad.buttonC.justPressed)
-    MusicBeatState.switchState(new mobile.CustomControlsState());
-    #end
-
 		changeSelection((controls.UP_P ? -1 : 0) + (controls.DOWN_P ? 1 : 0) - FlxG.mouse.wheel);
 		x = id * FlxG.width;
 		for(k=>option in members) {
