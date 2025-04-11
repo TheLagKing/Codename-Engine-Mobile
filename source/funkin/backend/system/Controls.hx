@@ -340,7 +340,7 @@ class Controls extends FlxActionSet
 	public var BACK(get, set):Bool;
 
 	inline function get_BACK()
-		return _back.check() || TouchInput.BACK();
+		return _back.check() #if android || TouchInput.BACK() #end;
 
 	inline function set_BACK(val)
 		return @:privateAccess _back._checked = val;
@@ -348,7 +348,7 @@ class Controls extends FlxActionSet
 	public var PAUSE(get, set):Bool;
 
 	inline function get_PAUSE()
-		return _pause.check() || TouchInput.BACK();
+		return _pause.check() #if android || TouchInput.BACK() #end;
 
 	inline function set_PAUSE(val)
 		return @:privateAccess _pause._checked = val;
