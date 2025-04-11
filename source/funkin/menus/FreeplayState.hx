@@ -176,6 +176,7 @@ class FreeplayState extends MusicBeatState
 		#if mobile
 		addVPad(NONE, A_B_X_Y);
 		addVPadCamera();
+		#end
 	}
 
 	#if PRELOAD_ALL
