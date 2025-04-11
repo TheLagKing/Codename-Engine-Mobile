@@ -16,8 +16,6 @@ jobs:
       - name: Install Libraries
         run: |
           haxe -cp commandline -D analyzer-optimize --run Main setup -s
-          haxelib remove lime
-          haxelib git lime https://github.com/MobilePorting/lime
           haxelib run lime rebuild hxcpp
 
       - name: Compile
