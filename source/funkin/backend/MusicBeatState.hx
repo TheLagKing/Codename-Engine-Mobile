@@ -22,6 +22,7 @@ import funkin.mobile.Mobilecontrols;
 
 class MusicBeatState extends FlxState implements IBeatReceiver
 {
+    public static var instance:MusicBeatState;
 	private var lastBeat:Float = 0;
 	private var lastStep:Float = 0;
 
@@ -180,6 +181,7 @@ class MusicBeatState extends FlxState implements IBeatReceiver
 
 	public function new(scriptsAllowed:Bool = true, ?scriptName:String) {
 		super();
+		instance = this;
 		this.scriptsAllowed = #if SOFTCODED_STATES scriptsAllowed #else false #end;
 
 		if(lastStateName != (lastStateName = Type.getClassName(Type.getClass(this)))) {

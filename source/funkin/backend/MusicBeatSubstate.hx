@@ -18,6 +18,7 @@ import funkin.mobile.FlxVirtualPad;
 
 class MusicBeatSubstate extends FlxSubState implements IBeatReceiver
 {
+	public static var instance:MusicBeatSubstate;
 	private var lastBeat:Float = 0;
 	private var lastStep:Float = 0;
 
@@ -126,6 +127,7 @@ class MusicBeatSubstate extends FlxSubState implements IBeatReceiver
 
 	public function new(scriptsAllowed:Bool = true, ?scriptName:String) {
 		super();
+		instance = this;
 		this.scriptsAllowed = #if SOFTCODED_STATES scriptsAllowed #else false #end;
 		this.scriptName = scriptName;
 	}
