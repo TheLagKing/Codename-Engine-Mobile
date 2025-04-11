@@ -29,8 +29,8 @@ class MiscOptions extends OptionsScreen {
 				// TODO: SAVE DATA RESETTING
 		}));
 		#if mobile
-		addVPad(NONE, A_B);
-		addVPadCamera();
+		MusicBeatState.addVPad(NONE, A_B);
+		MusicBeatState.addVPadCamera();
 		#end
 	}
 }

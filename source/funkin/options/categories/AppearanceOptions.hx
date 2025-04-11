@@ -48,8 +48,8 @@ class AppearanceOptions extends OptionsScreen {
 			"If checked, switching windows will pause the game.",
 			"autoPause"));
      #if mobile
-	 addVPad(NONE, A_B);
-	 addVPadCamera();
+	 MusicBeatState.addVPad(NONE, A_B);
+	 MusicBeatState.addVPadCamera();
 	 #end
 	}
 

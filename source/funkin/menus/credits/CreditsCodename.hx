@@ -22,8 +22,8 @@ class CreditsCodename extends funkin.options.OptionsScreen {
 		super("Codename Engine", "All the contributors of the engine! - Press RESET to update the list (One reset per 2 minutes).");
 		tryUpdating(true);
 		#if mobile
-		addVPad(NONE, A_B);
-		addVPadCamera();
+		MusicBeatState.addVPad(NONE, A_B);
+		MusicBeatState.addVPadCamera();
 		#end
 	}
 
