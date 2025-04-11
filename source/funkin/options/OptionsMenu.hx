@@ -82,8 +82,8 @@ class OptionsMenu extends TreeMenu {
 						main.add(o);
 			}
 		}
-      #if mobile
-	  addVPad(NONE, A_B);
+    #if mobile
+	  addVPad(NONE, A_B_C);
 	  addVPadCamera();
 	  #end
 	}

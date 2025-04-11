@@ -774,6 +774,8 @@ class PlayState extends MusicBeatState
 			e.cameras = [camHUD];
 		#end
 
+		#if mobile addMControls(); #end
+
 		startingSong = true;
 
 		super.create();
@@ -876,6 +878,7 @@ class PlayState extends MusicBeatState
 
 			if (scripts.event("onStartCountdown", new CancellableEvent()).cancelled) return;
 		}
+		#if mobile mcontrols.visible = true; #end
 
 		startedCountdown = true;
 		Conductor.songPosition = 0;
@@ -1489,6 +1492,7 @@ class PlayState extends MusicBeatState
 		}
 		inst.pause();
 		vocals.pause();
+		#if mobile mcontrols.visible = false; #end
 
 		if (validScore)
 		{
