@@ -92,7 +92,7 @@ class OptionsMenu extends TreeMenu {
 	public override function update(elapsed:Float) {
 		super.update(elapsed);
 		if (vPad.buttonC.justPressed)
-		FlxG.switchState(new CustomControlsState());
+		FlxG.switchState(new funkin.mobile.CustomControlsState());
 	}
 	#end
 
