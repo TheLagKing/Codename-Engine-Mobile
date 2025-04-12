@@ -12,6 +12,7 @@ import funkin.game.PlayState;
 import funkin.backend.scripting.EventManager;
 
 #if mobile
+import funkin.mobile.*;
 import funkin.mobile.backend.*;
 import funkin.mobile.utils.*;
 #end
