@@ -340,7 +340,7 @@ class Controls extends FlxActionSet
 	public var BACK(get, set):Bool;
 
 	inline function get_BACK()
-		return _back.check() #if android || TouchInput.BACK() #end;
+		return _back.check();
 
 	inline function set_BACK(val)
 		return @:privateAccess _back._checked = val;
