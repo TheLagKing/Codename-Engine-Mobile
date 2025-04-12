@@ -27,7 +27,11 @@ class OptionsScreen extends FlxTypedSpriteGroup<OptionType> {
 
 		var controls = PlayerSettings.solo.controls;
 
-		changeSelection((#if desktop controls.UP_P #else vPad.buttonUp.justPressed #end ? -1 : 0) + (#if desktop controls.DOWN_P ? #else vPad.buttonDown.justPressed #end 1 : 0) - FlxG.mouse.wheel);
+    #if desktop
+		changeSelection((controls.UP_P ? -1 : 0) + (controls.DOWN_P ? 1 : 0) - FlxG.mouse.wheel);
+		#else
+		changeSelection((vPad.buttonUp.justPressed ? -1 : 0) + (vPad.buttonDown.justPressed ? 1 : 0) - FlxG.mouse.wheel);
+		#end
 		x = id * FlxG.width;
 		for(k=>option in members) {
 			if(option == null) continue;
