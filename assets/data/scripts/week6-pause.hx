@@ -63,7 +63,7 @@ function create(event) {
 
 	FlxG.sound.play(Paths.sound(isThorns ? 'pixel/ANGRY' : 'pixel/clickText'));
 	#if mobile
-	addVPad(NONE, A);
+	addVPad(UP_DOWN, A);
 	addVPadCamera();
 	#end
 }

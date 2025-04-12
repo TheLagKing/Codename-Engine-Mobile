@@ -111,7 +111,7 @@ class PauseSubState extends MusicBeatSubstate
 		pauseScript.call("postCreate");
 
         #if mobile
-		addVPad(NONE, A);
+		addVPad(UP_DOWN, A);
 		addVPadCamera();
 		#end
 

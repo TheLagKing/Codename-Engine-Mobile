@@ -174,7 +174,7 @@ class FreeplayState extends MusicBeatState
 
 		interpColor = new FlxInterpolateColor(bg.color);
 		#if mobile
-		addVPad(NONE, A_B_X_Y);
+		addVPad(FULL, A_B_X_Y);
 		addVPadCamera();
 		#end
 	}

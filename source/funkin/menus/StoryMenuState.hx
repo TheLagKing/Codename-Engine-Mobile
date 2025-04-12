@@ -125,7 +125,7 @@ class StoryMenuState extends MusicBeatState {
 		DiscordUtil.call("onMenuLoaded", ["Story Menu"]);
 		CoolUtil.playMenuSong();
 		#if mobile
-		addVPad(NONE, A_B);
+		addVPad(FULL, A_B);
 		addVPadCamera();
 		#end
 	}

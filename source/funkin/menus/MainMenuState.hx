@@ -87,7 +87,7 @@ class MainMenuState extends MusicBeatState
 
 		changeItem();
 		#if mobile
-		addVPad(NONE, A_B_C);
+		addVPad(UP_DOWN, A_B_C);
 		addVPadCamera();
 		#end
 	}

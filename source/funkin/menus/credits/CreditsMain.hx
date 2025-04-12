@@ -46,7 +46,7 @@ class CreditsMain extends TreeMenu {
 		super.create();
 
         #if mobile
-		addVPad(NONE, A_B);
+		addVPad(UP_DOWN, A_B);
 		addVPadCamera();
 		#end
 

@@ -46,7 +46,7 @@ class GitarooPause extends MusicBeatState
 		changeThing();
 
         #if mobile
-		addVPad(NONE, A);
+		addVPad(LEFT_RIGHT, A);
 		addVPadCamera();
 		#end
 
