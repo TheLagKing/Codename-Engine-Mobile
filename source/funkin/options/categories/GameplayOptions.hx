@@ -35,7 +35,7 @@ class GameplayOptions extends OptionsScreen {
 			"If unchecked, will stop the camera from zooming in every 4 beats",
 			"camZoomOnBeat"));
 	  #if mobile
-	  MusicBeatState.instance.addVPad(NONE, A_B);
+	  MusicBeatState.instance.addVPad(FULL, A_B);
 	  MusicBeatState.instance.addVPadCamera();
 	  #end
 	}

@@ -27,7 +27,7 @@ class OptionsScreen extends FlxTypedSpriteGroup<OptionType> {
 
 		var controls = PlayerSettings.solo.controls;
 
-		changeSelection((controls.UP_P ? -1 : 0) + (controls.DOWN_P ? 1 : 0) - FlxG.mouse.wheel);
+		changeSelection((#if desktop controls.UP_P #else vPad.buttonUp.justPressed #end ? -1 : 0) + (#if desktop controls.DOWN_P ? #else vPad.buttonDown.justPressed #end 1 : 0) - FlxG.mouse.wheel);
 		x = id * FlxG.width;
 		for(k=>option in members) {
 			if(option == null) continue;
@@ -47,9 +47,9 @@ class OptionsScreen extends FlxTypedSpriteGroup<OptionType> {
 			members[curSelected].selected = true;
 			if (controls.ACCEPT || (FlxG.mouse.justReleased && Main.timeSinceFocus > 0.25))
 				members[curSelected].onSelect();
-			if (controls.LEFT_P)
+			if ( #if desktop controls.LEFT_P #else vPad.buttonLeft.justPressed #end)
 				members[curSelected].onChangeSelection(-1);
-			if (controls.RIGHT_P)
+			if (#if desktop controls.RIGHT_P #else vPad.buttonRight.justPressed #end)
 				members[curSelected].onChangeSelection(1);
 		}
 		if (controls.BACK || FlxG.mouse.justReleasedRight)
