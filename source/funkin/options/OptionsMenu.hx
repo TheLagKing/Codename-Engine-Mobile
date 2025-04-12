@@ -93,7 +93,7 @@ class OptionsMenu extends TreeMenu {
 	  #end
 	}
 
-    override function openSubState(sub) {}
+    override function openSubState(sub) {
 	    #if mobile vPad.visible = false; #end
 		super.openSubState(sub);
     }
