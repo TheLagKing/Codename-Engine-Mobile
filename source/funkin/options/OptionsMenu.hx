@@ -25,6 +25,11 @@ class OptionsMenu extends TreeMenu {
 			state: AppearanceOptions
 		},
 		{
+			name: 'Mobile Controls >',
+			desc: 'Change Mobile Controls...',
+			state: CustomControlsState
+		},
+		{
 			name: 'Miscellaneous >',
 			desc: 'Use this menu to reset save data or engine settings.',
 			state: MiscOptions
@@ -83,18 +88,10 @@ class OptionsMenu extends TreeMenu {
 			}
 		}
     #if mobile
-	  addVPad(UP_DOWN, A_B_C);
+	  addVPad(UP_DOWN, A_B);
 	  addVPadCamera();
 	  #end
 	}
-
-  #if mobile
-	public override function update(elapsed:Float) {
-		super.update(elapsed);
-		if (vPad.buttonC.justPressed)
-		FlxG.switchState(new funkin.mobile.CustomControlsState());
-	}
-	#end
 
 	public override function exit() {
 		Options.save();
