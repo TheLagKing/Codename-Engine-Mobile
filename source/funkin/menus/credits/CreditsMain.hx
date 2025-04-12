@@ -53,6 +53,13 @@ class CreditsMain extends TreeMenu {
 		DiscordUtil.call("onMenuLoaded", ["Credits Menu"]);
 	}
 
+    override function openSubState(sub)
+    {
+	    #if mobile vPad.visible = false; #end
+		super.openSubState(sub);
+	}
+
+
 	/**
 	 * XML STUFF
 	 */

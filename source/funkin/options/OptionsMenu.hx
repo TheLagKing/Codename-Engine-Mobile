@@ -87,11 +87,17 @@ class OptionsMenu extends TreeMenu {
 						main.add(o);
 			}
 		}
-    #if mobile
+      #if mobile
 	  addVPad(UP_DOWN, A_B);
 	  addVPadCamera();
 	  #end
 	}
+
+    override function openSubState(sub) {}
+	    #if mobile vPad.visible = false; #end
+		super.openSubState(sub);
+    }
+
 
 	public override function exit() {
 		Options.save();
