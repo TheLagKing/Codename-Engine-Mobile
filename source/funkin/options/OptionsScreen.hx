@@ -30,7 +30,7 @@ class OptionsScreen extends FlxTypedSpriteGroup<OptionType> {
         #if desktop
 		changeSelection((controls.UP_P ? -1 : 0) + (controls.DOWN_P ? 1 : 0) - FlxG.mouse.wheel);
 		#else
-		changeSelection((MusicBeatState.vPad.buttonUp.justPressed ? -1 : 0) + (MusicBeatState.vPad.buttonDown.justPressed ? 1 : 0) - FlxG.mouse.wheel);
+		changeSelection((MusicBeatState.instance.vPad.buttonUp.justPressed ? -1 : 0) + (MusicBeatState.instance.vPad.buttonDown.justPressed ? 1 : 0) - FlxG.mouse.wheel);
 		#end
 		x = id * FlxG.width;
 		for(k=>option in members) {
@@ -51,9 +51,9 @@ class OptionsScreen extends FlxTypedSpriteGroup<OptionType> {
 			members[curSelected].selected = true;
 			if (controls.ACCEPT || (FlxG.mouse.justReleased && Main.timeSinceFocus > 0.25))
 				members[curSelected].onSelect();
-			if ( #if desktop controls.LEFT_P #else MusicBeatState.vPad.buttonLeft.justPressed #end)
+			if ( #if desktop controls.LEFT_P #else MusicBeatState.instance.vPad.buttonLeft.justPressed #end)
 				members[curSelected].onChangeSelection(-1);
-			if (#if desktop controls.RIGHT_P #else MusicBeatState.vPad.buttonRight.justPressed #end)
+			if (#if desktop controls.RIGHT_P #else MusicBeatState.instance.vPad.buttonRight.justPressed #end)
 				members[curSelected].onChangeSelection(1);
 		}
 		if (controls.BACK || FlxG.mouse.justReleasedRight)
