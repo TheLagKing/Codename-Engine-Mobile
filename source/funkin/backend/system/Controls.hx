@@ -188,7 +188,7 @@ class Controls extends FlxActionSet
 	public var RIGHT_P(get, set):Bool;
 
 	inline function get_RIGHT_P()
-		return _rightP.check() || TouchInput.isSwipe('right');
+		return _rightP.check() /*|| TouchInput.isSwipe('right')*/;
 
 	inline function set_RIGHT_P(val)
 		return @:privateAccess _rightP._checked = val;
