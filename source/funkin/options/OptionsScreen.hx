@@ -51,7 +51,7 @@ class OptionsScreen extends FlxTypedSpriteGroup<OptionType> {
 			members[curSelected].selected = true;
 			if (controls.ACCEPT || (FlxG.mouse.justReleased && Main.timeSinceFocus > 0.25))
 				members[curSelected].onSelect();
-			if ( #if desktop controls.LEFT_P #else MusicBeatState.instance vPad.buttonLeft.justPressed #end)
+			if ( #if desktop controls.LEFT_P #else MusicBeatState.instance.vPad.buttonLeft.justPressed #end)
 				members[curSelected].onChangeSelection(-1);
 			if (#if desktop controls.RIGHT_P #else MusicBeatState.instance.vPad.buttonRight.justPressed #end)
 				members[curSelected].onChangeSelection(1);
