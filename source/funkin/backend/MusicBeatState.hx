@@ -206,12 +206,10 @@ class MusicBeatState extends FlxState implements IBeatReceiver
 					stateScripts.add(script);
 					script.load();
 					#if mobile
-					stateScripts.set('setVirtualPad', function(DPad:String, Action:String, ?addPadCam = false){
-					 if (vPad == null) return;
-					  removeVPad();
-				      addVPad(DPad, Action);
-	                 if(addPadCam)
-				     addVPadCamera();
+					stateScripts.set('setVirtualPad', function(DPad:FlxDPadMode, Action:FlxActionMode, ?addPadCam = false){
+						if (vPad != null) removeVPad();
+						addVPad(DPad, Action);
+						if(addPadCam) addVPadCamera();
 					});
 					#end
 				}
