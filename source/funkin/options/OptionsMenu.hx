@@ -94,8 +94,7 @@ class OptionsMenu extends TreeMenu {
 	}
 
     override function openSubState(sub) {
-	    #if mobile removeVPad();
-		addVPad(FULL, A_B); addVPadCamera(); #end
+	    #if mobile vPad.visible = false; #end
 		super.openSubState(sub);
     }
 

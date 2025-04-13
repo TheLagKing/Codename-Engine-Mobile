@@ -71,7 +71,7 @@ class CreditsCodename extends funkin.options.OptionsScreen {
 	}
 
 	override function close() {
-		#if mobile MusicBeatState.instance.removeVPad(); MusicBeatState.instance.addVPad(UP_DOWN, A_B); MusicBeatState.instance.addVPadCamera(); #end
+		#if mobile MusicBeatState.instance.vPad.visible = true; #end
 		super.close();
 		for (frmt in contribFormats) parent.treeParent.pathDesc.removeFormat(frmt.format);
 	}
