@@ -98,7 +98,7 @@ class MusicBeatSubstate extends FlxSubState implements IBeatReceiver
 		return PlayerSettings.player2.controls;
 
 	#if mobile
-	var vPad:FlxVirtualPad;
+	public var vPad:FlxVirtualPad;
 	var trackedinputs:Array<FlxActionInput> = [];
 
 	public function addVPad(?DPad:FlxDPadMode, ?Action:FlxActionMode) {

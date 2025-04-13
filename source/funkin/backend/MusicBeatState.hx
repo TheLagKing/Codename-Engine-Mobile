@@ -117,7 +117,7 @@ class MusicBeatState extends FlxState implements IBeatReceiver
 		return PlayerSettings.player2.controls;
 
 	#if mobile
-	var vPad:FlxVirtualPad;
+	public var vPad:FlxVirtualPad;
 	var mcontrols:Mobilecontrols;
 
 	var trackedinputs:Array<FlxActionInput> = [];
