@@ -55,7 +55,9 @@ class CreditsMain extends TreeMenu {
 
     override function openSubState(sub)
     {
-	    #if mobile vPad.visible = false; #end
+	    #if mobile MusicBeatState.instance.removeVPad();
+		MusicBeatState.instance.addVPad(FULL, A_B); addVPadCamera(); #end
+	
 		super.openSubState(sub);
 	}
 
