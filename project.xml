@@ -208,6 +208,7 @@
 	  <android target-sdk-version="34" />
 	  <android min-sdk-version="19" />
 	  </section>
+      <dependency name="Metal.framework" if="ios" />
 
 	<!-- Fix compiling issues -->
 	<setenv name="HAXEPATH" value="./"/>
