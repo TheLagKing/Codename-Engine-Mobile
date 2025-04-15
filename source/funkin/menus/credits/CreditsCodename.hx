@@ -71,7 +71,6 @@ class CreditsCodename extends funkin.options.OptionsScreen {
 	}
 
 	override function close() {
-		#if mobile MusicBeatState.instance.vPad.visible = true; #end
 		super.close();
 		for (frmt in contribFormats) parent.treeParent.pathDesc.removeFormat(frmt.format);
 	}

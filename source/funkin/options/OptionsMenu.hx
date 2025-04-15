@@ -90,13 +90,9 @@ class OptionsMenu extends TreeMenu {
       #if mobile
 	  addVPad(UP_DOWN, A_B);
 	  addVPadCamera();
+	  vPad.visible = true;
 	  #end
 	}
-
-    override function openSubState(sub) {
-	    #if mobile vPad.visible = false; #end
-		super.openSubState(sub);
-    }
 
 
 	public override function exit() {
@@ -151,6 +147,7 @@ class OptionsMenu extends TreeMenu {
 						options.push(new ArrayOption(name, desc, optionOptions, optionDisplayOptions, node.att.id, null, FlxG.save.data));
 
 				case "menu":
+				   vPad.visible = false;
 					options.push(new TextOption(name + " >", desc, function() {
 						optionsTree.add(new OptionsScreen(name, desc, parseOptionsFromXML(node)));
 					}));

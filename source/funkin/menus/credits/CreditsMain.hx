@@ -48,15 +48,10 @@ class CreditsMain extends TreeMenu {
         #if mobile
 		addVPad(UP_DOWN, A_B);
 		addVPadCamera();
+		vPad.visible = true;
 		#end
 
 		DiscordUtil.call("onMenuLoaded", ["Credits Menu"]);
-	}
-
-    override function openSubState(sub)
-    {
-	    #if mobile vPad.visible = false; #end
-		super.openSubState(sub);
 	}
 
 
@@ -107,6 +102,7 @@ class CreditsMain extends TreeMenu {
 						credsMenus.push(opt);
 
 					case "menu":
+					    vPad.visible = false;
 						credsMenus.push(new TextOption(name + " >", desc, function() {
 							optionsTree.add(new OptionsScreen(name, desc, parseCreditsFromXML(node, source)));
 						}));
