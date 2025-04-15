@@ -59,14 +59,18 @@ class OptionsMenu extends TreeMenu {
 				persistentUpdate = false;
 				persistentDraw = true;
 				if (o.substate is MusicBeatSubstate) {
+				  vPad.visible = false;
 					openSubState(o.substate);
 				} else {
+				  vPad.visible = false;
 					openSubState(Type.createInstance(o.substate, []));
 				}
 			} else {
 				if (o.state is OptionsScreen) {
+				  vPad.visible = false;
 					optionsTree.add(o.state);
 				} else {
+				  vPad.visible = false;
 					optionsTree.add(Type.createInstance(o.state, []));
 				}
 			}
@@ -90,6 +94,7 @@ class OptionsMenu extends TreeMenu {
     #if mobile
 	  addVPad(UP_DOWN, A_B);
 	  addVPadCamera();
+	  vPad.visible = true;
 	  #end
 	}
 
