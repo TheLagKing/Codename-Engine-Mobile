@@ -25,10 +25,6 @@ class OptionsScreen extends FlxTypedSpriteGroup<OptionType> {
 	public override function update(elapsed:Float) {
 		super.update(elapsed);
 
-			#if mobile
-			MusicBeatState.instance.removeVPad();
-			#end
-
 		var controls = PlayerSettings.solo.controls;
 
 		changeSelection((controls.UP_P ? -1 : 0) + (controls.DOWN_P ? 1 : 0) #if desktop - FlxG.mouse.wheel #end);
