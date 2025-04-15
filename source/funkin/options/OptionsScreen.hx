@@ -57,7 +57,7 @@ class OptionsScreen extends FlxTypedSpriteGroup<OptionType> {
 	}
 
 	public function close() {
-	  #if mobile MusicBeatState.instance.vPad.visible = false; #end
+	  #if mobile MusicBeatState.instance.vPad.visible = true; #end
 		onClose(this);
 	}
 
