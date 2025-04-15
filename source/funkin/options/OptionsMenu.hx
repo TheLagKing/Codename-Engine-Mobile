@@ -87,10 +87,9 @@ class OptionsMenu extends TreeMenu {
 						main.add(o);
 			}
 		}
-      #if mobile
+    #if mobile
 	  addVPad(UP_DOWN, A_B);
 	  addVPadCamera();
-	  vPad.visible = true;
 	  #end
 	}
 
@@ -147,7 +146,6 @@ class OptionsMenu extends TreeMenu {
 						options.push(new ArrayOption(name, desc, optionOptions, optionDisplayOptions, node.att.id, null, FlxG.save.data));
 
 				case "menu":
-				   vPad.visible = false;
 					options.push(new TextOption(name + " >", desc, function() {
 						optionsTree.add(new OptionsScreen(name, desc, parseOptionsFromXML(node)));
 					}));
