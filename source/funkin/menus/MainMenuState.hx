@@ -89,6 +89,7 @@ class MainMenuState extends MusicBeatState
 		#if mobile
 		addVPad(UP_DOWN, A_B_C);
 		addVPadCamera();
+		vPad.visible = true;
 		#end
 	}
 
@@ -130,6 +131,7 @@ class MainMenuState extends MusicBeatState
 			#if MOD_SUPPORT
 			if (controls.SWITCHMOD #if mobile || vPad.buttonC.justPressed #end) {
 				openSubState(new ModSwitchMenu());
+				vPad.visible = false;
 				persistentUpdate = false;
 				persistentDraw = true;
 			}
