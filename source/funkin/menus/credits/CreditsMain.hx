@@ -36,6 +36,7 @@ class CreditsMain extends TreeMenu {
 			}
 		}
 		items.push(new TextOption("Codename Engine >", "Select this to see all the contributors of the engine!", function() {
+		  vPad.visible = false;
 			optionsTree.add(Type.createInstance(CreditsCodename, []));
 		}));
 		items.push(new TextOption("Friday Night Funkin'", "Select this to open the itch.io page of the original game to donate!", function() {
@@ -45,7 +46,7 @@ class CreditsMain extends TreeMenu {
 		main = new OptionsScreen('Credits', 'The people who made this possible!', items);
 		super.create();
 
-        #if mobile
+    #if mobile
 		addVPad(UP_DOWN, A_B);
 		addVPadCamera();
 		vPad.visible = true;
