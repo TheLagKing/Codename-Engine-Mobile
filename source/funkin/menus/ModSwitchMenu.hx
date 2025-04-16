@@ -54,13 +54,6 @@ class ModSwitchMenu extends MusicBeatSubstate {
 			close();
 	}
 
-     public function close() { 
-	  #if mobile
-	  removeVPad();
-	  addVPad(UP_DOWN, A_B_C);
-	  addVPadCamera();
-	 }
-
 	public function changeSelection(change:Int, force:Bool = false) {
 		if (change == 0 && !force) return;
 
