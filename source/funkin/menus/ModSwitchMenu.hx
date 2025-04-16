@@ -59,6 +59,7 @@ class ModSwitchMenu extends MusicBeatSubstate {
 	  removeVPad();
 	  addVPad(UP_DOWN, A_B_C);
 	  addVPadCamera();
+	  #end
 	 }
 
 	public function changeSelection(change:Int, force:Bool = false) {
