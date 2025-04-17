@@ -131,7 +131,7 @@ class MainMenuState extends MusicBeatState
 			#if MOD_SUPPORT
 			if (controls.SWITCHMOD #if mobile || vPad.buttonC.justPressed #end) {
 				openSubState(new ModSwitchMenu());
-				removeVPad()();
+				removeVPad();
 				persistentUpdate = false;
 				persistentDraw = true;
 			}
