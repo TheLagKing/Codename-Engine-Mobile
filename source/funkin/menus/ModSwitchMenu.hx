@@ -51,7 +51,7 @@ class ModSwitchMenu extends MusicBeatSubstate {
 		}
 
 		if (controls.BACK)
-			close();
+			#if desktop close(); #else FlxG.resetState(); #end
 	}
 
 	public function changeSelection(change:Int, force:Bool = false) {
