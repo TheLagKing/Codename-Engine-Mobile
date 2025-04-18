@@ -59,18 +59,26 @@ class OptionsMenu extends TreeMenu {
 				persistentUpdate = false;
 				persistentDraw = true;
 				if (o.substate is MusicBeatSubstate) {
-				  removeVPad();
+					#if mobile
+				  	removeVPad();
+					#end
 					openSubState(o.substate);
 				} else {
-				  removeVPad();
+					#if mobile
+				  	removeVPad();
+					#end
 					openSubState(Type.createInstance(o.substate, []));
 				}
 			} else {
 				if (o.state is OptionsScreen) {
-				  removeVPad();
+					#if mobile
+				  	removeVPad();
+					#end
 					optionsTree.add(o.state);
 				} else {
-				  removeVPad();
+					#if mobile
+				  	removeVPad();
+					#end
 					optionsTree.add(Type.createInstance(o.state, []));
 				}
 			}

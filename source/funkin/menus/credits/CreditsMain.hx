@@ -36,7 +36,9 @@ class CreditsMain extends TreeMenu {
 			}
 		}
 		items.push(new TextOption("Codename Engine >", "Select this to see all the contributors of the engine!", function() {
-		  removeVPad();
+			#if mobile
+		  	removeVPad();
+			#end
 			optionsTree.add(Type.createInstance(CreditsCodename, []));
 		}));
 		items.push(new TextOption("Friday Night Funkin'", "Select this to open the itch.io page of the original game to donate!", function() {
@@ -103,7 +105,9 @@ class CreditsMain extends TreeMenu {
 						credsMenus.push(opt);
 
 					case "menu":
+						#if mobile
 					    removeVPad();
+						#end
 						credsMenus.push(new TextOption(name + " >", desc, function() {
 							optionsTree.add(new OptionsScreen(name, desc, parseCreditsFromXML(node, source)));
 						}));

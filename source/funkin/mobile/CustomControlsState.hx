@@ -1,5 +1,6 @@
 package funkin.mobile;
 
+#if mobile
 import flixel.addons.ui.FlxUIButton;
 import flixel.text.FlxText;
 import flixel.FlxG;
@@ -224,3 +225,4 @@ class CustomControlsState extends MusicBeatSubstate {
     override function destroy()
         super.destroy();
 }
+#end
