@@ -14,7 +14,7 @@ class Update {
 		if (!FileSystem.exists('.haxelib'))
 			FileSystem.createDirectory('.haxelib');
 
-		#if !mobile
+		#if desktop
 		var filename = "./libs.xml";
 		#else
 		var filename = "./libs-mobile.xml";
