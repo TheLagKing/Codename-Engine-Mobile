@@ -8,6 +8,7 @@ import android.Settings;
 #end
 
 import lime.system.System;
+import lime.app.Application;
 #if sys
 import sys.FileSystem;
 import sys.io.File;
