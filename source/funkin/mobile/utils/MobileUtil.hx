@@ -8,7 +8,6 @@ import android.Settings;
 #end
 
 import lime.system.System;
-import lime.app.Application;
 #if sys
 import sys.FileSystem;
 import sys.io.File;
@@ -59,7 +58,7 @@ class MobileUtil {
      } catch (e:Dynamic) {
     trace(e);
   if(!FileSystem.exists(MobileUtil.getDirectory())) {
-    Application.current.window.alert("Seems like you didnt enabled permissions requested to run the game/didnt put assets to your storage. Please enable them/put assets/mods folders to .CodenameEngine folder to be able to run the game. \n Press OK to close the game.", 'Uncaught Error');
+    NativeAPI.showMessageBox("Seems like you didnt enabled permissions requested to run the game/didnt put assets to your storage. Please enable them/put assets/mods folders to .CodenameEngine folder to be able to run the game. \n Press OK to close the game.", 'Uncaught Error');
     FileSystem.createDirectory(MobileUtil.getDirectory());
      System.exit(0);
      }
