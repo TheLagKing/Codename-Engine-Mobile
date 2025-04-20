@@ -52,15 +52,12 @@ class OptionsScreen extends FlxTypedSpriteGroup<OptionType> {
 			if (controls.RIGHT_P)
 				members[curSelected].onChangeSelection(1);
 		}
-		if (controls.BACK #if desktop || FlxG.mouse.justReleasedRight #end) {
+		if (controls.BACK #if desktop || FlxG.mouse.justReleasedRight #end)
 	  #if mobile
-    FlxTransitionableState.skipNextTransIn = true;
-    FlxTransitionableState.skipNextTransOut = true;
 	  FlxG.resetState();
 	  #else
 	  close();
 	  #end
-		}
 	}
 
 	public function close() {
