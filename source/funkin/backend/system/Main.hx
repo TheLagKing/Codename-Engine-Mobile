@@ -34,7 +34,7 @@ class Main extends Sprite
 	public static var instance:Main;
 
 	public static var modToLoad:String = null;
-	public static var forceGPUOnlyBitmapsOff:Bool = #if (windows && mobile) false #else true #end;
+	public static var forceGPUOnlyBitmapsOff:Bool = #if windows false #else true #end;
 	public static var noTerminalColor:Bool = false;
 
 	public static var scaleMode:FunkinRatioScaleMode;
@@ -133,7 +133,7 @@ class Main extends Sprite
 		funkin.backend.scripting.GlobalScript.init();
 		#end
 
-		#if (sys /*&& TEST_BUILD*/)
+		#if (sys && TEST_BUILD)
 			trace("Used cne test / cne build. Switching into source assets.");
 			#if MOD_SUPPORT
 			ModsFolder.modsPath = #if desktop './${pathBack}mods/' #else Sys.getCwd() + './${pathBack}mods/' #end;
