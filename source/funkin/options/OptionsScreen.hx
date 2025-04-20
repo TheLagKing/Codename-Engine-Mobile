@@ -54,7 +54,6 @@ class OptionsScreen extends FlxTypedSpriteGroup<OptionType> {
 		}
 		if (controls.BACK #if desktop || FlxG.mouse.justReleasedRight #end) {
 	  #if mobile
-	  ```
     FlxTransitionableState.skipNextTransIn = true;
     FlxTransitionableState.skipNextTransOut = true;
 	  FlxG.resetState();
