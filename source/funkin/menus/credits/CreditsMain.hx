@@ -48,7 +48,7 @@ class CreditsMain extends TreeMenu {
 		main = new OptionsScreen('Credits', 'The people who made this possible!', items);
 		super.create();
 
-    #if mobile
+        #if mobile
 		addVPad(UP_DOWN, A_B);
 		addVPadCamera();
 		vPad.visible = true;

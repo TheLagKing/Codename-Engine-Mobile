@@ -110,6 +110,7 @@ class OptionsMenu extends TreeMenu {
 	public override function exit() {
 		Options.save();
 		Options.applySettings();
+		lastState = MainMenuState();
 		super.exit();
 	}
 
