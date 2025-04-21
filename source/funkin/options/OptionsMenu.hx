@@ -2,6 +2,7 @@ package funkin.options;
 
 import funkin.options.type.Checkbox;
 import haxe.xml.Access;
+import funkin.menus.MainMenuState;
 import funkin.options.type.*;
 import funkin.options.categories.*;
 import funkin.options.TreeMenu;
@@ -111,7 +112,7 @@ class OptionsMenu extends TreeMenu {
 		Options.save();
 		Options.applySettings();
 		#if mobile
-		TreeMenu.lastState = new MainMenuState();
+		TreeMenu.lastState = MainMenuState();
 		#end
 		super.exit();
 	}
