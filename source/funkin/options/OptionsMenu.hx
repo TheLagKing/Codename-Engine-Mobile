@@ -111,7 +111,7 @@ class OptionsMenu extends TreeMenu {
 		Options.save();
 		Options.applySettings();
 		#if mobile
-		TreeMenu.lastState = MainMenuState();
+		TreeMenu.lastState = new MainMenuState();
 		#end
 		super.exit();
 	}
