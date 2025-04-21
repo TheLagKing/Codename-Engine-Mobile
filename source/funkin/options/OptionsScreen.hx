@@ -52,12 +52,15 @@ class OptionsScreen extends FlxTypedSpriteGroup<OptionType> {
 			if (controls.RIGHT_P)
 				members[curSelected].onChangeSelection(1);
 		}
-		if (controls.BACK #if desktop || FlxG.mouse.justReleasedRight #end)
+		if (controls.BACK #if desktop || FlxG.mouse.justReleasedRight #end) {
 	  #if mobile
-	  FlxG.resetState();
-	  #else
-	  close();
+	  MusicBeatState.instance.removeVPad();
+	  MusicBeatState.instance.addVPad(UP_DOWN, A_B);
+	  MusicBeatState.instance.addVPadCamera();
 	  #end
+
+	  close();
+		}
 	}
 
 	public function close() {
