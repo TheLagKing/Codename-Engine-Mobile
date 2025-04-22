@@ -54,7 +54,7 @@ class OptionsScreen extends FlxTypedSpriteGroup<OptionType> {
 		}
 		if (controls.BACK #if desktop || FlxG.mouse.justReleasedRight #end) {
 	  #if mobile
-	  MusicBeatSubstate.instance.removeVPad();
+	  MusicBeatState.instance.removeVPad();
 	  MusicBeatState.instance.addVPad(UP_DOWN, A_B);
 	  MusicBeatState.instance.addVPadCamera();
 	  #end
