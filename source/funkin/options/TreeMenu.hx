@@ -88,7 +88,12 @@ class TreeMenu extends UIState {
 	}
 
 	public function exit() {
+		#if desktop
 		FlxG.switchState((lastState != null) ? Type.createInstance(lastState, []) : new MainMenuState());
+		#else
+		FlxG.switchState(new MainMenuState());
+		MusicBeatState.skipTransOut = false;
+		#end
 		lastState = null;
 	}
 
