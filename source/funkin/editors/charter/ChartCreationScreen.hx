@@ -320,7 +320,8 @@ class CompactCharacterButton extends UIButton {
 		autoAlpha = false;
 
 		charIcon = new HealthIcon(funkin.game.Character.getIconFromCharName(char));
-		charIcon.scale.set(charIcon.defaultScale * 0.2, charIcon.defaultScale * 0.2);
+		var size = Std.int(150 * 0.2);
+		charIcon.setUnstretchedGraphicSize(size, size, true);
 		charIcon.updateHitbox();
 		charIcon.setPosition(10, bHeight/2 - charIcon.height / 2);
 		charIcon.scrollFactor.set(1,1);
@@ -333,7 +334,7 @@ class CompactCharacterButton extends UIButton {
 		textBox.onChange = function(char:String) {
 			char = funkin.game.Character.getIconFromCharName(char);
 			charIcon.setIcon(char);
-			charIcon.scale.set(charIcon.defaultScale * 0.2, charIcon.defaultScale * 0.2);
+			charIcon.setUnstretchedGraphicSize(size, size, true);
 			charIcon.updateHitbox();
 			charIcon.setPosition(10, bHeight/2 - charIcon.height / 2);
 		}

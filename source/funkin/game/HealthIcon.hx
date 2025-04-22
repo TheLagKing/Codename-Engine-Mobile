@@ -162,14 +162,18 @@ class HealthIcon extends FunkinSprite
 
 		animateAtlas = null; // reset
 		if (this.animated)
-			loadSprite(Paths.image(iconPath));
+			loadSprite(Paths.image(newIconPath));
 		else {
 			var iconAsset:FlxGraphic = FlxG.bitmap.add(Paths.image(iconPath));
 			var assetW:Float = iconAsset.width;
 			var assetH:Float = iconAsset.height;
 
-			iconAmt = Math.floor(assetW / assetH);
+			iconAmt = Math.round(assetW / assetH); // Just in case the icon is in a weird aspect ratio
 			iconSize = Math.floor(assetW / iconAmt);
+			if (iconSize * iconAmt > assetW) {
+				iconSize = Math.floor(assetW / iconAmt);
+				iconAmt = Math.floor(assetW / iconSize);
+			}
 
 			loadGraphic(iconAsset, true, Std.int(Math.min(iconSize, assetW)), Std.int(Math.min(iconSize, assetH)));
 
@@ -238,8 +242,20 @@ class HealthIcon extends FunkinSprite
 
 						var animName = node.get("name");
 
-						if (node.exists("offsetX") || node.exists("offsetY"))
-							addOffset(animName, Std.parseFloat(node.get("offsetX")).getDefault(0), Std.parseFloat(node.get("offsetY")).getDefault(0));
+						var offsetX:Float = 0;
+						var offsetY:Float = 0;
+						if (node.exists("offsetX"))
+							offsetX = Std.parseFloat(node.get("offsetX")).getDefault(0);
+						else if (node.exists("offsetx"))
+							offsetX = Std.parseFloat(node.get("offsetx")).getDefault(0);
+						
+						if (node.exists("offsetY"))
+							offsetY = Std.parseFloat(node.get("offsetY")).getDefault(0);
+						else if (node.exists("offsety"))
+							offsetY = Std.parseFloat(node.get("offsety")).getDefault(0);
+
+						addOffset(animName, offsetX, offsetY);
+
 						addAnim(animName, node.get("anim"), Std.parseInt(node.get("fps")).getDefault(24), node.get("looped").getDefault("true").toLowerCase() == "true");
 						if (animateAtlas == null && animation.exists(animName))
 							animation.getByName(animName).flipX = isPlayer != iconIsPlayer;
@@ -299,6 +315,8 @@ class HealthIcon extends FunkinSprite
 		}
 
 		defaultScale = (xmlValid && xmlData.exists("scale")) ? Std.parseFloat(xmlData.get("scale")).getDefault(scale.x) : scale.x;
+		scale.set(defaultScale, defaultScale);
+		updateHitbox();
 	}
 
 	var normalizedNames = ["neutral", "losing", "winning"];

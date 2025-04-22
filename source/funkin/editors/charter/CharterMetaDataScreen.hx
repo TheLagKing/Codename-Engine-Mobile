@@ -134,7 +134,8 @@ class CharterMetaDataScreen extends UISubstateWindow {
 		if (iconSprite == null) add(iconSprite = new HealthIcon());
 
 		iconSprite.setIcon(icon);
-		iconSprite.scale.set(iconSprite.defaultScale * 0.5, iconSprite.defaultScale * 0.5);
+		var size = Std.int(150 * 0.5);
+		iconSprite.setUnstretchedGraphicSize(size, size, true);
 		iconSprite.updateHitbox();
 		iconSprite.setPosition(iconTextBox.x + iconTextBox.bWidth + 8, iconTextBox.y + (iconTextBox.bHeight / 2) - (iconSprite.height / 2));
 		iconSprite.scrollFactor.set(1, 1);

@@ -194,7 +194,8 @@ class CharacterButton extends UIButton {
 		super(x, y, "", null, 250, 54);
 
 		charIcon = new HealthIcon(Character.getIconFromCharName(char));
-		charIcon.scale.set(charIcon.defaultScale * 0.3, charIcon.defaultScale * 0.3);
+		var size = Std.int(150 * 0.3);
+		charIcon.setUnstretchedGraphicSize(size, size, true);
 		charIcon.updateHitbox();
 		charIcon.setPosition(x + 10, bHeight/2 - charIcon.height / 2);
 		charIcon.scrollFactor.set(1,1);
@@ -207,7 +208,7 @@ class CharacterButton extends UIButton {
 		textBox.onChange = function(char:String) {
 			char = Character.getIconFromCharName(char);
 			charIcon.setIcon(char);
-			charIcon.scale.set(charIcon.defaultScale * 0.3, charIcon.defaultScale * 0.3);
+			charIcon.setUnstretchedGraphicSize(size, size, true);
 			charIcon.updateHitbox();
 			charIcon.setPosition(x + 10, bHeight/2 - charIcon.height / 2);
 		}
