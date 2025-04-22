@@ -133,7 +133,7 @@ class Main extends Sprite
 		funkin.backend.scripting.GlobalScript.init();
 		#end
 
-		#if (sys && mobile && TEST_BUILD)
+		#if sys /*(sys && TEST_BUILD)*/
 			trace("Used cne test / cne build. Switching into source assets.");
 			#if MOD_SUPPORT
 			ModsFolder.modsPath = #if desktop './${pathBack}mods/' #else Sys.getCwd() + '${pathBack}mods/' #end;
