@@ -88,7 +88,11 @@ class TreeMenu extends UIState {
 	}
 
 	public function exit() {
+		#if mobile
+		FlxG.switchState(new MainMenuState());
+		#else
 		FlxG.switchState((lastState != null) ? Type.createInstance(lastState, []) : new MainMenuState());
+		#end
 		lastState = null;
 	}
 
