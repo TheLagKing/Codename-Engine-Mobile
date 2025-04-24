@@ -106,6 +106,10 @@ class HScript extends Script {
 			Logs.logText(fn, GREEN),
 			Logs.logText(err, RED)
 		], ERROR);
+		
+		#if mobile
+                funkin.backend.utils.NativeAPI.showMessageBox("Codename Engine Crash Handler (HScript)", fn + err, MSG_ERROR);
+	        #end
 	}
 
 	public override function setParent(parent:Dynamic) {
