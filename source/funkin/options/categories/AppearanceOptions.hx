@@ -49,7 +49,7 @@ class AppearanceOptions extends OptionsScreen {
 			"autoPause"));
     #if mobile
 	 MusicBeatState.instance.addVPad(FULL, A_B);
-	 MusicBeatState.intsance.addVPadCamera();
+	 MusicBeatState.instance.addVPadCamera();
 	 #end
 	}
 

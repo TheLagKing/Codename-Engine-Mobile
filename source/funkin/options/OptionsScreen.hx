@@ -62,7 +62,7 @@ class OptionsScreen extends FlxTypedSpriteGroup<OptionType> {
 	  MusicBeatState.instance.addVPad(UP_DOWN, A_B);
 	  MusicBeatState.instance.addVPadCamera();
 	  #end
-		onClose(his);
+		onClose(this);
 	}
 
 	public function changeSelection(sel:Int, force:Bool = false) {
