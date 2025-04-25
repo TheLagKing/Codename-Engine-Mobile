@@ -58,11 +58,11 @@ class OptionsScreen extends FlxTypedSpriteGroup<OptionType> {
 
 	public function close() {
 	  #if mobile
-	  MusicBeatState.getState.removeVPad();
-	  MusicBeatState.getState.addVPad(UP_DOWN, A_B);
-	  MusicBeatState.getState.addVPadCamera();
+	  MusicBeatState.getState().removeVPad();
+	  MusicBeatState.getState().addVPad(UP_DOWN, A_B);
+	  MusicBeatState.getState().addVPadCamera();
 	  #end
-		onClose(this);
+		onClose(his);
 	}
 
 	public function changeSelection(sel:Int, force:Bool = false) {
