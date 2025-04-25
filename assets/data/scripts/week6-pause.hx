@@ -67,7 +67,8 @@ function create(event) {
 
 	FlxG.sound.play(Paths.sound(isThorns ? 'pixel/ANGRY' : 'pixel/clickText'));
 	#if mobile
-	setVirtualPad(FlxDPadMode.UP_DOWN, FlxActionMode.A, true);
+	addVPad(FlxDPadMode.UP_DOWN, FlxActionMode.A);
+	addVPadCamera();
 	#end
 }
 
