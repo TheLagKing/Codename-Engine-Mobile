@@ -199,6 +199,9 @@ class KeybindsOptions extends MusicBeatSubstate {
 
 			if (controls.BACK) {
 				MusicBeatState.skipTransIn = true;
+				removeVPad();
+				addVPad(UP_DOWN, A_B);
+				addVPadCamera();
 				if (isSubState)
 					close();
 				else
