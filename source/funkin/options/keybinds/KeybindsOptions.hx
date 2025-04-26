@@ -162,10 +162,10 @@ class KeybindsOptions extends MusicBeatSubstate {
 		}
 		add(alphabets);
 		add(camFollow);
-	    /*#if mobile
+	  #if mobile
 		addVPad(FULL, A_B);
 		addVPadCamera();
-		#end*/
+		#end
 	}
 
 	public override function destroy() {
