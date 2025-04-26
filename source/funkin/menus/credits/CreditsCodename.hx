@@ -42,7 +42,7 @@ class CreditsCodename extends funkin.options.OptionsScreen {
 			_canReset = true;
 			updateMenuDesc();
 		}
-		else if(_canReset && PlayerSettings.solo.controls.RESET #if mobile || MusicBeayState.vPad.buttonC.justPressed #end) tryUpdating();
+		else if(_canReset && PlayerSettings.solo.controls.RESET #if mobile || MusicBeatState.vPad.buttonC.justPressed #end) tryUpdating();
 	}
 
 	public function tryUpdating(forceDisplaying:Bool = false) {
