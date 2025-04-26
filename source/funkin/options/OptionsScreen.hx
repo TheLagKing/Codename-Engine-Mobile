@@ -1,6 +1,7 @@
 package funkin.options;
 
 import funkin.options.type.OptionType;
+import flixel.util.FlxTimer;
 
 class OptionsScreen extends FlxTypedSpriteGroup<OptionType> {
 	public static var optionHeight:Float = 120;
