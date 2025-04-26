@@ -19,7 +19,7 @@ class CreditsCodename extends funkin.options.OptionsScreen {
 
 	public override function new()
 	{
-		super("Codename Engine", "All the contributors of the engine! - Press RESET to update the list (One reset per 2 minutes).");
+		#if desktop super("Codename Engine", "All the contributors of the engine! - Press RESET to update the list (One reset per 2 minutes)."); #else super("Codename Engine", "All the contributors of the engine! - Press C button to update the list (One reset per 2 minutes)."); #end
 		tryUpdating(true);
 		#if mobile
 		MusicBeatState.instance.addVPad(UP_DOWN, A_B_C);
