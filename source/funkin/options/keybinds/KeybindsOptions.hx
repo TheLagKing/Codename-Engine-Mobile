@@ -199,13 +199,16 @@ class KeybindsOptions extends MusicBeatSubstate {
 
 			if (controls.BACK) {
 				MusicBeatState.skipTransIn = true;
-				removeVPad();
-				addVPad(UP_DOWN, A_B);
-				addVPadCamera();
-				if (isSubState)
+				if (isSubState) {
+				  #if desktop
 					close();
-				else
+					#else
+					MusicBeatState.skipTransOut = true;
+					FlxG.resetState();
+					#end
+				} else {
 					FlxG.switchState(new OptionsMenu());
+				}
 				Options.applyKeybinds();
 				Options.save();
 				return;
