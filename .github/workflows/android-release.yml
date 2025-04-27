@@ -1,0 +1,77 @@
+name: Android Release
+on: workflow_dispatch
+jobs:
+  Android:
+    runs-on: ubuntu-latest
+    permissions:
+        contents: write
+        actions: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@main
+        with:
+          submodules: true
+
+      - name: Setup Android NDK
+        id: setup-ndk
+        uses: nttld/setup-ndk@main
+        with:
+          ndk-version: r25c
+      - name: Setup Java JDK
+
+        uses: actions/setup-java@main
+        with:
+          distribution: 'zulu'
+          java-version: '18'
+
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@v1.2.0
+        with:
+          haxe-version: 4.3.4
+
+      - name: Installing Libraries
+        run: |
+          haxelib setup ~/haxelib
+          haxe -cp commandline -D analyzer-optimize --run Main setup -s
+          haxelib run lime rebuild hxcpp
+          haxelib install hxcpp-debug-server
+          haxelib list
+
+      - name: Configure Android
+        run: |
+          haxelib run lime setup -alias -y
+          haxelib run lime config ANDROID_SDK $ANDROID_HOME
+          haxelib run lime config ANDROID_NDK_ROOT $ANDROID_NDK_HOME
+          haxelib run lime config JAVA_HOME $JAVA_HOME
+          haxelib run lime config ANDROID_SETUP true
+        env:
+          ANDROID_NDK_HOME: ${{ steps.setup-ndk.outputs.ndk-path }}
+
+      - name: Building
+        run: haxelib run lime build android -final
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@main
+        with:
+          name: androidBuild
+          path: export/release/android/bin/app/build/outputs/apk/debug
+          if-no-files-found: warn
+  Publish:
+    needs: Android
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Download
+        uses: actions/download-artifact@main
+        with:
+           name: androidBuild
+           path: ${{github.workspace}}
+
+      - name: Publish
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{secrets.GITHUB_TOKEN}}
+          prerelease: true
+          automatic_release_tag: 'v1.0.0-pre-release'
+          title: 'Codename Engine Mobile Port [PRE-RELEASE]'
+          files: ${{gith
