@@ -74,4 +74,4 @@ jobs:
           prerelease: true
           automatic_release_tag: 'v1.0.0-pre-release'
           title: 'Codename Engine Mobile Port [PRE-RELEASE]'
-          files: ${{gith
+          files: ${{github.workspace}}/CodenameEngine-debug.apk
