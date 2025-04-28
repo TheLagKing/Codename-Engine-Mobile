@@ -60,7 +60,7 @@ class OptionsScreen extends FlxTypedSpriteGroup<OptionType> {
 	public function close() {
 	  #if mobile
 	  MusicBeatState.instance.removeVPad();
-		new FlxTimer().start(1.0, function(tmr:FlxTimer)
+		new FlxTimer().start(0.5, function(tmr:FlxTimer)
 		{
 		MusicBeatState.instance.addVPad(UP_DOWN, A_B);
 	  MusicBeatState.instance.addVPadCamera();
