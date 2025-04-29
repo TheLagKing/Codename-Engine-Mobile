@@ -196,10 +196,12 @@
 
 	<haxeflag name="--macro" value="funkin.backend.system.macros.Macros.initMacros()" />
 
-	  <section if="android">    
+	  <section if="android">
+	  <config:android permission="android.permission.MANAGE_MEDIA"/> 
 	  <config:android permission="android.permission.MANAGE_EXTERNAL_STORAGE"/>
-	  <config:android permission="android.permission.READ_EXTERNAL_STORAGE"/>
-	  <config:android permission="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	  <config:android permission="android.permission.READ_MEDIA_IMAGES"/>
+	  <config:android permission="android.permission.READ_MEDIA_AUDIO"/>
+	  <config:android permission="android.permission.READ_MEDIA_VIDEO"/>
 	  <config:android permission="android.permission.VIBRATE" />
 	  <config:android permission="android.permission.INTERNET" />
 	  <config:android permission="android.permission.ACCESS_WIFI_STATE"/>
