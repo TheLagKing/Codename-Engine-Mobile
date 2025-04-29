@@ -207,7 +207,7 @@
 	  <config:android permission="android.permission.ACCESS_WIFI_STATE"/>
           <config:android permission="android.permission.ACCESS_NETWORK_STATE" />
 	  <config:android permission="android.permission.CAPTURE_AUDIO_OUTPUT" />
-	  <!--android target-sdk-version="29" /-->
+	  <android target-sdk-version="34" />
  	  <android min-sdk-version="19" />
 	  </section>
           <dependency name="Metal.framework" if="ios" />
