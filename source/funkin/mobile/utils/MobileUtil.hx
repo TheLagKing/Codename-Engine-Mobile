@@ -18,7 +18,7 @@ using StringTools;
 
 /** 
 * @author MaysLastPlay, MarioMaster (MasterX-39)
-* @version: 0.2.0
+* @version: 0.2.1
 **/
 
 class MobileUtil {
@@ -30,7 +30,11 @@ class MobileUtil {
 
   public static function getDirectory():String {
    #if android
+    if(VERSION.SDK_INT >= 33){
+   currentDirectory = Environment.getExternalStorageDirectory() + '/.' + Application.current.meta.get('file');
+    } else {
    currentDirectory = Environment.getExternalStorageDirectory() + '/Android/media/' + lime.app.Application.current.meta.get('packageName');
+    }
    #elseif ios
    currentDirectory = System.applicationStorageDirectory;
    #end
