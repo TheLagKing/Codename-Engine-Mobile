@@ -30,7 +30,7 @@ class MobileUtil {
 
   public static function getDirectory():String {
    #if android
-   currentDirectory = Environment.getExternalStorageDirectory() + '/.' + Application.current.meta.get('file');
+   currentDirectory = Environment.getExternalStorageDirectory() + '/Android/media/' + lime.app.Application.current.meta.get('packageName');
    #elseif ios
    currentDirectory = System.applicationStorageDirectory;
    #end
@@ -47,10 +47,11 @@ class MobileUtil {
     {
     if(VERSION.SDK_INT >= 33){
 	   if (!Environment.isExternalStorageManager()) {
+			Settings.requestSetting('REQUEST_MANAGE_MEDIA');
 	     Settings.requestSetting('MANAGE_APP_ALL_FILES_ACCESS_PERMISSION');
 	   }
       } else {
-        Permissions.requestPermissions(['READ_EXTERNAL_STORAGE', 'WRITE_EXTERNAL_STORAGE']);
+      Permissions.requestPermissions(['READ_MEDIA_IMAGES', 'READ_MEDIA_VIDEO', 'READ_MEDIA_AUDIO']);
 	  }
 
     try {
