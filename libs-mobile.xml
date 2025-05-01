@@ -22,7 +22,7 @@
 <lib name="nape-haxe4" />
 
 <!-- Mobile Libraries -->
-<git name="hxcpp" url="https://github.com/MaysLastPlays-Stuff/hxcpp-h" />
+<git name="hxcpp" url="https://github.com/CodenameCrew/cne-hxcpp" />
 <git name="extension-androidtools" url="https://github.com/MAJigsaw77/extension-androidtools" skipDeps="true" unless="ios"/>
 
 </libraries>
