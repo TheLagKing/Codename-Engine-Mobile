@@ -36,7 +36,7 @@ class MobileUtil {
    currentDirectory = Environment.getExternalStorageDirectory() + '/Android/media/' + lime.app.Application.current.meta.get('packageName');
     }
    #elseif ios
-   currentDirectory = System.applicationStorageDirectory;
+   currentDirectory = System.documentsDirectory;
    #end
   return currentDirectory;
   }
