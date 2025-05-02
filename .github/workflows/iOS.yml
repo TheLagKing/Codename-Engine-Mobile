@@ -11,13 +11,11 @@ jobs:
       - name: Setup Haxe
         uses: krdlab/setup-haxe@master
         with:
-          haxe-version: 4.3.4
+          haxe-version: 4.2.5
 
       - name: Install Libraries
         run: |
           haxe -cp commandline -D analyzer-optimize --run Main setup -s
-          haxelib remove lime
-          haxelib git lime https://github.com/FunkinCrew/lime dev-funkin-arm64
           haxelib run lime rebuild hxcpp
 
       - name: Compile
