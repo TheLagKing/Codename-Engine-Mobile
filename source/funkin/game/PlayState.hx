@@ -295,6 +295,11 @@ class PlayState extends MusicBeatState
 	 */
 	public var iconP2:HealthIcon;
 	/**
+	 * Every active icon that will be updated during gameplay (defaults to `iconP1` and `iconP1` between `create` and `postCreate` in scripts)
+	 */
+	public var iconArray:Array<HealthIcon> = [];
+
+	/**
 	 * Camera for the HUD (notes, misses).
 	 */
 	public var camHUD:HudCamera;
@@ -522,10 +527,10 @@ class PlayState extends MusicBeatState
 	 */
 	public function updateRating() {
 		var rating = null;
-		var acc = get_accuracy();
+		var acc = accuracy;  // caching since it has a getter with an operation  - Nex
 
-		for(e in comboRatings)
-			if (e.percent <= acc && (rating == null || rating.percent < e.percent))
+		if (comboRatings != null && comboRatings.length > 0) for (e in comboRatings)
+			if ((e.percent <= acc && e.maxMisses >= misses) && (rating == null || (rating.percent < e.percent && e.maxMisses >= misses)))
 				rating = e;
 
 		var event = scripts.event("onRatingUpdate", EventManager.get(RatingUpdateEvent).recycle(rating, curRating));
@@ -750,9 +755,9 @@ class PlayState extends MusicBeatState
 
 		health = maxHealth / 2;
 
-		iconP1 = new HealthIcon(boyfriend != null ? boyfriend.getIcon() : "face", true);
-		iconP2 = new HealthIcon(dad != null ? dad.getIcon() : "face", false);
-		for(icon in [iconP1, iconP2]) {
+		iconArray.push(iconP1 = new HealthIcon(boyfriend != null ? boyfriend.getIcon() : "face", true));
+		iconArray.push(iconP2 = new HealthIcon(dad != null ? dad.getIcon() : "face", false));
+		for (icon in iconArray) {
 			icon.y = healthBar.y - (icon.height / 2);
 			add(icon);
 		}
@@ -769,7 +774,8 @@ class PlayState extends MusicBeatState
 		scoreTxt.alignment = RIGHT;
 		missesTxt.alignment = CENTER;
 		accuracyTxt.alignment = LEFT;
-		updateRatingStuff();
+		if (updateRatingStuff != null)
+			updateRatingStuff();
 
 		for(e in [healthBar, healthBarBG, iconP1, iconP2, scoreTxt, missesTxt, accuracyTxt])
 			e.cameras = [camHUD];
@@ -1230,7 +1236,7 @@ class PlayState extends MusicBeatState
 		iconP2.health = 1 - (healthBarPercent / 100);
 	}
 
-	function updateRatingStuff() {
+	dynamic function updateRatingStuff() {
 		scoreTxt.text = 'Score:$songScore';
 		missesTxt.text = '${comboBreaks ? "Combo Breaks" : "Misses"}:$misses';
 
@@ -1260,7 +1266,8 @@ class PlayState extends MusicBeatState
 			return;
 		}
 
-		updateRatingStuff();
+		if (updateRatingStuff != null)
+			updateRatingStuff();
 
 		if (canAccessDebugMenus) {
 			if (chartingMode && FlxG.keys.justPressed.SEVEN) {
@@ -1274,7 +1281,7 @@ class PlayState extends MusicBeatState
 		}
 
 		if (doIconBop)
-			for (icon in [iconP1, iconP2])
+			for (icon in iconArray)
 				if (icon.updateBump != null)
 					icon.updateBump();
 
@@ -1853,7 +1860,7 @@ class PlayState extends MusicBeatState
 		}
 
 		if (doIconBop)
-			for (icon in [iconP1, iconP2])
+			for (icon in iconArray)
 				if (icon.bump != null)
 					icon.bump();
 
@@ -1974,8 +1981,10 @@ final class ComboRating {
 	public var percent:Float;
 	public var rating:String;
 	public var color:FlxColor;
+	public var maxMisses:Float;  // Float since it could be Math.POSITIVE_INFINITY  - Nex
 
-	public function new(percent:Float, rating:String, color:FlxColor) {
+	public function new(?percent:Float, ?rating:String, ?color:FlxColor, ?misses:Float) {
+		maxMisses = misses == null || Math.isNaN(misses) ? Math.POSITIVE_INFINITY : misses;
 		this.percent = percent;
 		this.rating = rating;
 		this.color = color;
