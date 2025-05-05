@@ -1288,17 +1288,23 @@ class PlayState extends MusicBeatState
 		if (updateIconPositions != null)
 			updateIconPositions();
 
-		if (startingSong)
-		{
-			if (startedCountdown)
-			{
+		if (startingSong) {
+			if (startedCountdown) {
 				Conductor.songPosition += Conductor.songOffset + elapsed * 1000;
 				if (Conductor.songPosition >= 0)
 					startSong();
 			}
 		} else if (FlxG.sound.music != null) {
 			var instTime = FlxG.sound.music.time;
-			var isOffsync = vocals.time != instTime || [for(strumLine in strumLines.members) strumLine.vocals.time != instTime].contains(true);
+			var isOffsync:Bool = vocals.time != instTime;
+			if(!isOffsync) {
+				for(strumLine in strumLines.members) {
+					if(strumLine.vocals.time != instTime) {
+						isOffsync = true;
+						break;
+					}
+				}
+			}
 			__vocalOffsetViolation = Math.max(0, __vocalOffsetViolation + (isOffsync ? elapsed : -elapsed / 2));
 			if (__vocalOffsetViolation > 25) {
 				resyncVocals();
@@ -1312,31 +1318,17 @@ class PlayState extends MusicBeatState
 		if (controls.PAUSE && startedCountdown && canPause)
 			pauseGame();
 
-		if (generatedMusic && strumLines.members[curCameraTarget] != null)
-		{
-			var pos = FlxPoint.get();
-			var r = 0;
-			for(c in strumLines.members[curCameraTarget].characters) {
-				if (c == null || !c.visible) continue;
-				var cpos = c.getCameraPosition();
-				pos.x += cpos.x;
-				pos.y += cpos.y;
-				r++;
-				//cpos.put();
-			}
-			if (r > 0) {
-				pos.x /= r;
-				pos.y /= r;
-
-				var event = scripts.event("onCameraMove", EventManager.get(CamMoveEvent).recycle(pos, strumLines.members[curCameraTarget], r));
+		if (generatedMusic && strumLines.members[curCameraTarget] != null) {
+			var data:CamPosData = getStrumlineCamPos(curCameraTarget);
+			if (data.amount > 0) {
+				var event = scripts.event("onCameraMove", EventManager.get(CamMoveEvent).recycle(data.pos, strumLines.members[curCameraTarget], data.amount));
 				if (!event.cancelled)
-					camFollow.setPosition(pos.x, pos.y);
+					camFollow.setPosition(event.position.x, event.position.y);
 			}
-			pos.put();
+			data.put();
 		}
 
-		if (camZooming)
-		{
+		if (camZooming) {
 			FlxG.camera.zoom = lerp(FlxG.camera.zoom, defaultCamZoom, camGameZoomLerp);
 			camHUD.zoom = lerp(camHUD.zoom, defaultHudZoom, camHUDZoomLerp);
 		}
@@ -1369,6 +1361,41 @@ class PlayState extends MusicBeatState
 			super.draw();
 		scripts.event("postDraw", e);
 	}
+
+	/**
+	 * Returns the camera position of the specified strumline.
+	 * @param strumLine The strumline to get the camera position of.
+	 * @param pos The position to put the camera position in. If `null`, a new FlxPoint will be created.
+	 * @param ignoreInvisible Whenever invisible characters should be ignored.
+	**/
+	public inline function getStrumlineCamPos(strumLine:Int, ?pos:FlxPoint = null, ?ignoreInvisible:Bool = true):CamPosData {
+		return getCharactersCamPos(strumLines.members[strumLine].characters, pos, ignoreInvisible);
+	}
+
+	/**
+	 * Returns the camera position of the specified characters.
+	 * @param chars The characters to get the camera position of.
+	 * @param pos The position to put the camera position in. If `null`, a new FlxPoint will be created.
+	 * @param ignoreInvisible Whenever invisible characters should be ignored.
+	**/
+	public function getCharactersCamPos(chars:Array<Character>, ?pos:FlxPoint = null, ?ignoreInvisible:Bool = true):CamPosData {
+		if (pos == null) pos = FlxPoint.get();
+		var amount = 0;
+		for(c in chars) {
+			if (c == null || (ignoreInvisible && !c.visible)) continue;
+			var cpos = c.getCameraPosition();
+			pos.x += cpos.x;
+			pos.y += cpos.y;
+			amount++;
+			//cpos.put(); // not actually in the pool, so no need
+		}
+		if (amount > 0) {
+			pos.x /= amount;
+			pos.y /= amount;
+		}
+		return new CamPosData(pos, amount);
+	}
+
 
 	public var scrollSpeedTween:FlxTween = null;
 
@@ -1998,4 +2025,29 @@ typedef PlayStateTransitionData = {
 	var camFollowX:Float;
 	var camFollowY:Float;
 	var camZoom:Float;
+}
+
+class CamPosData {
+	/**
+	 * The camera position.
+	**/
+	public var pos:FlxPoint;
+	/**
+	 * The amount of characters that was involved in the calculation.
+	**/
+	public var amount:Int;
+
+	public function new(pos:FlxPoint, amount:Int) {
+		this.pos = pos;
+		this.amount = amount;
+	}
+
+	/**
+	 * Puts the position back into the pool, making it reusable.
+	**/
+	public function put() {
+		if(pos == null) return;
+		pos.put();
+		pos = null;
+	}
 }
