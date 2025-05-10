@@ -209,6 +209,7 @@
 	  <config:android permission="android.permission.CAPTURE_AUDIO_OUTPUT" />
 	  <android target-sdk-version="34" />
  	  <android min-sdk-version="19" />
+	  	<certificate path="key.keystore" password="codename" alias="replserver" alias-password="codename" unless="debug" />
 	  </section>
           <dependency name="Metal.framework" if="ios" />
 
