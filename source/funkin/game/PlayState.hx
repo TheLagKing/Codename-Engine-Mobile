@@ -1518,6 +1518,7 @@ class PlayState extends MusicBeatState
 	 */
 	public function endSong():Void
 	{
+		endingSong = true;
 		scripts.call("onSongEnd");
 		canPause = false;
 		inst.volume = 0;
