@@ -21,7 +21,7 @@ jobs:
           haxelib run lime rebuild hxcpp
 
       - name: Compile
-        run: haxelib run lime build ios -nosign
+        run: haxelib run lime build ios -clean
 
       - name: Create Ipa
         run: |
