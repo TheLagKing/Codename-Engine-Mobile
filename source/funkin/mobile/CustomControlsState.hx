@@ -67,30 +67,17 @@ class CustomControlsState extends MusicBeatSubstate {
         importButton = createButton(exportButton.x, 100, 'import', () -> loadfromclipboard(_pad));
         importButton.resize(125, 50);
         for (button in [exitButton, saveButton, exportButton, importButton]) add(button);
-        /*add(exitButton);
-        add(saveButton);
-        add(exportButton);
-        add(importButton);*/
 
         upText = createText(200, 200, 'Button up x:' + _pad.buttonUp.x + ' y:' + _pad.buttonUp.y);
         downText = createText(200, 250, 'Button down x:' + _pad.buttonDown.x + ' y:' + _pad.buttonDown.y);
         leftText = createText(200, 300, 'Button left x:' + _pad.buttonLeft.x + ' y:' + _pad.buttonLeft.y);
         rightText = createText(200, 350, 'Button right x:' + _pad.buttonRight.x + ' y:' + _pad.buttonRight.y);
         for (txt in [upText, downText, leftText, rightText]) add(txt);
-        /*add(upText);
-        add(downText);
-        add(leftText);
-        add(rightText);*/
 
         var arrowTex = FlxAtlasFrames.fromSparrow('assets/mobile/arrows.png', 'assets/mobile/arrows.xml');
         leftArrow = createArrow(inputVari.x - 60, inputVari.y - 10, arrowTex, 'arrow left', 'arrow push left');
         rightArrow = createArrow(inputVari.x + inputVari.width + 10, leftArrow.y, arrowTex, 'arrow right', 'arrow push right');
         for (obj in [leftArrow, rightArrow, inputVari, _pad, _hb]) add(obj);
-        /*add(leftArrow);
-        add(rightArrow);
-        add(inputVari);
-        add(_pad);
-        add(_hb);*/
 
         changeSelection();
     }
