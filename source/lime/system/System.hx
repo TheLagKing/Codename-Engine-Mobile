@@ -284,22 +284,6 @@ class System
 		#end
 	}
 
-     #if ios
-	 public static function getTimerPrecise():Float {
-		#if ((js && !nodejs) || electron)
-		return Browser.window.performance.now();
-		#elseif (lime_cffi && !macro)
-		return NativeCFFI.lime_system_get_timer();
-     	#elseif cpp
-		return untyped __global__.__time_stamp() * 1000.0;
-		#elseif sys
-		return Sys.time() * 1000.0;
-		#else
-		return 0;
-		#end
-	 }
-     #end
-
 	#if (!lime_doc_gen || lime_cffi)
 	public static inline function load(library:String, method:String, args:Int = 0, lazy:Bool = false):Dynamic
 	{
