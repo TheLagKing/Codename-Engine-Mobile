@@ -15,9 +15,9 @@ import funkin.options.PlayerSettings;
 #if mobile
 import flixel.FlxCamera;
 import flixel.input.actions.FlxActionInput;
-import funkin.mobile.FlxVirtualPad;
-import funkin.mobile.HitBox;
-import funkin.mobile.Mobilecontrols;
+import funkin.mobile.controls.FlxVirtualPad;
+import funkin.mobile.controls.HitBox;
+import funkin.mobile.controls.Mobilecontrols;
 #end
 
 class MusicBeatState extends FlxState implements IBeatReceiver

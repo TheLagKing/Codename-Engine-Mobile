@@ -13,7 +13,7 @@ import flixel.FlxSubState;
 #if mobile
 import flixel.FlxCamera;
 import flixel.input.actions.FlxActionInput;
-import funkin.mobile.FlxVirtualPad;
+import funkin.mobile.controls.FlxVirtualPad;
 #end
 
 class MusicBeatSubstate extends FlxSubState implements IBeatReceiver

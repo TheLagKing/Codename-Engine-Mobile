@@ -1,4 +1,4 @@
-package funkin.mobile;
+package funkin.mobile.controls;
 
 import flixel.FlxG;
 import flixel.graphics.frames.FlxAtlasFrames;
