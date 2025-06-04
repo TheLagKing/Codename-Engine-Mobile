@@ -33,13 +33,13 @@ jobs:
       - name: Building the game
         run: |
           haxelib run lime build linux
-      - name: Tar files
-        run: tar -zcvf CodenameEngine.tar.gz -C export/release/linux/bin .
+      # - name: Tar files
+      #   run: tar -zcvf CodenameEngine.tar.gz -C export/release/linux/bin .
       - name: Uploading artifact (entire build)
         uses: actions/upload-artifact@v4
         with:
           name: Codename Engine
-          path: CodenameEngine.tar.gz
+          path: export/release/linux/bin/
       # - name: Uploading artifact (executable)
       #   uses: actions/upload-artifact@v4
       #   with:
