@@ -1,4 +1,4 @@
-package funkin.mobile;
+package funkin.options.categories;
 
 #if mobile
 import flixel.addons.ui.FlxUIButton;
