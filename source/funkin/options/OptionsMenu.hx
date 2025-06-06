@@ -28,7 +28,7 @@ class OptionsMenu extends TreeMenu {
 		{
 			name: 'Mobile Controls >',
 			desc: 'Change Mobile Controls...',
-			state: CustomControlsState
+			state: funkin.mobile.CustomControlsState
 		},
 		{
 			name: 'Miscellaneous >',
