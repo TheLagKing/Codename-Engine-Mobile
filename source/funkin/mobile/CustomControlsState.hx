@@ -14,7 +14,7 @@ import flixel.graphics.frames.FlxAtlasFrames;
 
 using StringTools;
 
-class CustomControlsState extends MusicBeatSubstate {
+class CustomControlsState extends OptionsScreen {
     var _pad:FlxVirtualPad;
     var _hb:HitBox;
 
