@@ -1,5 +1,6 @@
 package funkin.mobile;
 
+import funkin.options.OptionsScreen;
 #if mobile
 import flixel.addons.ui.FlxUIButton;
 import flixel.text.FlxText;
