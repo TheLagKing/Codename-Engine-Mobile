@@ -1,6 +1,5 @@
 package funkin.mobile;
 
-import funkin.options.OptionsScreen;
 #if mobile
 import flixel.addons.ui.FlxUIButton;
 import flixel.text.FlxText;
@@ -14,7 +13,7 @@ import flixel.graphics.frames.FlxAtlasFrames;
 
 using StringTools;
 
-class CustomControlsState extends OptionsScreen {
+class CustomControlsState extends MusicBeatSubstate {
     var _pad:FlxVirtualPad;
     var _hb:HitBox;
 
