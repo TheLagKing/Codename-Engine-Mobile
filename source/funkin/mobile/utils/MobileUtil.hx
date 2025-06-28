@@ -29,7 +29,7 @@ class MobileUtil {
    */
 
   public static function getDirectory():String {
-   currentDirectory = #if android if(VERSION.SDK_INT >= 33) Environment.getExternalStorageDirectory() + '/.' + Application.current.meta.get('file') else '/sdcard/.CodenameEngine/'    #elseif ios System.documentsDirectory #else '' #end;
+   currentDirectory = #if android if(VERSION.SDK_INT >= 33) Environment.getExternalStorageDirectory() + '/.' + Application.current.meta.get('file') else Environment.getExternalStorageDirectory() + '/Android/media/' + lime.app.Application.current.meta.get('packageName') #elseif ios System.documentsDirectory #else '' #end;
   return currentDirectory;
   }
 
