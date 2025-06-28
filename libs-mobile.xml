@@ -2,7 +2,6 @@
 <libraries>
 <!-- OpenFL & Lime (Required for Flixel) -->
 <lib name="openfl" version="9.2.2" />
-<git name="lime"  url="https://github.com/moxie-coder/lime-8.2.2"/>
 
 <!-- Flixel -->
 <git name="flixel" url="https://github.com/CodenameCrew/cne-flixel" />
@@ -24,5 +23,5 @@
 <!-- Mobile Libraries -->
 <git name="hxcpp" url="https://github.com/CodenameCrew/cne-hxcpp" />
 <git name="extension-androidtools" url="https://github.com/MAJigsaw77/extension-androidtools" skipDeps="true" unless="ios"/>
-
+<git name="lime"  url="https://github.com/moxie-coder/lime-8.2.2"/>
 </libraries>
