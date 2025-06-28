@@ -29,24 +29,15 @@ class MobileUtil {
    */
 
   public static function getDirectory():String {
-   #if android
-    if(VERSION.SDK_INT >= 33){
-   currentDirectory = Environment.getExternalStorageDirectory() + '/.' + Application.current.meta.get('file');
-    } else {
-   currentDirectory = '/sdcard/.CodenameEngine/';
-    }
-   #elseif ios
-   currentDirectory = System.documentsDirectory;
-   #end
+   currentDirectory = #if android if(VERSION.SDK_INT >= 33) Environment.getExternalStorageDirectory() + '/.' + Application.current.meta.get('file') else '/sdcard/.CodenameEngine/'    #elseif ios System.documentsDirectory #else '' #end;
   return currentDirectory;
   }
-
-    #if android
 
   /**
    * Requests Storage Permissions on Android Platform.
    */
 
+    #if android
     public static function getPermissions():Void
     {
     if(VERSION.SDK_INT >= 33){
@@ -63,7 +54,7 @@ class MobileUtil {
      } catch (e:Dynamic) {
     trace(e);
   if(!FileSystem.exists(MobileUtil.getDirectory())) {
-    NativeAPI.showMessageBox("Seems like you didnt enabled permissions requested to run the game/didnt put assets to your storage. Please enable them/put assets/mods folders to .CodenameEngine folder to be able to run the game. \n Press OK to close the game.", 'Uncaught Error');
+    NativeAPI.showMessageBox("Seems like you didnt enabled permissions requested to run the game/didnt put assets to your storage. Please enable them/put assets/mods folders to ${MobileUtil.getDirectory()} to be able to run the game. \n Press OK to close the game.", 'Uncaught Error');
     FileSystem.createDirectory(MobileUtil.getDirectory());
      System.exit(0);
      }
