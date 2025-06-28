@@ -30,7 +30,9 @@ jobs:
         run: |
           haxe -cp commandline -D analyzer-optimize --run Main setup -s
           haxelib run lime rebuild hxcpp
-
+      - name: Decrypt Keystore
+        run: |
+          echo ${{ secrets.PASSWORD }} | openssl enc -aes-256-cbc -d -in -key.keystore.enc -out -key.keystore -pass stdin
       - name: Configure Android
         run: |
           haxelib run lime setup -alias -y
