@@ -40,8 +40,8 @@ class HitBox extends FlxSpriteGroup
         button.makeGraphic(width, height, FlxColor.fromString(color));
         button.alpha = 0.1;
 
-        button.onDown.callback = () -> button.alpha = 0.15;
-        button.onUp.callback = () -> button.alpha = 0.1;
+        button.onDown.callback = () -> button.alpha = 0.015;
+        button.onUp.callback = () -> button.alpha = 0.01;
         button.onOut.callback = button.onUp.callback;
 
         return button;
