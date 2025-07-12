@@ -1,4 +1,4 @@
-package funkin.mobile;
+package funkin.mobile.controls;
 
 import flixel.FlxG;
 import flixel.group.FlxSpriteGroup;
@@ -40,7 +40,7 @@ class HitBox extends FlxSpriteGroup
         button.makeGraphic(width, height, FlxColor.fromString(color));
         button.alpha = 0.01;
 
-        button.onDown.callback = () -> button.alpha = 0.015;
+        button.onDown.callback = () -> button.alpha = 0.005;
         button.onUp.callback = () -> button.alpha = 0.01;
         button.onOut.callback = button.onUp.callback;
 
