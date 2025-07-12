@@ -3,8 +3,8 @@ import flixel.text.FlxText;
 import flixel.text.FlxTextBorderStyle;
 import flixel.util.FlxAxes;
 #if mobile
-import funkin.mobile.controls.FlxDPadMode;
-import funkin.mobile.controls.FlxActionMode;
+import funkin.mobile.FlxDPadMode;
+import funkin.mobile.FlxActionMode;
 #end
 
 var pixelScript:Script;
