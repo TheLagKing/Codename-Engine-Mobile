@@ -11,8 +11,8 @@ import flixel.input.gamepad.FlxGamepadInputID;
 import flixel.input.keyboard.FlxKey;
 #if mobile
 import funkin.mobile.backend.FlxButton;
-import funkin.mobile.controls.FlxVirtualPad;
-import funkin.mobile.controls.HitBox;
+import funkin.mobile.FlxVirtualPad;
+import funkin.mobile.HitBox;
 #end
 
 enum abstract Action(String) to String from String {
