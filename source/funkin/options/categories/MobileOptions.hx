@@ -4,7 +4,7 @@ class AppearanceOptions extends OptionsScreen {
 	public override function new() {
 		super("Mobile Options", "Change Mobile Options. Only on mobile...");
 		add(new Checkbox(
-			"Hitbox Visibility",
+			"hitbox visibility",
 			"Makes the hitbox invisible",
   }
     #if mobile
