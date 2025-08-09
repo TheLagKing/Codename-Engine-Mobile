@@ -12,3 +12,4 @@ class AppearanceOptions extends OptionsScreen {
 	 MusicBeatState.instance.addVPadCamera();
 	 #end
 	}
+}
