@@ -1,6 +1,6 @@
 package funkin.options.categories;
 
-class AppearanceOptions extends OptionsScreen {
+class MobileOptions extends OptionsScreen {
 	public override function new() {
 		super("Mobile Options", "Change Mobile Options. Only on mobile...");
 		add(new Checkbox(
