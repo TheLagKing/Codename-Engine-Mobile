@@ -6,6 +6,7 @@ class AppearanceOptions extends OptionsScreen {
 		add(new Checkbox(
 			"hitbox visibility",
 			"Makes the hitbox invisible",
+			"hitboxvisibility"));
   }
     #if mobile
 	 MusicBeatState.instance.addVPad(FULL, A_B);
