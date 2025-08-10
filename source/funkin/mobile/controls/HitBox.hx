@@ -11,10 +11,9 @@ class HitBox extends FlxSpriteGroup
     public var buttonDown:FlxButton;
     public var buttonUp:FlxButton;
     public var buttonRight:FlxButton;
-    
-    // Default alpha values
-    public static final DEFAULT_ALPHA:Float = 0.09;
-    public static final PRESSED_ALPHA:Float = 0.05;
+
+    public static final DEFAULT_ALPHA:Float = 0.15;
+    public static final PRESSED_ALPHA:Float = 0.1;
     
     public function new()
     {
@@ -23,8 +22,7 @@ class HitBox extends FlxSpriteGroup
         
         addButtons();
         scrollFactor.set();
-        
-        // Set initial visibility based on options
+
         updateHitboxVisibility();
     }
     
