@@ -3,8 +3,6 @@ package funkin.mobile.controls;
 import flixel.FlxG;
 import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
-import flixel.ui.FlxButton;
-import funkin.options.Options;
 
 /**
  * ...
