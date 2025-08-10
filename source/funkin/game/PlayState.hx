@@ -781,8 +781,6 @@ class PlayState extends MusicBeatState
 			e.cameras = [camHUD];
 		#end
 
-		#if mobile addMControls(); #end
-
 		startingSong = true;
 
 		super.create();
@@ -880,6 +878,9 @@ class PlayState extends MusicBeatState
 
 	@:dox(hide) public function startCountdown():Void
 	{
+	
+	#if mobile addMControls(); #end
+	
 		if (!_startCountdownCalled) {
 			_startCountdownCalled = true;
 			inCutscene = false;
