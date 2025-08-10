@@ -61,10 +61,10 @@ class HitBox extends FlxSpriteGroup
     {
         var button:FlxButton = new FlxButton(x, y);
         button.makeGraphic(width, height, FlxColor.fromString(color));
-        button.alpha = Options.hitboxvisibility ? DEFAULT_ALPHA : 0;
+        button.alpha = Options.hitboxvisibility ? DEFAULT_ALPHA;
         
-        button.onDown.callback = () -> button.alpha = Options.hitboxvisibility ? PRESSED_ALPHA : 0;
-        button.onUp.callback = () -> button.alpha = Options.hitboxvisibility ? DEFAULT_ALPHA : 0;
+        button.onDown.callback = () -> button.alpha = Options.hitboxvisibility ? PRESSED_ALPHA;
+        button.onUp.callback = () -> button.alpha = Options.hitboxvisibility ? DEFAULT_ALPHA;
         button.onOut.callback = button.onUp.callback;
 
         return button;
