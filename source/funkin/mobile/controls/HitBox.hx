@@ -3,6 +3,8 @@ package funkin.mobile.controls;
 import flixel.FlxG;
 import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
+import flixel.ui.FlxButton;
+import funkin.options.Options;
 
 /**
  * ...
@@ -38,10 +40,14 @@ class HitBox extends FlxSpriteGroup
     {
         var button:FlxButton = new FlxButton(x, y);
         button.makeGraphic(width, height, FlxColor.fromString(color));
-        button.alpha = 0.1;
+        button.alpha = Options.hitboxvisibility ? 0.1 : 0; // hope this works lol
 
-        button.onDown.callback = () -> button.alpha = 0.15;
-        button.onUp.callback = () -> button.alpha = 0.1;
+        button.onDown.callback = () -> {
+            if (Options.hitboxvisibility) button.alpha = 0.15;
+        };
+        button.onUp.callback = () -> {
+            if (Options.hitboxvisibility) button.alpha = 0.1;
+        };
         button.onOut.callback = button.onUp.callback;
 
         return button;
