@@ -3,18 +3,19 @@ package funkin.mobile.controls;
 import flixel.FlxG;
 import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
+import funkin.options.Options;
 
-/**
- * ...
- * @author Idklool
- */
 class HitBox extends FlxSpriteGroup
 {
     public var buttonLeft:FlxButton;
     public var buttonDown:FlxButton;
     public var buttonUp:FlxButton;
     public var buttonRight:FlxButton;
-
+    
+    // Default alpha values
+    public static final DEFAULT_ALPHA:Float = 0.09;
+    public static final PRESSED_ALPHA:Float = 0.05;
+    
     public function new()
     {
         super();
@@ -22,6 +23,30 @@ class HitBox extends FlxSpriteGroup
         
         addButtons();
         scrollFactor.set();
+        
+        // Set initial visibility based on options
+        updateHitboxVisibility();
+    }
+    
+    public function updateHitboxVisibility() {
+        var alphaValue:Float = Options.hitboxvisibility ? DEFAULT_ALPHA : 0;
+        var pressedAlphaValue:Float = Options.hitboxvisibility ? PRESSED_ALPHA : 0;
+        
+        buttonLeft.alpha = alphaValue;
+        buttonDown.alpha = alphaValue;
+        buttonUp.alpha = alphaValue;
+        buttonRight.alpha = alphaValue;
+        
+        // Update the pressed state alphas as well
+        buttonLeft.onDown.callback = () -> buttonLeft.alpha = pressedAlphaValue;
+        buttonDown.onDown.callback = () -> buttonDown.alpha = pressedAlphaValue;
+        buttonUp.onDown.callback = () -> buttonUp.alpha = pressedAlphaValue;
+        buttonRight.onDown.callback = () -> buttonRight.alpha = pressedAlphaValue;
+        
+        buttonLeft.onUp.callback = buttonLeft.onOut.callback = () -> buttonLeft.alpha = alphaValue;
+        buttonDown.onUp.callback = buttonDown.onOut.callback = () -> buttonDown.alpha = alphaValue;
+        buttonUp.onUp.callback = buttonUp.onOut.callback = () -> buttonUp.alpha = alphaValue;
+        buttonRight.onUp.callback = buttonRight.onOut.callback = () -> buttonRight.alpha = alphaValue;
     }
 
     function addButtons() {
@@ -38,10 +63,10 @@ class HitBox extends FlxSpriteGroup
     {
         var button:FlxButton = new FlxButton(x, y);
         button.makeGraphic(width, height, FlxColor.fromString(color));
-        button.alpha = 0.01;
-
-        button.onDown.callback = () -> button.alpha = 0.005;
-        button.onUp.callback = () -> button.alpha = 0.01;
+        button.alpha = Options.hitboxvisibility ? DEFAULT_ALPHA : 0;
+        
+        button.onDown.callback = () -> button.alpha = Options.hitboxvisibility ? PRESSED_ALPHA : 0;
+        button.onUp.callback = () -> button.alpha = Options.hitboxvisibility ? DEFAULT_ALPHA : 0;
         button.onOut.callback = button.onUp.callback;
 
         return button;
