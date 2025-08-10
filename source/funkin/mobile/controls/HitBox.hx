@@ -3,8 +3,11 @@ package funkin.mobile.controls;
 import flixel.FlxG;
 import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
-import funkin.options.Options;
 
+/**
+ * ...
+ * @author Idklool
+ */
 class HitBox extends FlxSpriteGroup
 {
     public var buttonLeft:FlxButton;
@@ -12,9 +15,6 @@ class HitBox extends FlxSpriteGroup
     public var buttonUp:FlxButton;
     public var buttonRight:FlxButton;
 
-    public static final DEFAULT_ALPHA:Float = 0.15;
-    public static final PRESSED_ALPHA:Float = 0.1;
-    
     public function new()
     {
         super();
@@ -22,29 +22,6 @@ class HitBox extends FlxSpriteGroup
         
         addButtons();
         scrollFactor.set();
-
-        updateHitboxVisibility();
-    }
-    
-    public function updateHitboxVisibility() {
-        var alphaValue:Float = Options.hitboxvisibility ? DEFAULT_ALPHA : 0;
-        var pressedAlphaValue:Float = Options.hitboxvisibility ? PRESSED_ALPHA : 0;
-        
-        buttonLeft.alpha = alphaValue;
-        buttonDown.alpha = alphaValue;
-        buttonUp.alpha = alphaValue;
-        buttonRight.alpha = alphaValue;
-        
-        // Update the pressed state alphas as well
-        buttonLeft.onDown.callback = () -> buttonLeft.alpha = pressedAlphaValue;
-        buttonDown.onDown.callback = () -> buttonDown.alpha = pressedAlphaValue;
-        buttonUp.onDown.callback = () -> buttonUp.alpha = pressedAlphaValue;
-        buttonRight.onDown.callback = () -> buttonRight.alpha = pressedAlphaValue;
-        
-        buttonLeft.onUp.callback = buttonLeft.onOut.callback = () -> buttonLeft.alpha = alphaValue;
-        buttonDown.onUp.callback = buttonDown.onOut.callback = () -> buttonDown.alpha = alphaValue;
-        buttonUp.onUp.callback = buttonUp.onOut.callback = () -> buttonUp.alpha = alphaValue;
-        buttonRight.onUp.callback = buttonRight.onOut.callback = () -> buttonRight.alpha = alphaValue;
     }
 
     function addButtons() {
@@ -61,10 +38,10 @@ class HitBox extends FlxSpriteGroup
     {
         var button:FlxButton = new FlxButton(x, y);
         button.makeGraphic(width, height, FlxColor.fromString(color));
-        button.alpha = Options.hitboxvisibility ? DEFAULT_ALPHA;
-        
-        button.onDown.callback = () -> button.alpha = Options.hitboxvisibility ? PRESSED_ALPHA;
-        button.onUp.callback = () -> button.alpha = Options.hitboxvisibility ? DEFAULT_ALPHA;
+        button.alpha = 0.1;
+
+        button.onDown.callback = () -> button.alpha = 0.15;
+        button.onUp.callback = () -> button.alpha = 0.1;
         button.onOut.callback = button.onUp.callback;
 
         return button;
