@@ -53,7 +53,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@main
         with:
-          name: androidBuild
+          name: android Build
           path: export/release/android/bin/app/build/outputs/apk/*
           if-no-files-found: warn
   Publish:
@@ -73,5 +73,5 @@ jobs:
           repo_token: ${{secrets.GITHUB_TOKEN}}
           prerelease: true
           automatic_release_tag: 'v1.0.2-pre-release'
-          title: 'Codename Engine Mobile Port [Android BUGFIX]'
+          title: 'Codename Engine Android'
           files: ${{github.workspace}}/CodenameEngine-debug.apk
