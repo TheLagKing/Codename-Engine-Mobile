@@ -446,9 +446,6 @@ public function setHitBox(hitbox:HitBox)
     inline forEachBound(Control.NOTE_DOWN, (action, state) -> addbutton(action, hitbox.buttonDown, state));
     inline forEachBound(Control.NOTE_LEFT, (action, state) -> addbutton(action, hitbox.buttonLeft, state));
     inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addbutton(action, hitbox.buttonRight, state));
-
-    if (hitbox.buttonSpace != null) {
-        inline forEachBound(Control.SPACE, (action, state) -> addbutton(action, hitbox.buttonSpace, state));
     }
 }
 
