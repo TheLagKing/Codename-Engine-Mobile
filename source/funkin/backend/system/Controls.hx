@@ -456,6 +456,556 @@ class Controls extends FlxActionSet
 
 		switch (DPad)
 		{
+			case UP_DOWN:
+				inline forEachBound(Control.NOTE_UP, (action, state) -> addbutton(action, virtualPad.buttonUp, state));
+				inline forEachBound(Control.NOTE_DOWN, (action, state) -> addbutton(action, virtualPad.buttonDown, state));
+			case LEFT_RIGHT:
+				inline forEachBound(Control.NOTE_LEFT, (action, state) -> addbutton(action, virtualPad.buttonLeft, state));
+				inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addbutton(action, virtualPad.buttonRight, state));
+			case UP_LEFT_RIGHT:
+				inline forEachBound(Control.NOTE_UP, (action, state) -> addbutton(action, virtualPad.buttonUp, state));
+				inline forEachBound(Control.NOTE_LEFT, (action, state) -> addbutton(action, virtualPad.buttonLeft, state));
+				inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addbutton(action, virtualPad.buttonRight, state));
+			case FULL | RIGHT_FULL:
+				inline forEachBound(Control.NOTE_UP, (action, state) -> addbutton(action, virtualPad.buttonUp, state));
+				inline forEachBound(Control.NOTE_DOWN, (action, state) -> addbutton(action, virtualPad.buttonDown, state));
+				inline forEachBound(Control.NOTE_LEFT, (action, state) -> addbutton(action, virtualPad.buttonLeft, state));
+				inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addbutton(action, virtualPad.buttonRight, state));
+			case NONE:
+		}
+
+		switch (Action)
+		{
+			case A:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbutton(action, virtualPad.buttonA, state));
+			case B:
+			  inline forEachBound(Control.BACK, (action, state) -> addbutton(action, virtualPad.buttonB, state));
+			case A_B:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbutton(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addbutton(action, virtualPad.buttonB, state));
+			case A_C:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbutton(action, virtualPad.buttonA, state));
+			case A_X:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbutton(action, virtualPad.buttonA, state));
+			case A_Y:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbutton(action, virtualPad.buttonA, state));				
+			case A_B_C:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbutton(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addbutton(action, virtualPad.buttonB, state));
+			case A_B_X_Y:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbutton(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addbutton(action, virtualPad.buttonB, state));
+			case A_B_C_X_Y:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbutton(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addbutton(action, virtualPad.buttonB, state));
+			case B_C:
+			    inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
+			case B_X_Y:
+			    inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
+			case B_C_X_Y:
+			    inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
+			case NONE:
+		}
+	}
+
+	public function setUIVirtualPad(virtualPad:FlxVirtualPad, ?DPad:FlxDPadMode, ?Action:FlxActionMode) {
+		if (DPad == null)
+			DPad = NONE;
+		if (Action == null)
+			Action = NONE;
+
+		switch (DPad)
+		{
+			case UP_DOWN:
+				inline forEachBound(Control.UP, (action, state) -> addUIButton(action, virtualPad.buttonUp, state));
+				inline forEachBound(Control.DOWN, (action, state) -> addUIButton(action, virtualPad.buttonDown, state));
+			case LEFT_RIGHT:
+				inline forEachBound(Control.LEFT, (action, state) -> addUIButton(action, virtualPad.buttonLeft, state));
+				inline forEachBound(Control.RIGHT, (action, state) -> addUIButton(action, virtualPad.buttonRight, state));
+			case UP_LEFT_RIGHT:
+				inline forEachBound(Control.UP, (action, state) -> addUIButton(action, virtualPad.buttonUp, state));
+				inline forEachBound(Control.LEFT, (action, state) -> addUIButton(action, virtualPad.buttonLeft, state));
+				inline forEachBound(Control.RIGHT, (action, state) -> addUIButton(action, virtualPad.buttonRight, state));
+			case FULL | RIGHT_FULL:
+				inline forEachBound(Control.UP, (action, state) -> addUIButton(action, virtualPad.buttonUp, state));
+				inline forEachBound(Control.DOWN, (action, state) -> addUIButton(action, virtualPad.buttonDown, state));
+				inline forEachBound(Control.LEFT, (action, state) -> addUIButton(action, virtualPad.buttonLeft, state));
+				inline forEachBound(Control.RIGHT, (action, state) -> addUIButton(action, virtualPad.buttonRight, state));
+			case NONE:
+		}
+
+		switch (Action)
+		{
+			case A:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
+			case B:
+			  inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
+			case A_B:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
+			case A_X:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
+			case A_Y:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));				
+			case A_B_C:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
+			case A_B_X_Y:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
+			case A_B_C_X_Y:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
+			case B_C:
+			    inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
+			case B_X_Y:
+			    inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
+			case B_C_X_Y:
+			    inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
+			case NONE:
+		}
+	}
+
+	public function removeFlxInput(Tinputs) {
+		for (action in this.digitalActions)
+		{
+			var i = action.inputs.length;
+			
+			while (i-- > 0)
+			{
+				var input = action.inputs[i];
+
+				var x = Tinputs.length;
+				while (x-- > 0)
+					if (Tinputs[x] == input)
+						action.remove(input);
+			}
+		}
+	}
+	#end
+
+	override function update()
+	{
+		super.update();
+	}
+
+	// inline
+	public function checkByName(name:Action):Bool
+	{
+		#if debug
+		if (!byName.exists(name))
+			throw 'Invalid name: $name';
+		#end
+		return byName[name].check();
+	}
+
+	public function getKeyName(control:Control):String
+	{
+		return getDialogueName(getActionFromControl(control));
+	}
+
+	public function getDialogueName(action:FlxActionDigital):String
+	{
+		var input = action.inputs[0];
+		return switch input.device
+		{
+			case KEYBOARD: return '${(input.inputID : FlxKey)}';
+			case GAMEPAD: return '${(input.inputID : FlxGamepadInputID)}';
+			case device: throw 'unhandled device: $device';
+		}
+	}
+
+	public function getDialogueNameFromToken(token:String):String
+	{
+		return getDialogueName(getActionFromControl(Control.createByName(token.toUpperCase())));
+	}
+
+	function getActionFromControl(control:Control):FlxActionDigital
+	{
+		return switch (control)
+		{
+			case UP: _up;
+			case DOWN: _down;
+			case LEFT: _left;
+			case RIGHT: _right;
+			case NOTE_UP: _noteUp;
+			case NOTE_DOWN: _noteDown;
+			case NOTE_LEFT: _noteLeft;
+			case NOTE_RIGHT: _noteRight;
+			case ACCEPT: _accept;
+			case BACK: _back;
+			case PAUSE: _pause;
+			case RESET: _reset;
+			case CHEAT: _cheat;
+			case SWITCHMOD: _switchMod;
+		}
+	}
+
+	static function init():Void
+	{
+		var actions = new FlxActionManager();
+		FlxG.inputs.add(actions);
+	}
+
+	/**
+	 * Calls a function passing each action bound by the specified control
+	 * @param control
+	 * @param func
+	 * @return ->Void)
+	 */
+	function f	var _upR = new FlxActionDigital(Action.UP_R);
+	var _leftR = new FlxActionDigital(Action.LEFT_R);
+	var _rightR = new FlxActionDigital(Action.RIGHT_R);
+	var _downR = new FlxActionDigital(Action.DOWN_R);
+
+	var _noteUp = new FlxActionDigital(Action.NOTE_UP);
+	var _noteLeft = new FlxActionDigital(Action.NOTE_LEFT);
+	var _noteRight = new FlxActionDigital(Action.NOTE_RIGHT);
+	var _noteDown = new FlxActionDigital(Action.NOTE_DOWN);
+	var _noteUpP = new FlxActionDigital(Action.NOTE_UP_P);
+	var _noteLeftP = new FlxActionDigital(Action.NOTE_LEFT_P);
+	var _noteRightP = new FlxActionDigital(Action.NOTE_RIGHT_P);
+	var _noteDownP = new FlxActionDigital(Action.NOTE_DOWN_P);
+	var _noteUpR = new FlxActionDigital(Action.NOTE_UP_R);
+	var _noteLeftR = new FlxActionDigital(Action.NOTE_LEFT_R);
+	var _noteRightR = new FlxActionDigital(Action.NOTE_RIGHT_R);
+	var _noteDownR = new FlxActionDigital(Action.NOTE_DOWN_R);
+
+	var _accept = new FlxActionDigital(Action.ACCEPT);
+	var _back = new FlxActionDigital(Action.BACK);
+	var _pause = new FlxActionDigital(Action.PAUSE);
+	var _reset = new FlxActionDigital(Action.RESET);
+	var _cheat = new FlxActionDigital(Action.CHEAT);
+	var _switchMod = new FlxActionDigital(Action.SWITCHMOD);
+
+	#if (haxe >= "4.0.0")
+	var byName:Map<String, FlxActionDigital> = [];
+	#else
+	var byName:Map<String, FlxActionDigital> = new Map<String, FlxActionDigital>();
+	#end
+
+	public var gamepadsAdded:Array<Int> = [];
+	public var keyboardScheme = KeyboardScheme.None;
+
+	public var UP(get, set):Bool;
+
+	inline function get_UP()
+		return _up.check();
+
+	inline function set_UP(val)
+		return @:privateAccess _up._checked = val;
+
+	public var LEFT(get, set):Bool;
+
+	inline function get_LEFT()
+		return _left.check();
+
+	inline function set_LEFT(val)
+		return @:privateAccess _left._checked = val;
+
+	public var RIGHT(get, set):Bool;
+
+	inline function get_RIGHT()
+		return _right.check();
+
+	inline function set_RIGHT(val)
+		return @:privateAccess _right._checked = val;
+
+	public var DOWN(get, set):Bool;
+
+	inline function get_DOWN()
+		return _down.check();
+
+	inline function set_DOWN(val)
+		return @:privateAccess _down._checked = val;
+
+	public var UP_P(get, set):Bool;
+
+	inline function get_UP_P()
+		return _upP.check() /*|| TouchInput.isSwipe('up')*/;
+
+	inline function set_UP_P(val)
+		return @:privateAccess _upP._checked = val;
+
+	public var LEFT_P(get, set):Bool;
+
+	inline function get_LEFT_P()
+		return _leftP.check() /*|| TouchInput.isSwipe('left')*/;
+
+	inline function set_LEFT_P(val)
+		return @:privateAccess _leftP._checked = val;
+
+	public var RIGHT_P(get, set):Bool;
+
+	inline function get_RIGHT_P()
+		return _rightP.check() /*|| TouchInput.isSwipe('right')*/;
+
+	inline function set_RIGHT_P(val)
+		return @:privateAccess _rightP._checked = val;
+
+	public var DOWN_P(get, set):Bool;
+
+	inline function get_DOWN_P()
+		return _downP.check() /*|| TouchInput.isSwipe('down')*/;
+
+	inline function set_DOWN_P(val)
+		return @:privateAccess _downP._checked = val;
+
+	public var UP_R(get, set):Bool;
+
+	inline function get_UP_R()
+		return _upR.check();
+
+	inline function set_UP_R(val)
+		return @:privateAccess _upR._checked = val;
+
+	public var LEFT_R(get, set):Bool;
+
+	inline function get_LEFT_R()
+		return _leftR.check();
+
+	inline function set_LEFT_R(val)
+		return @:privateAccess _leftR._checked = val;
+
+	public var RIGHT_R(get, set):Bool;
+
+	inline function get_RIGHT_R()
+		return _rightR.check();
+
+	inline function set_RIGHT_R(val)
+		return @:privateAccess _rightR._checked = val;
+
+	public var DOWN_R(get, set):Bool;
+
+	inline function get_DOWN_R()
+		return _downR.check();
+
+	inline function set_DOWN_R(val)
+		return @:privateAccess _downR._checked = val;
+
+	public var NOTE_UP(get, set):Bool;
+
+	inline function get_NOTE_UP()
+		return _noteUp.check();
+
+	inline function set_NOTE_UP(val)
+		return @:privateAccess _noteUp._checked = val;
+
+	public var NOTE_LEFT(get, set):Bool;
+
+	inline function get_NOTE_LEFT()
+		return _noteLeft.check();
+
+	inline function set_NOTE_LEFT(val)
+		return @:privateAccess _noteLeft._checked = val;
+
+	public var NOTE_RIGHT(get, set):Bool;
+
+	inline function get_NOTE_RIGHT()
+		return _noteRight.check();
+
+	inline function set_NOTE_RIGHT(val)
+		return @:privateAccess _noteRight._checked = val;
+
+	public var NOTE_DOWN(get, set):Bool;
+
+	inline function get_NOTE_DOWN()
+		return _noteDown.check();
+
+	inline function set_NOTE_DOWN(val)
+		return @:privateAccess _noteDown._checked = val;
+
+	public var NOTE_UP_P(get, set):Bool;
+
+	inline function get_NOTE_UP_P()
+		return _noteUpP.check();
+
+	inline function set_NOTE_UP_P(val)
+		return @:privateAccess _noteUpP._checked = val;
+
+	public var NOTE_LEFT_P(get, set):Bool;
+
+	inline function get_NOTE_LEFT_P()
+		return _noteLeftP.check();
+
+	inline function set_NOTE_LEFT_P(val)
+		return @:privateAccess _noteLeftP._checked = val;
+
+	public var NOTE_RIGHT_P(get, set):Bool;
+
+	inline function get_NOTE_RIGHT_P()
+		return _noteRightP.check();
+
+	inline function set_NOTE_RIGHT_P(val)
+		return @:privateAccess _noteRightP._checked = val;
+
+	public var NOTE_DOWN_P(get, set):Bool;
+
+	inline function get_NOTE_DOWN_P()
+		return _noteDownP.check();
+
+	inline function set_NOTE_DOWN_P(val)
+		return @:privateAccess _noteDownP._checked = val;
+
+	public var NOTE_UP_R(get, set):Bool;
+
+	inline function get_NOTE_UP_R()
+		return _noteUpR.check();
+
+	inline function set_NOTE_UP_R(val)
+		return @:privateAccess _noteUpR._checked = val;
+
+	public var NOTE_LEFT_R(get, set):Bool;
+
+	inline function get_NOTE_LEFT_R()
+		return _noteLeftR.check();
+
+	inline function set_NOTE_LEFT_R(val)
+		return @:privateAccess _noteLeftR._checked = val;
+
+	public var NOTE_RIGHT_R(get, set):Bool;
+
+	inline function get_NOTE_RIGHT_R()
+		return _noteRightR.check();
+
+	inline function set_NOTE_RIGHT_R(val)
+		return @:privateAccess _noteRightR._checked = val;
+
+	public var NOTE_DOWN_R(get, set):Bool;
+
+	inline function get_NOTE_DOWN_R()
+		return _noteDownR.check();
+
+	inline function set_NOTE_DOWN_R(val)
+		return @:privateAccess _noteDownR._checked = val;
+
+	public var ACCEPT(get, set):Bool;
+
+	inline function get_ACCEPT()
+		return _accept.check();
+
+	inline function set_ACCEPT(val)
+		return @:privateAccess _accept._checked = val;
+
+	public var BACK(get, set):Bool;
+
+	inline function get_BACK()
+		return _back.check();
+
+	inline function set_BACK(val)
+		return @:privateAccess _back._checked = val;
+
+	public var PAUSE(get, set):Bool;
+
+	inline function get_PAUSE()
+		return _pause.check() #if android || TouchInput.BACK() #end;
+
+	inline function set_PAUSE(val)
+		return @:privateAccess _pause._checked = val;
+
+	public var RESET(get, set):Bool;
+
+	inline function get_RESET()
+		return _reset.check();
+
+	inline function set_RESET(val)
+		return @:privateAccess _reset._checked = val;
+
+	public var CHEAT(get, set):Bool;
+
+	inline function get_CHEAT()
+		return _cheat.check();
+
+	inline function set_CHEAT(val)
+		return @:privateAccess _cheat._checked = val;
+
+	public var SWITCHMOD(get, set):Bool;
+
+	inline function get_SWITCHMOD()
+		return _switchMod.check();
+
+	inline function set_SWITCHMOD(val)
+		return @:privateAccess _switchMod._checked = val;
+
+	public function new(name, scheme = None)
+	{
+		super(name);
+
+		add(_up);
+		add(_left);
+		add(_right);
+		add(_down);
+		add(_upP);
+		add(_leftP);
+		add(_rightP);
+		add(_downP);
+		add(_upR);
+		add(_leftR);
+		add(_rightR);
+		add(_downR);
+
+		add(_noteUp);
+		add(_noteLeft);
+		add(_noteRight);
+		add(_noteDown);
+		add(_noteUpP);
+		add(_noteLeftP);
+		add(_noteRightP);
+		add(_noteDownP);
+		add(_noteUpR);
+		add(_noteLeftR);
+		add(_noteRightR);
+		add(_noteDownR);
+
+		add(_accept);
+		add(_back);
+		add(_pause);
+		add(_reset);
+		add(_cheat);
+		add(_switchMod);
+
+		for (action in digitalActions)
+			byName[action.name] = action;
+
+		setKeyboardScheme(scheme, false);
+	}
+
+	#if mobile
+  public var trackedinputs:Array<FlxActionInput> = [];
+  public var trackedUIinputs:Array<FlxActionInput> = [];
+
+	public function addbutton(action:FlxActionDigital, button:FlxButton, state:FlxInputState) {
+		var input = new FlxActionInputDigitalIFlxInput(button, state);
+		trackedinputs.push(input);
+		
+		action.add(input);
+		//action.addInput(button, state);
+	}
+	
+	public function addUIButton(action:FlxActionDigital, button:FlxButton, state:FlxInputState) {
+		var input = new FlxActionInputDigitalIFlxInput(button, state);
+		trackedUIinputs.push(input);
+		
+		action.add(input);
+		//action.addInput(button, state);
+	}
+	
+	public function setHitBox(hitbox:HitBox) 
+	{
+		inline forEachBound(Control.NOTE_UP, (action, state) -> addbutton(action, hitbox.buttonUp, state));
+		inline forEachBound(Control.NOTE_DOWN, (action, state) -> addbutton(action, hitbox.buttonDown, state));
+		inline forEachBound(Control.NOTE_LEFT, (action, state) -> addbutton(action, hitbox.buttonLeft, state));
+		inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addbutton(action, hitbox.buttonRight, state));
+	}
+
+	public function setVirtualPad(virtualPad:FlxVirtualPad, ?DPad:FlxDPadMode, ?Action:FlxActionMode) {
+		if (DPad == null)
+			DPad = NONE;
+		if (Action == null)
+			Action = NONE;
+
+		switch (DPad)
+		{
 				
 			case LEFT:
 				inline forEachBound(Control.NOTE_LEFT, (action, state) -> addbutton(action, virtualPad.buttonLeft, state));
