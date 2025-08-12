@@ -78,7 +78,6 @@ enum Control
 	PAUSE;
 	CHEAT;
 	SWITCHMOD;
-	SPACE;
 }
 
 enum KeyboardScheme
@@ -507,6 +506,8 @@ public function setHitBox(hitbox:HitBox)
 				inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
 			case A_X_Y:
 				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
+			case A_C_X_Y:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
 			case A_B_X_Y:
 				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
 				inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
@@ -571,8 +572,7 @@ public function setHitBox(hitbox:HitBox)
 				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
 				inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
 			case A_C:
-				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
-				
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));			
 			case A_X:
 				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
 			case A_Y:
