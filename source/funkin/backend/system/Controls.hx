@@ -440,13 +440,17 @@ class Controls extends FlxActionSet
 		//action.addInput(button, state);
 	}
 	
-	public function setHitBox(hitbox:HitBox) 
-	{
-		inline forEachBound(Control.NOTE_UP, (action, state) -> addbutton(action, hitbox.buttonUp, state));
-		inline forEachBound(Control.NOTE_DOWN, (action, state) -> addbutton(action, hitbox.buttonDown, state));
-		inline forEachBound(Control.NOTE_LEFT, (action, state) -> addbutton(action, hitbox.buttonLeft, state));
-		inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addbutton(action, hitbox.buttonRight, state));
-	}
+public function setHitBox(hitbox:HitBox) 
+{
+    inline forEachBound(Control.NOTE_UP, (action, state) -> addbutton(action, hitbox.buttonUp, state));
+    inline forEachBound(Control.NOTE_DOWN, (action, state) -> addbutton(action, hitbox.buttonDown, state));
+    inline forEachBound(Control.NOTE_LEFT, (action, state) -> addbutton(action, hitbox.buttonLeft, state));
+    inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addbutton(action, hitbox.buttonRight, state));
+
+    if (hitbox.buttonSpace != null) {
+        inline forEachBound(Control.SPACE, (action, state) -> addbutton(action, hitbox.buttonSpace, state));
+    }
+}
 
 	public function setVirtualPad(virtualPad:FlxVirtualPad, ?DPad:FlxDPadMode, ?Action:FlxActionMode) {
 		if (DPad == null)
@@ -477,29 +481,39 @@ class Controls extends FlxActionSet
 		switch (Action)
 		{
 			case A:
-				inline forEachBound(Control.ACCEPT, (action, state) -> addbutton(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
 			case B:
-			  inline forEachBound(Control.BACK, (action, state) -> addbutton(action, virtualPad.buttonB, state));
+			  inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
+			case X:
+	    		inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
+			case Y:
+		    	inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
 			case A_B:
-				inline forEachBound(Control.ACCEPT, (action, state) -> addbutton(action, virtualPad.buttonA, state));
-				inline forEachBound(Control.BACK, (action, state) -> addbutton(action, virtualPad.buttonB, state));
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
 			case A_C:
-				inline forEachBound(Control.ACCEPT, (action, state) -> addbutton(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
 			case A_X:
-				inline forEachBound(Control.ACCEPT, (action, state) -> addbutton(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
 			case A_Y:
-				inline forEachBound(Control.ACCEPT, (action, state) -> addbutton(action, virtualPad.buttonA, state));				
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));				
 			case A_B_C:
-				inline forEachBound(Control.ACCEPT, (action, state) -> addbutton(action, virtualPad.buttonA, state));
-				inline forEachBound(Control.BACK, (action, state) -> addbutton(action, virtualPad.buttonB, state));
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
+			case A_X_Y:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
 			case A_B_X_Y:
-				inline forEachBound(Control.ACCEPT, (action, state) -> addbutton(action, virtualPad.buttonA, state));
-				inline forEachBound(Control.BACK, (action, state) -> addbutton(action, virtualPad.buttonB, state));
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
 			case A_B_C_X_Y:
-				inline forEachBound(Control.ACCEPT, (action, state) -> addbutton(action, virtualPad.buttonA, state));
-				inline forEachBound(Control.BACK, (action, state) -> addbutton(action, virtualPad.buttonB, state));
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
 			case B_C:
 			    inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
+			case B_X:
+			    inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
+			case B_Y:
+			    inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));			
 			case B_X_Y:
 			    inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
 			case B_C_X_Y:
@@ -516,9 +530,17 @@ class Controls extends FlxActionSet
 
 		switch (DPad)
 		{
+			case UP:
+				inline forEachBound(Control.UP, (action, state) -> addUIButton(action, virtualPad.buttonUp, state));
+			case DOWN:
+				inline forEachBound(Control.DOWN, (action, state) -> addUIButton(action, virtualPad.buttonDown, state));
+			case LEFT:
+				inline forEachBound(Control.LEFT, (action, state) -> addUIButton(action, virtualPad.buttonLeft, state));
+			case RIGHT:
+				inline forEachBound(Control.RIGHT, (action, state) -> addUIButton(action, virtualPad.buttonRight, state));				
 			case UP_DOWN:
 				inline forEachBound(Control.UP, (action, state) -> addUIButton(action, virtualPad.buttonUp, state));
-				inline forEachBound(Control.DOWN, (action, state) -> addUIButton(action, virtualPad.buttonDown, state));
+				inline forEachBound(Control.DOWN, (action, state) -> addUIButton(action, virtualPad.buttonDown, state));				
 			case LEFT_RIGHT:
 				inline forEachBound(Control.LEFT, (action, state) -> addUIButton(action, virtualPad.buttonLeft, state));
 				inline forEachBound(Control.RIGHT, (action, state) -> addUIButton(action, virtualPad.buttonRight, state));
@@ -526,6 +548,10 @@ class Controls extends FlxActionSet
 				inline forEachBound(Control.UP, (action, state) -> addUIButton(action, virtualPad.buttonUp, state));
 				inline forEachBound(Control.LEFT, (action, state) -> addUIButton(action, virtualPad.buttonLeft, state));
 				inline forEachBound(Control.RIGHT, (action, state) -> addUIButton(action, virtualPad.buttonRight, state));
+			case DOWN_LEFT_RIGHT:
+				inline forEachBound(Control.DOWN, (action, state) -> addUIButton(action, virtualPad.buttonDown, state));
+				inline forEachBound(Control.LEFT, (action, state) -> addUIButton(action, virtualPad.buttonLeft, state));
+				inline forEachBound(Control.RIGHT, (action, state) -> addUIButton(action, virtualPad.buttonRight, state));				
 			case FULL | RIGHT_FULL:
 				inline forEachBound(Control.UP, (action, state) -> addUIButton(action, virtualPad.buttonUp, state));
 				inline forEachBound(Control.DOWN, (action, state) -> addUIButton(action, virtualPad.buttonDown, state));
@@ -540,6 +566,10 @@ class Controls extends FlxActionSet
 				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
 			case B:
 			  inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
+			case X:
+   			inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
+			case Y:
+	    		inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
 			case A_B:
 				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
 				inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
@@ -550,6 +580,8 @@ class Controls extends FlxActionSet
 			case A_B_C:
 				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
 				inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
+			case A_X_Y:
+				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
 			case A_B_X_Y:
 				inline forEachBound(Control.ACCEPT, (action, state) -> addUIButton(action, virtualPad.buttonA, state));
 				inline forEachBound(Control.BACK, (action, state) -> addUIButton(action, virtualPad.buttonB, state));
