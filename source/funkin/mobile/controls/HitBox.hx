@@ -32,7 +32,7 @@ class HitBox extends FlxSpriteGroup
         add(buttonRight = createHitbox((FlxG.width / 2) + (FlxG.width / 4), 0, Std.int(FlxG.width / 4), buttonHeight, '0xF9393F'));
 
         if (hasExtraButton) {
-            buttonSpace = createHitbox(0, spaceY, FlxG.width, Std.int(FlxG.height * 0.25), '0x7700FF', true);
+            buttonSpace = createHitbox(0, spaceY, FlxG.width, Std.int(FlxG.height * 0.25), '0xFFFFFF', true);
             add(buttonSpace);
         }
     }
@@ -44,11 +44,14 @@ class HitBox extends FlxSpriteGroup
         button.alpha = Options.hitboxvisibility ? (isSpace ? 0.2 : 0.1) : 0;
 
         button.onDown.callback = () -> {
-            if (Options.hitboxvisibility) button.alpha = isSpace ? 0.25 : 0.15;
+            if (Options.hitboxvisibility) button.alpha = isSpace ? 0.2 : 0.1;
+            if (isSpace) FlxG.keys.justPressed.SPACE = true;
         };
+        
         button.onUp.callback = () -> {
             if (Options.hitboxvisibility) button.alpha = isSpace ? 0.2 : 0.1;
         };
+        
         button.onOut.callback = button.onUp.callback;
 
         return button;
