@@ -32,14 +32,6 @@ class FlxVirtualPad extends FlxSpriteGroup
 
 	  switch (DPad)
 	  {
-	    case LEFT:
-	      add(buttonLeft = createButton(0, FlxG.height - 45 * 3, 44 * 3, 45 * 3, 'left'));	
-	    case RIGHT:
-	      add(buttonRight = createButton(0, FlxG.height - 45 * 3, 44 * 3, 45 * 3, 'right'));	
-	    case DOWN:
-	      add(buttonDown = createButton(0, FlxG.height - 45 * 3, 44 * 3, 45 * 3, 'down'));
-	    case UP:
-	      add(buttonUp = createButton(0, FlxG.height - 45 * 3, 44 * 3, 45 * 3, 'up'));	
 	    case UP_DOWN:
 	      add(buttonUp = createButton(0, FlxG.height - 85 * 3, 44 * 3, 45 * 3, 'up'));
 	      add(buttonDown = createButton(0, FlxG.height - 45 * 3, 44 * 3, 45 * 3, 'down'));
@@ -98,6 +90,10 @@ class FlxVirtualPad extends FlxSpriteGroup
 				add(buttonA = createButton(FlxG.width - 44 * 3, FlxG.height - 45 * 3, 44 * 3, 45 * 3, 'a'));
 				add(buttonB = createButton(FlxG.width - 86 * 3, FlxG.height - 45 * 3, 44 * 3, 45 * 3, 'b'));
 				add(buttonC = createButton(FlxG.width - 127 * 3, FlxG.height - 45 * 3, 44 * 3, 45 * 3, 'c'));
+			case A_X_Y:
+				add(buttonA = createButton(FlxG.width - 44 * 3, FlxG.height - 45 * 3, 44 * 3, 45 * 3, 'a'));
+				add(buttonY = createButton(FlxG.width - 86 * 3, FlxG.height - 45 * 3, 44 * 3, 45 * 3, 'y'));
+				add(buttonX = createButton(FlxG.width - 127 * 3, FlxG.height - 45 * 3, 44 * 3, 45 * 3, 'x'));				
 			case A_B_X_Y:
 			  add(buttonY = createButton(FlxG.width - 86 * 3, FlxG.height - 85 * 3, 44 * 3, 45 * 3, 'y'));
 				add(buttonX = createButton(FlxG.width - 44 * 3, FlxG.height - 85 * 3, 44 * 3, 45 * 3, 'x'));
@@ -165,10 +161,6 @@ class FlxVirtualPad extends FlxSpriteGroup
 enum FlxDPadMode
 {
 	NONE;
-	LEFT;
-	RIGHT;
-	UP;
-	DOWN;
 	UP_DOWN;
 	LEFT_RIGHT;
 	UP_LEFT_RIGHT;
@@ -189,6 +181,7 @@ enum FlxActionMode
 	A_X;
 	A_Y;
 	A_B_C;
+	A_X_Y;
 	A_B_X_Y;
 	A_C_X_Y;
 	A_B_C_X_Y;
