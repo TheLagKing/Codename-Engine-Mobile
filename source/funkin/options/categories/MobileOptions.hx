@@ -7,6 +7,10 @@ class MobileOptions extends OptionsScreen {
 			"hitbox visibility",
 			"Makes the hitbox invisible",
 			"hitboxvisibility"));
+		add(new Checkbox(
+			"extra button",
+			"Adds space button on hitbox",
+			"extrabutton"));
     #if mobile
 	 MusicBeatState.instance.addVPad(FULL, A_B);
 	 MusicBeatState.instance.addVPadCamera();
