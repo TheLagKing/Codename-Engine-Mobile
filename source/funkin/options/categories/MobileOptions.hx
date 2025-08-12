@@ -1,6 +1,9 @@
 package funkin.options.categories;
 
 class MobileOptions extends OptionsScreen {
+
+	var extrabutton:NumOption;
+	
 	public override function new() {
 		super("Mobile Options", "Change Mobile Options. Only on mobile...");
 		add(new Checkbox(
@@ -12,7 +15,7 @@ class MobileOptions extends OptionsScreen {
 			"Adds space button on hitbox",
 			1,
 			2,
-			0,
+			1,
 			"extrabutton"));
     #if mobile
 	 MusicBeatState.instance.addVPad(FULL, A_B);
