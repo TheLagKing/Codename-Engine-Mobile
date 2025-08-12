@@ -13,7 +13,7 @@ class MobileOptions extends OptionsScreen {
 		add(new NumOption(
 			"Extra Button",
 			"Adds space button on hitbox",
-			1,
+			0,
 			2,
 			1,
 			"extrabutton"));
