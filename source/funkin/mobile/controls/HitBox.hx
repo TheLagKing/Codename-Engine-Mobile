@@ -34,7 +34,6 @@ class HitBox extends FlxSpriteGroup
         if (hasExtraButton) {
             buttonSpace = createHitbox(0, spaceY, FlxG.width, Std.int(FlxG.height * 0.25), '0xFFFFFF', true);
             add(buttonSpace);
-        }
     }
 
     function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?isSpace:Bool = false):FlxButton
