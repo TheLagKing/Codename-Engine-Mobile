@@ -16,7 +16,7 @@ import flixel.math.FlxPoint;
  // Bó modificar um pouco sa' bagaça ~ Idklool
 class FlxVirtualPad extends FlxSpriteGroup
 {
-  public var buttonA:FlxButton;
+    public var buttonA:FlxButton;
 	public var buttonB:FlxButton;
 	public var buttonC:FlxButton;
 	public var buttonY:FlxButton;
@@ -73,7 +73,9 @@ class FlxVirtualPad extends FlxSpriteGroup
 			case X:
 				add(buttonX = createButton(FlxG.width - 44 * 3, FlxG.height - 45 * 3, 44 * 3, 45 * 3, 'x'));
 			case Y:
-				add(buttonY = createButton(FlxG.width - 44 * 3, FlxG.height - 45 * 3, 44 * 3, 45 * 3, 'y'));				
+				add(buttonY = createButton(FlxG.width - 44 * 3, FlxG.height - 45 * 3, 44 * 3, 45 * 3, 'y'));
+			case C:
+				add(buttonC = createButton(FlxG.width - 44 * 3, FlxG.height - 45 * 3, 44 * 3, 45 * 3, 'c'));
 			case A_B:
 				add(buttonA = createButton(FlxG.width - 44 * 3, FlxG.height - 45 * 3, 44 * 3, 45 * 3, 'a'));
 				add(buttonB = createButton(FlxG.width - 86 * 3, FlxG.height - 45 * 3, 44 * 3, 45 * 3, 'b'));
@@ -154,7 +156,7 @@ class FlxVirtualPad extends FlxSpriteGroup
 	 }
 	  button.resetSizeFromFrame();
 	  button.solid = false;
-		button.immovable = true;
+	  button.immovable = true;
 	  button.scrollFactor.set();
 
 	  return button;
@@ -179,6 +181,7 @@ enum FlxActionMode
 	B;
 	X;
 	Y;
+	C;
 	A_B;
 	A_C;
 	A_X;
