@@ -10,6 +10,10 @@ class MobileOptions extends OptionsScreen {
 			"Hitbox Visibility",
 			"Makes the hitbox invisible",
 			"hitboxvisibility"));
+		add(new Checkbox(
+			"Classic Buttons",
+			"Bring back the classic buttons",
+			"classicbuttons"));
 		add(new NumOption(
 			"Extra Button",
 			"Adds space button on hitbox",
