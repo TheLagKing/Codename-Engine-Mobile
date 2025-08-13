@@ -32,7 +32,7 @@ class HitBox extends FlxSpriteGroup
         add(buttonRight = createHitbox((FlxG.width / 2) + (FlxG.width / 4), 0, Std.int(FlxG.width / 4), buttonHeight, '0xF9393F'));
 
         if (hasExtraButton) {
-            buttonSpace = createHitbox(0, spaceY, FlxG.width, Std.int(FlxG.height * 0.25), '0x7700FF', true);
+            buttonSpace = createHitbox(0, spaceY, FlxG.width, Std.int(FlxG.height * 0.25), '0xFFFFFF', true);
             add(buttonSpace);
         }
     }
@@ -58,17 +58,10 @@ class HitBox extends FlxSpriteGroup
         Options.extrabutton = Options.extrabutton == 1 ? 0 : 1;
         FlxG.resetState();
     }
-    
-    override public function update(elapsed:Float):Void {
-    super.update(elapsed);
-
-    if (buttonSpace != null && buttonSpace.justPressed) { // if this doesn't work i give up
-    }
-}
 
     override public function destroy()
     {
         super.destroy();
         buttonLeft = buttonDown = buttonUp = buttonRight = buttonSpace = null;
     }
-}
+}}
