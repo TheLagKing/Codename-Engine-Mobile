@@ -147,8 +147,11 @@ class FlxVirtualPad extends FlxSpriteGroup
 	function createButton(x:Float, y:Float, width:Int, height:Int, graphic:String)
 	{
 	  var button:FlxButton = new FlxButton(x, y);
-
-	  button.frames = Options.classicbuttons == true ? FlxTileFrames.fromFrame(FlxAtlasFrames.fromSpriteSheetPacker('assets/mobile/virtual-input-classic.png', 'assets/mobile/virtual-input-classic.txt').getByName(graphic), FlxPoint.get(width, height)); : FlxTileFrames.fromFrame(FlxAtlasFrames.fromSpriteSheetPacker('assets/mobile/virtual-input.png', 'assets/mobile/virtual-input.txt').getByName(graphic), FlxPoint.get(width, height));
+     if (Options.classicbuttons) {
+	  button.frames = FlxTileFrames.fromFrame(FlxAtlasFrames.fromSpriteSheetPacker('assets/mobile/virtual-input-classic.png', 'assets/mobile/virtual-input-classic.txt').getByName(graphic), FlxPoint.get(width, height));
+	 } else {
+	  button.frames = FlxTileFrames.fromFrame(FlxAtlasFrames.fromSpriteSheetPacker('assets/mobile/virtual-input.png', 'assets/mobile/virtual-input.txt').getByName(graphic), FlxPoint.get(width, height));
+	 }
 	  button.resetSizeFromFrame();
 	  button.solid = false;
 		button.immovable = true;
