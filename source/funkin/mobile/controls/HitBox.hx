@@ -45,7 +45,7 @@ class HitBox extends FlxSpriteGroup
 
         button.onDown.callback = () -> {
             if (Options.hitboxvisibility) button.alpha = isSpace ? 0.2 : 0.1;
-            if (isSpace) FlxG.keys.justPressed.SPACE = true;
+            //if (isSpace) FlxG.keys.justPressed.SPACE = true;
         };
         
         button.onUp.callback = () -> {
