@@ -10,7 +10,7 @@ class HitBox extends FlxSpriteGroup
     public var buttonDown:FlxButton;
     public var buttonUp:FlxButton;
     public var buttonRight:FlxButton;
-    public var buttonSpace:FlxButton = null; // Initialize as null
+    public var buttonSpace:FlxButton = null;
 
     public function new()
     {
@@ -32,7 +32,7 @@ class HitBox extends FlxSpriteGroup
         add(buttonRight = createHitbox((FlxG.width / 2) + (FlxG.width / 4), 0, Std.int(FlxG.width / 4), buttonHeight, '0xF9393F'));
 
         if (hasExtraButton) {
-            buttonSpace = createHitbox(0, spaceY, FlxG.width, Std.int(FlxG.height * 0.25), '0xFFFFFF', true);
+            buttonSpace = createHitbox(0, spaceY, FlxG.width, Std.int(FlxG.height * 0.25), '0x7700FF', true);
             add(buttonSpace);
         }
     }
@@ -45,13 +45,10 @@ class HitBox extends FlxSpriteGroup
 
         button.onDown.callback = () -> {
             if (Options.hitboxvisibility) button.alpha = isSpace ? 0.2 : 0.1;
-            //if (isSpace) FlxG.keys.justPressed.SPACE = true;
         };
-        
         button.onUp.callback = () -> {
             if (Options.hitboxvisibility) button.alpha = isSpace ? 0.2 : 0.1;
         };
-        
         button.onOut.callback = button.onUp.callback;
 
         return button;
@@ -61,6 +58,13 @@ class HitBox extends FlxSpriteGroup
         Options.extrabutton = Options.extrabutton == 1 ? 0 : 1;
         FlxG.resetState();
     }
+    
+    override public function update(elapsed:Float):Void {
+    super.update(elapsed);
+
+    if (buttonSpace != null && buttonSpace.justPressed) { // if this doesn't work i give up
+    }
+}
 
     override public function destroy()
     {
