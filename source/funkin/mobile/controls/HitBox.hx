@@ -62,4 +62,5 @@ class HitBox extends FlxSpriteGroup
     {
         super.destroy();
         buttonLeft = buttonDown = buttonUp = buttonRight = buttonSpace = null;
+       }
     }
