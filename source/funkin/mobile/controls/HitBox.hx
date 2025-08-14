@@ -10,7 +10,7 @@ class HitBox extends FlxSpriteGroup
     public var buttonDown:FlxButton;
     public var buttonUp:FlxButton;
     public var buttonRight:FlxButton;
-    public var buttonSpace:FlxButton = null;
+    public var buttonSpace:FlxButton = null; // Initialize as null
 
     public function new()
     {
@@ -45,10 +45,12 @@ class HitBox extends FlxSpriteGroup
 
         button.onDown.callback = () -> {
             if (Options.hitboxvisibility) button.alpha = isSpace ? 0.2 : 0.1;
-        };
+  };
+        
         button.onUp.callback = () -> {
             if (Options.hitboxvisibility) button.alpha = isSpace ? 0.2 : 0.1;
         };
+        
         button.onOut.callback = button.onUp.callback;
 
         return button;
@@ -63,5 +65,5 @@ class HitBox extends FlxSpriteGroup
     {
         super.destroy();
         buttonLeft = buttonDown = buttonUp = buttonRight = buttonSpace = null;
-       }
     }
+}
