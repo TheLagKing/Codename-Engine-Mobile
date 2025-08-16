@@ -2,7 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 	<app
-		title="FNF' - Codename Engine Legacy" main="funkin.backend.system.Main"
+		title="FNF' - Codename Engine" main="funkin.backend.system.Main"
 		file="CodenameEngineLegacy" packageName="com.yoshman29.codenameenginelegacy"
 		package="com.yoshman29.codenameenginelegacy"
 		version="0.1.0 Legacy" company="Yoshman29" />
