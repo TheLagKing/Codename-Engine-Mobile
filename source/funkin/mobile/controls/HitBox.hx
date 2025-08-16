@@ -1,5 +1,7 @@
 package funkin.mobile.controls;
 
+import openfl.display.BitmapData;
+import openfl.display.Shape;
 import flixel.FlxG;
 import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
@@ -37,7 +39,8 @@ class HitBox extends FlxSpriteGroup
     function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String)
     {
         var button:FlxButton = new FlxButton(x, y);
-        button.makeGraphic(width, height, FlxColor.fromString(color));
+        button.makeGraphic(createHitboxGraphic(width, height));
+        button.color = FlxColor.fromString(color);
         button.alpha = 0.1;
 
         button.onDown.callback = () -> button.alpha = 0.15;
@@ -45,6 +48,26 @@ class HitBox extends FlxSpriteGroup
         button.onOut.callback = button.onUp.callback;
 
         return button;
+    }
+
+    function createHitboxGraphic(Width:Int, Height:Int):FlxGraphic
+    {
+        var shape:Shape = new Shape();
+		shape.graphics.beginFill(0xFFFFFF);
+        
+        shape.graphics.lineStyle(3, 0xFFFFFF, 1);
+		shape.graphics.drawRect(0, 0, Width, Height);
+		shape.graphics.lineStyle(0, 0, 0);
+		shape.graphics.drawRect(3, 3, Width - 6, Height - 6);
+		shape.graphics.endFill();
+		shape.graphics.beginGradientFill(RADIAL, [0xFFFFFF, FlxColor.TRANSPARENT], [1, 0], [0, 255], null, null, null, 0.5);
+		shape.graphics.drawRect(3, 3, Width - 6, Height - 6);
+		shape.graphics.endFill();
+
+        var bitmap:BitmapData = new BitmapData(Width, Height, true, 0);
+		bitmap.draw(shape);
+
+		return FlxG.bitmap.add(bitmap);
     }
 
     override public function destroy()
