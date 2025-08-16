@@ -29,7 +29,7 @@ class Main extends Sprite
 {
 	// make this empty once you guys are done with the project.
 	// good luck /gen <3 @crowplexus
-	public static final releaseCycle:String = "Beta";
+	public static final releaseCycle:String = "Legacy";
 	// add a version number in dis shid rn 
 	public static var releaseVersion(get, default):String = null;
 	public static function get_releaseVersion():String {
