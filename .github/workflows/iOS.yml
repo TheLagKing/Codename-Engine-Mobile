@@ -21,18 +21,18 @@ jobs:
           haxelib run lime rebuild hxcpp
 
       - name: Compile
-        run: haxelib run lime build ios -clean -nosign
+        run: haxelib run lime build ios -final
 
       - name: Create Ipa
         run: |
           cd export/release/ios/build/*-iphoneos
           mkdir Payload
           mv *.app Payload
-          zip -r CodenameEngine.ipa Payload
+          zip -r CodenameEngineLegacy.ipa Payload
 
       - name: Upload Artifact
         uses: actions/upload-artifact@main
         with:
-          name: CodenameEngine iOS
+          name: CodenameEngineLegacy iOS
           path: export/release/ios/build/Release-iphoneos/*.ipa
           if-no-files-found: error
