@@ -2,10 +2,10 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 	<app
-		title="FNF' - Codename Engine" main="funkin.backend.system.Main"
-		file="CodenameEngine" packageName="com.yoshman29.codenameengine"
-		package="com.yoshman29.codenameengine"
-		version="0.1.0-legacy" company="Yoshman29" />
+		title="FNF' - Codename Engine Legacy" main="funkin.backend.system.Main"
+		file="CodenameEngineLegacy" packageName="com.yoshman29.codenameenginelegacy"
+		package="com.yoshman29.codenameenginelegacy"
+		version="0.1.0 Legacy" company="Yoshman29" />
 
 	<!--
 		CHANGE THE SAVE PATH & NAME FOR YOUR MOD HERE!
