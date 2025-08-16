@@ -118,7 +118,7 @@ class MusicBeatState extends FlxState implements IBeatReceiver
 
 	#if mobile
 	public var vPad:FlxVirtualPad;
-	var mcontrols:Mobilecontrols;
+	public var mcontrols:Mobilecontrols;
 
 	var trackedinputs:Array<FlxActionInput> = [];
 
@@ -133,9 +133,9 @@ class MusicBeatState extends FlxState implements IBeatReceiver
 	
 	public function addVPadCamera() {
 	  var camcontrol = new FlxCamera(); 
-    FlxG.cameras.add(camcontrol, false); 
-    camcontrol.bgColor.alpha = 0; 
-    vPad.cameras = [camcontrol];
+      FlxG.cameras.add(camcontrol, false); 
+      camcontrol.bgColor.alpha = 0; 
+      vPad.cameras = [camcontrol];
 	}
 
 	public function removeVPad() {
