@@ -118,7 +118,7 @@ class MusicBeatState extends FlxState implements IBeatReceiver
 
 	#if mobile
 	public var vPad:FlxVirtualPad;
-	public var mcontrols:Mobilecontrols;
+	public var mcontrols:HitBox;
 
 	var trackedinputs:Array<FlxActionInput> = [];
 
@@ -147,15 +147,8 @@ class MusicBeatState extends FlxState implements IBeatReceiver
 	
 	public function addMControls()
 	{
-	  mcontrols = new Mobilecontrols();
-	  switch (mcontrols.mode.toLowerCase())
-	  {
-	    case 'vpad_right' | 'vpad_left' | 'vpad_custom':
-	      controls.setVirtualPad(mcontrols.vPad, FULL, NONE);
-	    case 'hitbox':
-	      controls.setHitBox(mcontrols.hitbox);
-	    default:
-	  }
+	  mcontrols = new HitBox();
+	  controls.setHitBox(mcontrols);
 
 	  trackedinputs = controls.trackedinputs;
 	  controls.trackedinputs = [];
