@@ -20,6 +20,7 @@ class Options
 	public static var downscroll:Bool = false;
 	public static var hitboxvisibility:Bool = true;
 	public static var classicbuttons:Bool = false;
+	public static var extrabuttontop:Bool = true;
 	public static var extrabutton:Float = 0;
 	public static var ghostTapping:Bool = true;
 	public static var flashingMenu:Bool = true;
