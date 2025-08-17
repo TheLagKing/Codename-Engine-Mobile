@@ -44,8 +44,29 @@ class HitBox extends FlxSpriteGroup
         button.color = FlxColor.fromString(color);
         button.alpha = 0.1;
 
-        button.onDown.callback = () -> button.alpha = 0.65;
-        button.onUp.callback = () -> button.alpha = 0.1;
+		var buttonTween:FlxTween = null;
+        //button.onDown.callback = () -> button.alpha = 0.65;
+		button.onDown.callback = function()
+			{
+				if (buttonTween != null)
+					buttonTween.cancel();
+
+				buttonTween = FlxTween.tween(button, {alpha: 0.65}, 0.65 / 100, {
+					ease: FlxEase.circInOut,
+					onComplete: (twn:FlxTween) -> buttonTween = null
+				});
+			}
+        //button.onUp.callback = () -> button.alpha = 0.1;
+		button.onUp.callback = function()
+			{
+				if (buttonTween != null)
+					buttonTween.cancel();
+
+				buttonTween = FlxTween.tween(button, {alpha: 0.1}, 0.65 / 10, {
+					ease: FlxEase.circInOut,
+					onComplete: (twn:FlxTween) -> buttonTween = null
+				});
+			}
         button.onOut.callback = button.onUp.callback;
 
         return button;
