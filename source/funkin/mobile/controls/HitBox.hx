@@ -2,9 +2,11 @@ package funkin.mobile.controls;
 
 import openfl.display.BitmapData;
 import openfl.display.Shape;
+import openfl.display.GradientType;
 import flixel.graphics.FlxGraphic;
 import flixel.FlxG;
 import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
 
@@ -20,15 +22,49 @@ class HitBox extends FlxSpriteGroup
     public var buttonRight:FlxButton;
 	public var buttonExtra:FlxButton;
 	public var buttonExtraTwo:FlxButton;
+	
+	// Variables for the fade effect
+	private var topFade:Shape;
+	private var bottomFade:Shape;
+	private var fadeTween:FlxTween;
 
     public function new()
     {
         super();
         buttonLeft = buttonDown = buttonUp = buttonRight = new FlxButton(0, 0);
         
+        // Create fade shapes
+        createFadeShapes();
         addButtons();
         scrollFactor.set();
     }
+	
+	function createFadeShapes() {
+		topFade = new Shape();
+		bottomFade = new Shape();
+		
+		// Make them initially transparent
+		topFade.alpha = 0;
+		bottomFade.alpha = 0;
+		
+		// Position them at top and bottom
+		topFade.y = 0;
+		bottomFade.y = FlxG.height - 50; // Adjust height as needed
+		
+		// Set their dimensions
+		var fadeHeight = 50; // Height of the fade effect
+		topFade.graphics.beginFill(0x000000, 0.5);
+		topFade.graphics.drawRect(0, 0, FlxG.width, fadeHeight);
+		topFade.graphics.endFill();
+		
+		bottomFade.graphics.beginFill(0x000000, 0.5);
+		bottomFade.graphics.drawRect(0, 0, FlxG.width, fadeHeight);
+		bottomFade.graphics.endFill();
+		
+		// Add them to the display list
+		add(topFade);
+		add(bottomFade);
+	}
 
     function addButtons() {
         var x:Int = 0;
@@ -48,8 +84,7 @@ class HitBox extends FlxSpriteGroup
         button.alpha = 0.1;
 
 		var buttonTween:FlxTween = null;
-        //button.onDown.callback = () -> button.alpha = 0.65;
-		button.onDown.callback = function()
+        button.onDown.callback = function()
 			{
 				if (buttonTween != null)
 					buttonTween.cancel();
@@ -58,9 +93,13 @@ class HitBox extends FlxSpriteGroup
 					ease: FlxEase.circInOut,
 					onComplete: (twn:FlxTween) -> buttonTween = null
 				});
+				
+				// Hide fades when button is pressed
+				if (fadeTween != null) fadeTween.cancel();
+				fadeTween = FlxTween.tween(topFade, {alpha: 0}, 0.2);
+				fadeTween = FlxTween.tween(bottomFade, {alpha: 0}, 0.2);
 			}
-        //button.onUp.callback = () -> button.alpha = 0.1;
-		button.onUp.callback = function()
+        button.onUp.callback = function()
 			{
 				if (buttonTween != null)
 					buttonTween.cancel();
@@ -68,6 +107,16 @@ class HitBox extends FlxSpriteGroup
 				buttonTween = FlxTween.tween(button, {alpha: 0.1}, 0.65 / 10, {
 					ease: FlxEase.circInOut,
 					onComplete: (twn:FlxTween) -> buttonTween = null
+				});
+				
+				// Show fades when button is released
+				if (fadeTween != null) fadeTween.cancel();
+				fadeTween = FlxTween.tween(topFade, {alpha: 0.5}, 0.2);
+				fadeTween = FlxTween.tween(bottomFade, {alpha: 0.5}, 0.2, {
+					onComplete: function(twn:FlxTween) {
+						fadeTween = FlxTween.tween(topFade, {alpha: 0}, 0.5, {startDelay: 0.5});
+						fadeTween = FlxTween.tween(bottomFade, {alpha: 0}, 0.5, {startDelay: 0.5});
+					}
 				});
 			}
         button.onOut.callback = button.onUp.callback;
@@ -85,7 +134,7 @@ class HitBox extends FlxSpriteGroup
 		shape.graphics.lineStyle(0, 0, 0);
 		shape.graphics.drawRect(3, 3, Width - 6, Height - 6);
 		shape.graphics.endFill();
-		shape.graphics.beginGradientFill(RADIAL, [0xFFFFFF, FlxColor.TRANSPARENT], [1, 0], [0, 255], null, null, null, 0.5);
+		shape.graphics.beginGradientFill(GradientType.RADIAL, [0xFFFFFF, FlxColor.TRANSPARENT], [1, 0], [0, 255], null, null, null, 0.5);
 		shape.graphics.drawRect(3, 3, Width - 6, Height - 6);
 		shape.graphics.endFill();
 
@@ -99,5 +148,8 @@ class HitBox extends FlxSpriteGroup
     {
         super.destroy();
         buttonLeft = buttonDown = buttonUp = buttonRight = null;
+		if (fadeTween != null) fadeTween.cancel();
+		topFade = null;
+		bottomFade = null;
     }
 }
