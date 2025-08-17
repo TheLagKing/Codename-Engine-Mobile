@@ -446,6 +446,8 @@ class Controls extends FlxActionSet
 		inline forEachBound(Control.NOTE_DOWN, (action, state) -> addbutton(action, hitbox.buttonDown, state));
 		inline forEachBound(Control.NOTE_LEFT, (action, state) -> addbutton(action, hitbox.buttonLeft, state));
 		inline forEachBound(Control.NOTE_RIGHT, (action, state) -> addbutton(action, hitbox.buttonRight, state));
+		inline forEachBound(FlxG.keys.justPressed.SPACE, (action, state) -> addbutton(action, hitbox.buttonExtra, state));
+		inline forEachBound(FlxG.keys.justPressed.SHIFT, (action, state) -> addbutton(action, hitbox.buttonExtraTwo, state));
 	}
 
 	public function setVirtualPad(virtualPad:FlxVirtualPad, ?DPad:FlxDPadMode, ?Action:FlxActionMode) {
