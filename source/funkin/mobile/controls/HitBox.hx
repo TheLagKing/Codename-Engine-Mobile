@@ -164,7 +164,7 @@ class HitBox extends FlxSpriteGroup
 		topFade = null;
 		bottomFade = null;
     }
-} 
+
 button.onUp.callback = function()
 			{
 				if (buttonTween != null)
