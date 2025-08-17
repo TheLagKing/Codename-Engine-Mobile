@@ -54,7 +54,7 @@ class MobileUtil {
      } catch (e:Dynamic) {
     trace(e);
   if(!FileSystem.exists(MobileUtil.getDirectory())) {
-    NativeAPI.showMessageBox("Uncaught Error!", "Seems like you didnt enabled permissions requested to run the game/didnt put assets to your storage. Please enable them/put assets/mods folders to ${MobileUtil.getDirectory()} to be able to run the game. \n Press OK to close the game.");
+    NativeAPI.showMessageBox("Uncaught Error!", "Seems like you didnt enabled permissions requested to run the game/didnt put assets to your storage. Please enable them/put assets/mods folders to " + MobileUtil.getDirectory() + " to be able to run the game. \n Press OK to close the game.");
     FileSystem.createDirectory(MobileUtil.getDirectory());
      System.exit(0);
      }
