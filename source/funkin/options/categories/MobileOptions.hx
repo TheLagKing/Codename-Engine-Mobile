@@ -21,6 +21,10 @@ class MobileOptions extends OptionsScreen {
 			2,
 			1,
 			"extrabutton"));
+		add(new Checkbox(
+			"Extras Buttons Top",
+			"Makes extra buttons stay at the top of the screen\n(off makes the extra buttons stay below the screen)",
+			"extrabuttontop"));
     #if mobile
 	 MusicBeatState.instance.addVPad(FULL, A_B);
 	 MusicBeatState.instance.addVPadCamera();
