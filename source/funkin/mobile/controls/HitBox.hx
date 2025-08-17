@@ -9,6 +9,7 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
+import flixel.FlxSprite;
 
 /**
  * ...
@@ -24,8 +25,8 @@ class HitBox extends FlxSpriteGroup
 	public var buttonExtraTwo:FlxButton;
 	
 	// Variables for the fade effect
-	private var topFade:Shape;
-	private var bottomFade:Shape;
+	private var topFade:FlxSprite;
+	private var bottomFade:FlxSprite;
 	private var fadeTween:FlxTween;
 
     public function new()
@@ -33,35 +34,46 @@ class HitBox extends FlxSpriteGroup
         super();
         buttonLeft = buttonDown = buttonUp = buttonRight = new FlxButton(0, 0);
         
-        // Create fade shapes
-        createFadeShapes();
+        // Create fade sprites
+        createFadeSprites();
         addButtons();
         scrollFactor.set();
     }
 	
-	function createFadeShapes() {
-		topFade = new Shape();
-		bottomFade = new Shape();
-		
-		// Make them initially transparent
+	function createFadeSprites() {
+		// Create top fade
+		topFade = new FlxSprite();
+		topFade.makeGraphic(FlxG.width, 50, FlxColor.TRANSPARENT, true);
+		topFade.pixels.lock();
+		for (y in 0...50) {
+			var alpha = Std.int(0.5 * 255 * (1 - y/50));
+			var color = FlxColor.fromRGB(0, 0, 0, alpha);
+			for (x in 0...FlxG.width) {
+				topFade.pixels.setPixel32(x, y, color);
+			}
+		}
+		topFade.pixels.unlock();
+		topFade.dirty = true;
 		topFade.alpha = 0;
-		bottomFade.alpha = 0;
-		
-		// Position them at top and bottom
 		topFade.y = 0;
-		bottomFade.y = FlxG.height - 50; // Adjust height as needed
 		
-		// Set their dimensions
-		var fadeHeight = 50; // Height of the fade effect
-		topFade.graphics.beginFill(0x000000, 0.5);
-		topFade.graphics.drawRect(0, 0, FlxG.width, fadeHeight);
-		topFade.graphics.endFill();
+		// Create bottom fade
+		bottomFade = new FlxSprite();
+		bottomFade.makeGraphic(FlxG.width, 50, FlxColor.TRANSPARENT, true);
+		bottomFade.pixels.lock();
+		for (y in 0...50) {
+			var alpha = Std.int(0.5 * 255 * (y/50));
+			var color = FlxColor.fromRGB(0, 0, 0, alpha);
+			for (x in 0...FlxG.width) {
+				bottomFade.pixels.setPixel32(x, y, color);
+			}
+		}
+		bottomFade.pixels.unlock();
+		bottomFade.dirty = true;
+		bottomFade.alpha = 0;
+		bottomFade.y = FlxG.height - 50;
 		
-		bottomFade.graphics.beginFill(0x000000, 0.5);
-		bottomFade.graphics.drawRect(0, 0, FlxG.width, fadeHeight);
-		bottomFade.graphics.endFill();
-		
-		// Add them to the display list
+		// Add them to the group
 		add(topFade);
 		add(bottomFade);
 	}
@@ -100,6 +112,59 @@ class HitBox extends FlxSpriteGroup
 				fadeTween = FlxTween.tween(bottomFade, {alpha: 0}, 0.2);
 			}
         button.onUp.callback = function()
+			{
+				if (buttonTween != null)
+					buttonTween.cancel();
+
+				buttonTween = FlxTween.tween(button, {alpha: 0.1}, 0.65 / 10, {
+					ease: FlxEase.circInOut,
+					onComplete: (twn:FlxTween) -> buttonTween = null
+				});
+				
+				// Show fades when button is released
+				if (fadeTween != null) fadeTween.cancel();
+				fadeTween = FlxTween.tween(topFade, {alpha: 1}, 0.2);
+				fadeTween = FlxTween.tween(bottomFade, {alpha: 1}, 0.2, {
+					onComplete: function(twn:FlxTween) {
+						fadeTween = FlxTween.tween(topFade, {alpha: 0}, 0.5, {startDelay: 0.5});
+						fadeTween = FlxTween.tween(bottomFade, {alpha: 0}, 0.5, {startDelay: 0.5});
+					}
+				});
+			}
+        button.onOut.callback = button.onUp.callback;
+
+        return button;
+    }
+
+    function createHitboxGraphic(Width:Int, Height:Int):FlxGraphic
+    {
+        var shape:Shape = new Shape();
+		shape.graphics.beginFill(0xFFFFFF);
+        
+        shape.graphics.lineStyle(3, 0xFFFFFF, 1);
+		shape.graphics.drawRect(0, 0, Width, Height);
+		shape.graphics.lineStyle(0, 0, 0);
+		shape.graphics.drawRect(3, 3, Width - 6, Height - 6);
+		shape.graphics.endFill();
+		shape.graphics.beginGradientFill(GradientType.RADIAL, [0xFFFFFF, FlxColor.TRANSPARENT], [1, 0], [0, 255], null, null, null, 0.5);
+		shape.graphics.drawRect(3, 3, Width - 6, Height - 6);
+		shape.graphics.endFill();
+
+        var bitmap:BitmapData = new BitmapData(Width, Height, true, 0);
+		bitmap.draw(shape);
+
+		return FlxG.bitmap.add(bitmap);
+    }
+
+    override public function destroy()
+    {
+        super.destroy();
+        buttonLeft = buttonDown = buttonUp = buttonRight = null;
+		if (fadeTween != null) fadeTween.cancel();
+		topFade = null;
+		bottomFade = null;
+    }
+}        button.onUp.callback = function()
 			{
 				if (buttonTween != null)
 					buttonTween.cancel();
