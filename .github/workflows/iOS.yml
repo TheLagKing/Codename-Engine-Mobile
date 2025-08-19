@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
 jobs:
   iOS:
-    runs-on: macos-14
+    runs-on: macos-13
     steps:
       - name: Checkout
         uses: actions/checkout@main
@@ -25,7 +25,9 @@ jobs:
 
       - name: Create Ipa
         run: |
+          brew install ldid
           cd export/release/ios/build/*-iphoneos
+          ldid -S../../../CodenameEngineLegacy/CodenameEngineLegacy.entitlements CodenameEngineLegacy
           mkdir Payload
           mv *.app Payload
           zip -r CodenameEngineLegacy.ipa Payload
