@@ -63,43 +63,44 @@ class HitBox extends FlxSpriteGroup
         }
     }
 
-    function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?isExtra:Bool = false)
-    {
-        var button:FlxButton = new FlxButton(x, y);
-        button.loadGraphic(createHitboxGraphic(width, height));
-        button.color = FlxColor.fromString(color);
-        button.alpha = Options.hitboxvisibility ? (isExtra ? 0.2 : 0.1) : 0;
+function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?isExtra:Bool = false)
+{
+    var button:FlxButton = new FlxButton(x, y);
+    button.loadGraphic(createHitboxGraphic(width, height));
+    button.color = FlxColor.fromString(color);
+    button.alpha = Options.hitboxvisibility ? (isExtra ? 0.2 : 0.1) : 0;
 
-        var buttonTween:FlxTween = null;
-        button.onDown.callback = function()
-            {
-                if (buttonTween != null)
-                    buttonTween.cancel();
+    var buttonTween:FlxTween = null;
+    button.onDown.callback = function()
+        {
+            if (buttonTween != null)
+                buttonTween.cancel();
 
-                buttonTween = FlxTween.tween(button, {alpha: 0.65}, 0.65 / 100, {
-                    ease: FlxEase.circInOut,
-                    onComplete: function(twn:FlxTween) {
-                        buttonTween = null;
-                    }
-                });
-            }
-        button.onUp.callback = function()
-            {
-                if (buttonTween != null)
-                    buttonTween.cancel();
+            buttonTween = FlxTween.tween(button, {alpha: 0.65}, 0.65 / 100, {
+                ease: FlxEase.circInOut,
+                onComplete: function(twn:FlxTween) {
+                    buttonTween = null;
+                }
+            });
+        }
+    button.onUp.callback = function()
+        {
+            if (buttonTween != null)
+                buttonTween.cancel();
 
-                buttonTween = FlxTween.tween(button, {alpha: Options.hitboxvisibility ? (isExtra ? 0.2 : 0.1) : 0}, 0.65 / 10, {
-                    ease: FlxEase.circInOut,
-                    onComplete: function(twn:FlxTween) {
-                        buttonTween = null;
-                    }
-                });
-            }
-        button.onOut.callback = button.onUp.callback;
+            var targetAlpha:Float = Options.hitboxvisibility ? (isExtra ? 0.2 : 0.1) : 0;
+            buttonTween = FlxTween.tween(button, {alpha: targetAlpha}, 0.65 / 10, {
+                ease: FlxEase.circInOut,
+                onComplete: function(twn:FlxTween) {
+                    buttonTween = null;
+                }
+            });
+        }
+    button.onOut.callback = button.onUp.callback;
 
-        return button;
-    }
-
+    return button;
+}
+    
     function createHitboxGraphic(Width:Int, Height:Int):FlxGraphic
     {
         var shape:Shape = new Shape();
