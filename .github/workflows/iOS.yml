@@ -26,10 +26,11 @@ jobs:
       - name: Create Ipa
         run: |
           brew install ldid
-          cd export/release/ios/build/*-iphoneos
+          cd export/release/ios/build/Release-iphoneos/CodenameEngineLegacy.app
           ldid -S../../../CodenameEngineLegacy/CodenameEngineLegacy.entitlements CodenameEngineLegacy
+          cd ..
           mkdir Payload
-          mv *.app Payload
+          mv CodenameEngineLegacy.app Payload
           zip -r CodenameEngineLegacy.ipa Payload
 
       - name: Upload Artifact
