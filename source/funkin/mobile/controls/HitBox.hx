@@ -52,7 +52,7 @@ class HitBox extends FlxSpriteGroup
                 buttonExtra = createHitbox(0, extraY, Std.int(FlxG.width / 2), extraHeight, '0xFFFFFF', true);
                 add(buttonExtra);
                 
-                // Second extra button (right half of extra space) - yellow color
+                // Second extra button (right half of extra space)
                 buttonExtraTwo = createHitbox(FlxG.width / 2, extraY, Std.int(FlxG.width / 2), extraHeight, '0xFFFF00', true);
                 add(buttonExtraTwo);
             } else {
@@ -76,7 +76,8 @@ function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?is
             if (buttonTween != null)
                 buttonTween.cancel();
 
-            buttonTween = FlxTween.tween(button, {alpha: 0.65}, 0.65 / 100, {
+            var targetAlpha:Float = Options.hitboxvisibility ? 0.65 : 0;
+            buttonTween = FlxTween.tween(button, {alpha: targetAlpha}, 0.65 / 100, {
                 ease: FlxEase.circInOut,
                 onComplete: function(twn:FlxTween) {
                     buttonTween = null;
