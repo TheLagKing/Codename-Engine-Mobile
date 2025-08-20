@@ -103,6 +103,17 @@ class Framerate extends Sprite {
 		if (TouchInput.BACK()) {
 	    debugMode = (debugMode + 1) % 3;
 		}
+		#elseif ios
+		for(camera in FlxG.cameras.list) {
+			var pos = FlxG.mouse.getScreenPosition(camera);
+			if (pos.x >= FlxG.game.x + 10 + offset.x &&
+				pos.x <= FlxG.game.x + offset.x + 80 &&
+				pos.y >= FlxG.game.y + 2 + offset.y &&
+				pos.y <= FlxG.game.y + 2 + offset.y + 60)
+			{
+				if(FlxG.mouse.justPressed)
+					debugMode = (debugMode + 1) % 3);
+		}
 		#end
 
 		alpha = CoolUtil.fpsLerp(alpha, debugMode > 0 ? 1 : 0, 0.5);
