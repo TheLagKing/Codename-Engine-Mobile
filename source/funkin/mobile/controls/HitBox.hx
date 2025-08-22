@@ -68,7 +68,7 @@ function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?is
     var button:FlxButton = new FlxButton(x, y);
     button.loadGraphic(createHitboxGraphic(width, height));
     button.color = FlxColor.fromString(color);
-    button.alpha = Options.hitboxvisibility ? (isExtra ? 0.2 : 0.1) : 0;
+    if (Options.hitboxvisibillity) button.alpha = isExtra ? 0.2 : 0.1;
 
     if (!Options.hitboxvisibility) {
     var buttonTween:FlxTween = null;
@@ -77,8 +77,7 @@ function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?is
             if (buttonTween != null)
                 buttonTween.cancel();
 
-            var targetAlpha:Float = Options.hitboxvisibility ? 0.65 : 0;
-            buttonTween = FlxTween.tween(button, {alpha: targetAlpha}, 0.65 / 100, {
+            buttonTween = FlxTween.tween(button, {alpha: 0.65}, 0.65 / 100, {
                 ease: FlxEase.circInOut,
                 onComplete: function(twn:FlxTween) {
                     buttonTween = null;
@@ -90,7 +89,7 @@ function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?is
             if (buttonTween != null)
                 buttonTween.cancel();
 
-            var targetAlpha:Float = Options.hitboxvisibility ? (isExtra ? 0.2 : 0.1) : 0;
+            var targetAlpha:Float = isExtra ? 0.2 : 0.1;
             buttonTween = FlxTween.tween(button, {alpha: targetAlpha}, 0.65 / 10, {
                 ease: FlxEase.circInOut,
                 onComplete: function(twn:FlxTween) {
