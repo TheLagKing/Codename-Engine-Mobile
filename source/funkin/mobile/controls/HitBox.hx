@@ -68,7 +68,7 @@ function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?is
     var button:FlxButton = new FlxButton(x, y);
     button.loadGraphic(createHitboxGraphic(width, height));
     button.color = FlxColor.fromString(color);
-    if (Options.hitboxvisibillity) button.alpha = isExtra ? 0.2 : 0.1;
+    if (Options.hitboxvisibility) button.alpha = isExtra ? 0.2 : 0.1;
 
     if (!Options.hitboxvisibility) {
     var buttonTween:FlxTween = null;
