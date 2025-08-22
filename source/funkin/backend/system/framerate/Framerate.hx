@@ -21,7 +21,7 @@ class Framerate extends Sprite {
 	public static var codenameBuildField:CodenameBuildField;
 	#end
 
-	public static var fontName:String = #if windows '${Sys.getEnv("windir")}\\Fonts\\consola.ttf' #else "_sans" #end;
+	public static var fontName:String = #if windows '${Sys.getEnv("windir")}\\Fonts\\consola.ttf' #else "_typewriter" #end;
 
 	/**
 	 * 0: FPS INVISIBLE
@@ -138,4 +138,11 @@ class Framerate extends Sprite {
 			y = c.y + c.height + 4;
 		}
 	}
+	#if mobile
+	public inline function setScale(?scale:Float){
+		if(scale == null)
+			scale = Math.min(FlxG.stage.window.width / FlxG.width, FlxG.stage.window.height / FlxG.height);
+		    scaleX = scaleY = #if android (scale > 1 ? scale : 1) #else (scale < 1 ? scale : 1) #end;
+	}
+	#end
 }
