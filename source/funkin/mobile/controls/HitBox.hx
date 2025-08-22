@@ -70,6 +70,7 @@ function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?is
     button.color = FlxColor.fromString(color);
     button.alpha = Options.hitboxvisibility ? (isExtra ? 0.2 : 0.1) : 0;
 
+    if (!Options.hitboxvisibility) {
     var buttonTween:FlxTween = null;
     button.onDown.callback = function()
         {
@@ -98,6 +99,7 @@ function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?is
             });
         }
     button.onOut.callback = button.onUp.callback;
+    }
 
     return button;
 }
