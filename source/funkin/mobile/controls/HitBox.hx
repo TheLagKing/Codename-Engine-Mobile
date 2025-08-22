@@ -70,7 +70,7 @@ function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?is
     button.color = FlxColor.fromString(color);
     if (Options.hitboxvisibility) button.alpha = isExtra ? 0.2 : 0.1;
 
-    if (!Options.hitboxvisibility) {
+    if (Options.hitboxvisibility) {
     var buttonTween:FlxTween = null;
     button.onDown.callback = function()
         {
