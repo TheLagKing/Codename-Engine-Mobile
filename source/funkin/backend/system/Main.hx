@@ -75,7 +75,7 @@ class Main extends Sprite
 		Sys.setCwd(haxe.io.Path.addTrailingSlash(MobileUtil.getDirectory()));
 		MobileUtil.getPermissions();
 		#elseif ios
-		Sys.setCwd(lime.system.System.applicationStorageDirectory);
+		Sys.setCwd(haxe.io.Path.addTrailingSlash(openfl.filesystem.File.applicationStorageDirectory.nativePath));
         #end
 
 		instance = this;
