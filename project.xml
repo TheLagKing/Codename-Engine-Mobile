@@ -221,4 +221,8 @@
 	<haxedef name="HXCPP_CATCH_SEGV" />
 
 	<haxedef name="hscriptPos" /> <!-- for logging -->
+
+	<!-- IOS stuff -->
+	<config:ios category_type="public.app-category.music-games" />
+	<config:mac category_type="public.app-category.music-games" />
 </project>
