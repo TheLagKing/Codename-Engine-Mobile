@@ -5,7 +5,6 @@ import extension.androidtools.os.Build.VERSION;
 import extension.androidtools.os.Environment;
 import extension.androidtools.Permissions;
 import extension.androidtools.Settings;
-#end
 
 import lime.system.System;
 import lime.app.Application;
@@ -18,7 +17,7 @@ using StringTools;
 
 /** 
 * @author MaysLastPlay, MarioMaster (MasterX-39)
-* @version: 0.2.1
+* @version: 0.2.2
 **/
 
 class MobileUtil {
@@ -29,15 +28,13 @@ class MobileUtil {
    */
 
   public static function getDirectory():String {
-   currentDirectory = #if android if(VERSION.SDK_INT >= 33) Environment.getExternalStorageDirectory() + '/.' + Application.current.meta.get('file') else Environment.getExternalStorageDirectory() + '/Android/media/' + lime.app.Application.current.meta.get('packageName') #elseif ios System.documentsDirectory #else '' #end;
-  return currentDirectory;
+  return '/storage/emulated/0/.CodenameEngine/';
   }
 
   /**
    * Requests Storage Permissions on Android Platform.
    */
-
-    #if android
+  
     public static function getPermissions():Void
     {
     if(VERSION.SDK_INT >= 33){
@@ -54,7 +51,7 @@ class MobileUtil {
      } catch (e:Dynamic) {
     trace(e);
   if(!FileSystem.exists(MobileUtil.getDirectory())) {
-    NativeAPI.showMessageBox("Uncaught Error!", "Seems like you didnt enabled permissions requested to run the game/didnt put assets to your storage. Please enable them/put assets/mods folders to " + MobileUtil.getDirectory() + " to be able to run the game. \n Press OK to close the game.");
+    NativeAPI.showMessageBox("Seems like you didnt enabled permissions requested to run the game.", 'Uncaught Error');
     FileSystem.createDirectory(MobileUtil.getDirectory());
      System.exit(0);
      }
@@ -65,14 +62,14 @@ class MobileUtil {
    * Saves a file to the external storage.
    */
 
-	public static function save(fileName:String = 'Ye', fileExt:String = '.json', fileData:String = 'you didnt cooked, try again!')
+	public static function save(fileName:String = 'Ye', fileExt:String = '.txt', fileData:String = 'Nice try, but you failed, try again!')
 	{
-	  var savesDir:String = MobileUtil.getDirectory() + 'saved-content/';
+	  var savesDir:String = MobileUtil.getDirectory() + 'saves/';
 
 		if (!FileSystem.exists(savesDir))
 			FileSystem.createDirectory(savesDir);
 
 		File.saveContent(savesDir + fileName + fileExt, fileData);
 	}
-  #end
 }
+#end
