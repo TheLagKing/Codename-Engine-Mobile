@@ -34,8 +34,8 @@ class HitBox extends FlxSpriteGroup
         var hasExtraButton:Bool = Options.extrabutton >= 1;
         var hasSecondExtraButton:Bool = Options.extrabutton == 2;
         
-        var buttonHeight:Int = hasExtraButton ? (Options.extrabuttontop ? Std.int(FlxG.height * 0.75 + 160) : Std.int(FlxG.height * 0.75)) : FlxG.height;
-        var extraY:Int = hasExtraButton ? (Options.extrabuttontop ? Std.int(FlxG.height * 0.75 / 80) : Std.int(FlxG.height * 0.75)) : 0;
+        var buttonHeight:Int = hasExtraButton ? (Options.extrabuttontop ? Std.int(FlxG.height * 0.75 + 180) : Std.int(FlxG.height * 0.75)) : FlxG.height;
+        var extraY:Int = hasExtraButton ? (Options.extrabuttontop ? Std.int(FlxG.height * 0.75 / 90) : Std.int(FlxG.height * 0.75)) : 0;
         var extraHeight:Int = Std.int(FlxG.height * 0.25);
         
         var x:Int = 0;
