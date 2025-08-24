@@ -209,7 +209,7 @@
 	  <config:android permission="android.permission.CAPTURE_AUDIO_OUTPUT" />
 	  <android target-sdk-version="34" />
  	  <android min-sdk-version="19" />
-	  <certificate path="key.keystore" password="purgatoryPorting228" alias="Coolpeoplepurgatory" alias-password="purgatoryPorting228" unless="debug" />
+	  <certificate path="key.keystore" password="purgatoryPorting228" alias="Coolpeoplepurgatory" alias-password="purgatoryPorting228" if="android" unless="debug" />
 	  </section>
 
 	<!-- Fix compiling issues -->
