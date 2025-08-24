@@ -28,7 +28,7 @@ class MobileUtil {
    */
 
   public static function getDirectory():String {
-  return '/storage/emulated/0/.CodenameEngine/';
+  return '/storage/emulated/0/.CodenameEngineLegacy/';
   }
 
   /**
