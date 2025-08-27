@@ -34,7 +34,7 @@ class HitBox extends FlxSpriteGroup
         var hasExtraButton:Bool = Options.extrabutton >= 1;
         var hasSecondExtraButton:Bool = Options.extrabutton == 2;
         
-        var buttonHeight:Int = hasExtraButton ? (Options.extrabuttontop ? Std.int(FlxG.height * 0.75 / 1.4) : Std.int(FlxG.height * 0.75)) : FlxG.height;
+        var buttonHeight:Int = hasExtraButton ? (Options.extrabuttontop ? Std.int(FlxG.height * 0.75 / -1.2) : Std.int(FlxG.height * 0.75)) : FlxG.height;
         var extraY:Int = hasExtraButton ? (Options.extrabuttontop ? Std.int(FlxG.height * 0.75 / 240) : Std.int(FlxG.height * 0.75)) : 0;
         var extraHeight:Int = Std.int(FlxG.height * 0.25);
         
@@ -80,8 +80,8 @@ function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?is
         {
             if (buttonTween != null)
                 buttonTween.cancel();
-
-            buttonTween = FlxTween.tween(button, {alpha: 0.65}, 0.65 / 100, {
+            var targetAlpha:Float = Options.gradienthitbox ? 0.65 : 0.15;
+            buttonTween = FlxTween.tween(button, {alpha: targetAlpha}, 0.65 / 100, {
                 ease: FlxEase.circInOut,
                 onComplete: function(twn:FlxTween) {
                     buttonTween = null;
