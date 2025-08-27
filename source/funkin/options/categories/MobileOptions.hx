@@ -25,6 +25,10 @@ class MobileOptions extends OptionsScreen {
 			"Extras Buttons Top",
 			"Makes extra buttons stay at the top of the screen.\n(when off, the extra buttons stay at the bottom of the screen)",
 			"extrabuttontop"));
+		add(new Checkbox(
+			"Gradient in Hitbox",
+			"Place Gradient in Hitbox",
+			"gradienthitbox"));
     #if mobile
 	 MusicBeatState.instance.addVPad(FULL, A_B);
 	 MusicBeatState.instance.addVPadCamera();
