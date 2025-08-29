@@ -696,6 +696,20 @@ class NativeWindow
 		return value;
 	}
 
+	#if ios
+	public function setVSync(value:Bool):Bool
+	{
+		if (handle != null)
+		{
+			#if (!macro && lime_cffi)
+			return NativeCFFI.lime_window_set_vsync(handle, value);
+			#end
+		}
+
+		return value;
+	}
+	#end
+
 	public function getOpacity():Float
 	{
 		if (handle != null)
