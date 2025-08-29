@@ -71,11 +71,9 @@ class Main extends Sprite
 	{
 		super();
 
-	    #if android
-		Sys.setCwd(haxe.io.Path.addTrailingSlash(MobileUtil.getDirectory()));
+	    #if mobile
 		MobileUtil.getPermissions();
-		#elseif ios
-		Sys.setCwd(haxe.io.Path.addTrailingSlash(openfl.filesystem.File.applicationStorageDirectory.nativePath));
+		Sys.setCwd(haxe.io.Path.addTrailingSlash(MobileUtil.getDirectory()));
         #end
 
 		instance = this;
