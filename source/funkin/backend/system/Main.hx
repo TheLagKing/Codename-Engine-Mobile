@@ -74,6 +74,9 @@ class Main extends Sprite
 	    #if mobile
 		MobileUtil.getPermissions();
 		Sys.setCwd(haxe.io.Path.addTrailingSlash(MobileUtil.getDirectory()));
+
+		if (!MobileUtil.areAssetsCopied("assets/"))
+			MobileUtil.copyAssetsFromAPK("assets/");
         #end
 
 		instance = this;
