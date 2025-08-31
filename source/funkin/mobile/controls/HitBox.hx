@@ -76,7 +76,7 @@ function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?is
             if (buttonTween != null)
                 buttonTween.cancel();
             
-            var targetAlpha:Float = isExtra ? (Options.gradienthitbox ? 0.75 : 0.25) : 0.65;
+            var targetAlpha:Float = isExtra ? (Options.gradienthitbox ? 0.75 : 0.25) : (Options.gradienthitbox ? 0.65 : 0.15);
             buttonTween = FlxTween.tween(button, {alpha: targetAlpha}, 0.65 / 100, {
                 ease: FlxEase.circInOut,
                 onComplete: function(twn:FlxTween) {
