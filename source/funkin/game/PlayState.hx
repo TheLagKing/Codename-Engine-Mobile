@@ -958,7 +958,7 @@ class PlayState extends MusicBeatState
 		startingSong = false;
 
 	   #if mobile
-		PauseButtonManager.showPauseButtonOnCamera(camcontrol, null, function() {
+		PauseButtonManager.showPauseButtonOnCamera(camHUD, null, function() {
 		pauseGame();
 		});
 	   #end
