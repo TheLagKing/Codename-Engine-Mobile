@@ -957,6 +957,12 @@ class PlayState extends MusicBeatState
 		scripts.call("onSongStart");
 		startingSong = false;
 
+	   #if mobile
+		PauseButtonManager.showPauseButtonOnCamera(camHUD, null, function() {
+		pauseGame();
+		});
+	   #end
+
 		inst.onComplete = endSong;
 
 		if (!paused) {
@@ -1261,6 +1267,10 @@ class PlayState extends MusicBeatState
 	{
 		scripts.call("update", [elapsed]);
 
+		#if mobile
+		PauseButtonManager.update();
+		#end
+
 		if (inCutscene) {
 			super.update(elapsed);
 			scripts.call("postUpdate", [elapsed]);
@@ -1530,7 +1540,10 @@ class PlayState extends MusicBeatState
 		}
 		inst.pause();
 		vocals.pause();
-		#if mobile mcontrols.visible = false; #end
+		#if mobile
+		PauseButtonManager.hidePauseButton();
+		mcontrols.visible = false;
+		#end
 
 		if (validScore)
 		{
