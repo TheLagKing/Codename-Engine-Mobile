@@ -90,6 +90,9 @@ class Main extends Sprite
 
 		#if !web
 		addChild(framerateSprite = new funkin.backend.system.framerate.Framerate());
+		#if mobile
+		FlxG.stage.window.onResize.add((w:Int, h:Int) -> framerateSprite.setScale());
+		#end
 		SystemInfo.init();
 		#end
 	}
