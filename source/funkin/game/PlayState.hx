@@ -303,6 +303,13 @@ class PlayState extends MusicBeatState
 	 * Camera for the HUD (notes, misses).
 	 */
 	public var camHUD:HudCamera;
+
+	#if mobile
+	/**
+	 * Camera for the Mobile system (pause button).
+	 */
+	public var camMobile:HudCamera;
+	#end
 	/**
 	 * Camera for the game (stages, characters)
 	 */
@@ -570,6 +577,7 @@ class PlayState extends MusicBeatState
 		camGame = camera;
 		FlxG.cameras.add(camHUD = new HudCamera(), false);
 		camHUD.bgColor.alpha = 0;
+		#if mobile camMobile.bgColor.alpha = 0; #end
 
 		downscroll = Options.downscroll;
 
@@ -958,7 +966,7 @@ class PlayState extends MusicBeatState
 		startingSong = false;
 
 	   #if mobile
-		PauseButtonManager.showPauseButtonOnCamera(camHUD, null, function() {
+		PauseButtonManager.showPauseButtonOnCamera(camMobile, null, function() {
 		pauseGame();
 		});
 	   #end
