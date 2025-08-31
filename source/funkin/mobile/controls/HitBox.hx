@@ -12,8 +12,7 @@ import flixel.util.FlxColor;
  * ...
  * @author Idklool
  */
-class HitBox extends FlxSpriteGroup
-{
+class HitBox extends FlxSpriteGroup {
     public var buttonLeft:FlxButton;
     public var buttonDown:FlxButton;
     public var buttonUp:FlxButton;
@@ -21,11 +20,9 @@ class HitBox extends FlxSpriteGroup
     public var buttonExtra:FlxButton;
     public var buttonExtraTwo:FlxButton;
 
-    public function new()
-    {
+    public function new() {
         super();
         buttonLeft = buttonDown = buttonUp = buttonRight = buttonExtra = buttonExtraTwo = new FlxButton(0, 0);
-        
         addButtons();
         scrollFactor.set();
     }
@@ -63,8 +60,7 @@ class HitBox extends FlxSpriteGroup
         }
     }
 
-function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?isExtra:Bool = false)
-{
+function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?isExtra:Bool = false) {
     var button:FlxButton = new FlxButton(x, y);
     if (Options.gradienthitbox) {
      button.loadGraphic(createHitboxGraphic(width, height));
@@ -72,13 +68,11 @@ function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?is
     } else {
      button.makeGraphic(width, height, FlxColor.fromString(color));
     }
-    button.alpha = Options.hitboxvisibility ? (isExtra ? (Options.gradienthitbox ? 0.15 : 0.1) : 0.1) : 0;
-
+    button.alpha = Options.hitboxvisibility ? (isExtra ? (Options.gradienthitbox ? 0.15 : 0.1) : 0.1) : 0.0001; // i changed it to have less lag
     if (Options.hitboxvisibility) {
      var buttonTween:FlxTween = null;
         
-     button.onDown.callback = function()
-     {
+     button.onDown.callback = function() {
             if (buttonTween != null)
                 buttonTween.cancel();
             
@@ -90,8 +84,7 @@ function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?is
                 }
             });
     }
-    button.onUp.callback = function()
-    {
+    button.onUp.callback = function() {
             if (buttonTween != null)
                 buttonTween.cancel();
 
@@ -104,13 +97,14 @@ function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?is
             });
     }
     button.onOut.callback = button.onUp.callback;
+    } else {
+        button.alpha = 0.0001;
     }
 
     return button;
-    }
+}
     
-    function createHitboxGraphic(Width:Int, Height:Int):FlxGraphic
-    {
+    function createHitboxGraphic(Width:Int, Height:Int):FlxGraphic {
         var shape:Shape = new Shape();
         shape.graphics.beginFill(0xFFFFFF);
         
@@ -134,8 +128,7 @@ function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?is
         FlxG.resetState();
     }
     
-    override public function destroy()
-    {
+    override public function destroy() {
         super.destroy();
         buttonLeft = buttonDown = buttonUp = buttonRight = buttonExtra = buttonExtraTwo = null;
     }
