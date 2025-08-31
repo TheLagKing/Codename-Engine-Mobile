@@ -67,10 +67,10 @@ function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?is
 {
     var button:FlxButton = new FlxButton(x, y);
     if (Options.gradienthitbox) {
-       button.loadGraphic(createHitboxGraphic(width, height));
-       button.color = FlxColor.fromString(color);
+     button.loadGraphic(createHitboxGraphic(width, height));
+     button.color = FlxColor.fromString(color);
     } else {
-       button.makeGraphic(width, height, FlxColor.fromString(color));
+     button.makeGraphic(width, height, FlxColor.fromString(color));
     }
     button.alpha = Options.hitboxvisibility ? (isExtra ? (Options.gradienthitbox ? 0.2 : 0.1) : 0.1) : 0;
 
