@@ -7,8 +7,6 @@ import flixel.FlxG;
 import flixel.tweens.FlxTween;
 import flixel.group.FlxSpriteGroup;
 import flixel.util.FlxColor;
-import flixel.tweens.FlxEase;
-import flixel.ui.FlxButton;
 
 /**
  * ...
@@ -36,8 +34,8 @@ class HitBox extends FlxSpriteGroup
         var hasExtraButton:Bool = Options.extrabutton >= 1;
         var hasSecondExtraButton:Bool = Options.extrabutton == 2;
         
-        var buttonHeight:Int = hasExtraButton ? (Options.extrabuttontop ? Std.int(FlxG.height * -0.75) : Std.int(FlxG.height * 0.75)) : FlxG.height;
-        var extraY:Int = hasExtraButton ? (Options.extrabuttontop ? Std.int(FlxG.height * -0.75) : Std.int(FlxG.height * 0.75)) : 0;
+        var buttonHeight:Int = hasExtraButton ? (Options.extrabuttontop ? Std.int(FlxG.height / 0.310) : Std.int(FlxG.height * 0.75)) : FlxG.height;
+        var extraY:Int = hasExtraButton ? (Options.extrabuttontop ? Std.int(FlxG.height * 0.310) : Std.int(FlxG.height * 0.75)) : 0;
         var extraHeight:Int = Std.int(FlxG.height * 0.25);
         
         var x:Int = 0;
@@ -54,7 +52,7 @@ class HitBox extends FlxSpriteGroup
                 buttonExtra = createHitbox(0, extraY, Std.int(FlxG.width / 2), extraHeight, '0xFFFFFF', true);
                 add(buttonExtra);
                 
-                // Second extra button (right half of extra space) - yellow color
+                // Second extra button (right half of extra space)
                 buttonExtraTwo = createHitbox(FlxG.width / 2, extraY, Std.int(FlxG.width / 2), extraHeight, '0xFFFF00', true);
                 add(buttonExtraTwo);
             } else {
@@ -65,43 +63,52 @@ class HitBox extends FlxSpriteGroup
         }
     }
 
-    function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?isExtra:Bool = false)
+function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?isExtra:Bool = false)
+{
+    var button:FlxButton = new FlxButton(x, y);
+    if (Options.gradienthitbox) {
+       button.loadGraphic(createHitboxGraphic(width, height));
+       button.color = FlxColor.fromString(color);
+    } else {
+       button.makeGraphic(width, height, FlxColor.fromString(color));
+    }
+    button.alpha = Options.hitboxvisibility ? (isExtra ? (Options.gradienthitbox ? 0.2 : 0.1) : 0.1) : 0;
+
+    if (Options.hitboxvisibility) {
+        
+    var buttonTween:FlxTween = null;
+     button.onDown.callback = function()
+     {
+            if (buttonTween != null)
+                buttonTween.cancel();
+            
+            var targetAlpha:Float = Options.gradienthitbox ? 0.65 : 0.15;
+            buttonTween = FlxTween.tween(button, {alpha: targetAlpha}, 0.65 / 100, {
+                ease: FlxEase.circInOut,
+                onComplete: function(twn:FlxTween) {
+                    buttonTween = null;
+                }
+            });
+    }
+    button.onUp.callback = function()
     {
-        var button:FlxButton = new FlxButton(x, y);
-        button.loadGraphic(createHitboxGraphic(width, height));
-        button.color = FlxColor.fromString(color);
-        button.alpha = Options.hitboxvisibility ? (isExtra ? 0.2 : 0.1) : 0;
+            if (buttonTween != null)
+                buttonTween.cancel();
 
-        var buttonTween:FlxTween = null;
-        button.onDown.callback = function()
-            {
-                if (buttonTween != null)
-                    buttonTween.cancel();
-
-                buttonTween = FlxTween.tween(button, {alpha: 0.65}, 0.65 / 100, {
-                    ease: FlxEase.circInOut,
-                    onComplete: function(twn:FlxTween) {
-                        buttonTween = null;
-                    }
-                });
-            }
-        button.onUp.callback = function()
-            {
-                if (buttonTween != null)
-                    buttonTween.cancel();
-
-                buttonTween = FlxTween.tween(button, {alpha: Options.hitboxvisibility ? (isExtra ? 0.2 : 0.1) : 0}, 0.65 / 10, {
-                    ease: FlxEase.circInOut,
-                    onComplete: function(twn:FlxTween) {
-                        buttonTween = null;
-                    }
-                });
-            }
-        button.onOut.callback = button.onUp.callback;
-
-        return button;
+            var targetAlpha:Float = isExtra ? (Options.gradienthitbox ? 0.2 : 0.1) : 0.1;
+            buttonTween = FlxTween.tween(button, {alpha: targetAlpha}, 0.65 / 10, {
+                ease: FlxEase.circInOut,
+                onComplete: function(twn:FlxTween) {
+                    buttonTween = null;
+                }
+            });
+    }
+    button.onOut.callback = button.onUp.callback;
     }
 
+    return button;
+    }
+    
     function createHitboxGraphic(Width:Int, Height:Int):FlxGraphic
     {
         var shape:Shape = new Shape();
