@@ -82,7 +82,7 @@ function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?is
             if (buttonTween != null)
                 buttonTween.cancel();
             
-            var targetAlpha:Float = Options.gradienthitbox ? 0.65 : 0.15;
+            var targetAlpha:Float = Options.gradienthitbox ? 0.6 : 0.0001;
             buttonTween = FlxTween.tween(button, {alpha: targetAlpha}, 0.65 / 100, {
                 ease: FlxEase.circInOut,
                 onComplete: function(twn:FlxTween) {
@@ -95,7 +95,7 @@ function createHitbox(x:Float, y:Float, width:Int, height:Int, color:String, ?is
             if (buttonTween != null)
                 buttonTween.cancel();
 
-            var targetAlpha:Float = isExtra ? (Options.gradienthitbox ? 0.2 : 0.1) : 0.1;
+            var targetAlpha:Float = isExtra ? (Options.gradienthitbox ? 0.2 : 0.1) : 0.00001;
             buttonTween = FlxTween.tween(button, {alpha: targetAlpha}, 0.65 / 10, {
                 ease: FlxEase.circInOut,
                 onComplete: function(twn:FlxTween) {
