@@ -39,7 +39,7 @@ class HitBox extends FlxSpriteGroup
         var extraHeight:Int = Std.int(FlxG.height * 0.25);
         
         var x:Int = 0;
-        var y:Int = Options.extrabuttontop ? Std.int(FlxG.height / 4) : 0;
+        var y:Int = hasExtraButton ? (Options.extrabuttontop ? Std.int(FlxG.height / 4) : 0) : 0;
 
         add(buttonLeft = createHitbox(x, y, Std.int(FlxG.width / 4), buttonHeight, '0xC24B99'));
         add(buttonDown = createHitbox(FlxG.width / 4, y, Std.int(FlxG.width / 4), buttonHeight, '0x00FFFF'));
