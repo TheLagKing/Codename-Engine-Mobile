@@ -958,7 +958,9 @@ class PlayState extends MusicBeatState
 		startingSong = false;
 
 	   #if mobile
-		addButtonPause();
+		addButtonPause(function() {
+		pauseGame();
+		});
 	   #end
 
 		inst.onComplete = endSong;
