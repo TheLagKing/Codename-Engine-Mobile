@@ -171,14 +171,12 @@ class MusicBeatState extends FlxState implements IBeatReceiver
 	  }
 	}
 
-	public function addButtonPause()
+	public function addButtonPause(?onClick:Void->Void)
 	{
 		var camMobile = new FlxCamera();
 	    FlxG.cameras.add(camMobile, false);
 	    camMobile.bgColor.alpha = 0;
-		PauseButtonManager.showPauseButtonOnCamera(camMobile, null, function() {
-		pauseGame();
-		});
+		PauseButtonManager.showPauseButtonOnCamera(camMobile, null, onClick);
 	}
 	#end
 
