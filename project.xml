@@ -225,6 +225,9 @@
 	<haxedef name="hscriptPos" /> <!-- for logging -->
 
 	<!-- IOS stuff -->
+    <section if="ios">
+	<haxedef name="SHARE_MOBILE_FILES" />
 	<config:ios category_type="public.app-category.music-games" />
 	<config:mac category_type="public.app-category.music-games" />
+	</section>
 </project>
