@@ -88,6 +88,8 @@ class Main extends Sprite
 
 		addChild(game = new FunkinGame(gameWidth, gameHeight, MainState, Options.framerate, Options.framerate, skipSplash, startFullscreen));
 
+		#if android FlxG.android.preventDefaultKeys = [BACK]; #end
+
 		#if !web
 		addChild(framerateSprite = new funkin.backend.system.framerate.Framerate());
 		#if mobile
