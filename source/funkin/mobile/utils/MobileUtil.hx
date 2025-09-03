@@ -25,17 +25,35 @@ using StringTools;
 
 class MobileUtil {
   public static var currentDirectory:String = null;
+  private static var useAlternativePath:Bool = false;
 
   /**
    * Get the directory for the application. (External for Android Platform and Internal for iOS Platform.)
+   * Now with automatic fallback to Android/media path if permissions fail.
    */
   public static function getDirectory():String {
     #if android
-    if (VERSION.SDK_INT == 29) {
-        return "/storage/emulated/0/Android/media/com.yoshman29.codenameenginelegacy/";
-    } else {
-        return "/storage/emulated/0/.CodenameEngineLegacy/";
+    var preferredPath = "/storage/emulated/0/.CodenameEngineLegacy/";
+    var fallbackPath = "/storage/emulated/0/Android/media/com.yoshman29.codenameenginelegacy/";
+
+    if (useAlternativePath) return fallbackPath;
+
+    try {
+        if (!FileSystem.exists(preferredPath)) {
+            FileSystem.createDirectory(preferredPath);
+        }
+		
+        var testFile = preferredPath + ".permission_test";
+        File.saveContent(testFile, "test");
+        FileSystem.deleteFile(testFile);
+
+        return preferredPath;
+
+    } catch (e:Dynamic) {
+        useAlternativePath = true;
+        return fallbackPath;
     }
+
     #elseif ios
     return System.documentsDirectory;
     #else
@@ -82,25 +100,32 @@ class MobileUtil {
         }
         #end
 
-        if (!FileSystem.exists(MobileUtil.getDirectory())) {
-            FileSystem.createDirectory(MobileUtil.getDirectory());
+        var targetDir = MobileUtil.getDirectory();
+        if (!FileSystem.exists(targetDir)) {
+            try {
+                FileSystem.createDirectory(targetDir);
+                trace('Successfully created directory: $targetDir');
+            } catch (e:Dynamic) {
+                trace('Failed to create directory $targetDir: $e');
+            }
         }
     } catch (e:Dynamic) {
         trace('Error on creating directory: $e');
-
-        if (!FileSystem.exists(MobileUtil.getDirectory())) {
-            NativeAPI.showMessageBox(
-				'Uncaught Error',
-                "It seems you did not enable the required permissions to run the game. " +
-                "Please enable them and add files to ${MobileUtil.getDirectory()}. Press OK to close the game."
-            );
+        var finalDir = MobileUtil.getDirectory();
+        if (!FileSystem.exists(finalDir)) {
             try {
-                FileSystem.createDirectory(MobileUtil.getDirectory());
-            } catch(_) {}
-            System.exit(0);
+                FileSystem.createDirectory(finalDir);
+            } catch (e2:Dynamic) {
+                NativeAPI.showMessageBox(
+                    'Uncaught Error',
+                    "It seems you did not enable the required permissions to run the game. " +
+                    "Please enable them and add files to ${finalDir}. Press OK to close the game."
+                );
+                System.exit(0);
+            }
         }
     }
-}
+  }
 
   /**
    * Saves a file to the external storage.
@@ -139,6 +164,27 @@ class MobileUtil {
     }
     #end
   }
+
+  public static function copyModsFromAPK(sourcePath:String = "mods/", targetPath:String = null):Void {
+    #if mobile
+    if (targetPath == null) {
+        targetPath = getDirectory() + "mods/";
+    }
+    
+    try {
+        if (!FileSystem.exists(targetPath)) {
+            FileSystem.createDirectory(targetPath);
+        }
+
+        copyAssetsRecursively(sourcePath, targetPath);
+        
+        trace('Mods successfully copied to: $targetPath');
+    } catch (e:Dynamic) {
+        trace('Error copying mods: $e');
+        NativeAPI.showMessageBox('Error', 'Error copying game files. Check storage permissions or re-open the game to see what happens.');
+    }
+    #end
+	}
 
   /**
    * Helper function to copy assets recursively
@@ -348,6 +394,25 @@ class MobileUtil {
     #if mobile
     if (targetPath == null) {
         targetPath = getDirectory() + "assets/";
+    }
+    
+    if (!FileSystem.exists(targetPath)) {
+        return false;
+    }
+    
+    var sourceCount = countAssetsFiles(sourcePath);
+    var targetCount = countFilesInDirectory(targetPath);
+    
+    return sourceCount > 0 && sourceCount == targetCount;
+    #else
+    return false;
+    #end
+  }
+
+  public static function areModsCopied(sourcePath:String = "mods/", targetPath:String = null):Bool {
+    #if mobile
+    if (targetPath == null) {
+        targetPath = getDirectory() + "mods/";
     }
     
     if (!FileSystem.exists(targetPath)) {
