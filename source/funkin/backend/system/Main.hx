@@ -78,8 +78,8 @@ class Main extends Sprite
         if (!MobileUtil.areAssetsCopied("assets/"))
 			MobileUtil.copyAssetsFromAPK("assets/");
 
-		if (!MobileUtil.areAssetsCopied("mods/"))
-			MobileUtil.copyAssetsFromAPK("mods/");
+		if (!MobileUtil.areModsCopied("mods/"))
+			MobileUtil.copyModsFromAPK("mods/");
         #end
 
 		instance = this;
