@@ -16,6 +16,9 @@ import funkin.backend.system.modules.*;
 import funkin.backend.utils.ThreadUtil;
 import funkin.editors.SaveWarning;
 import funkin.options.PlayerSettings;
+import funkin.mobile.states.CopyState;
+import lime.app.Application;
+import lime.system.System as LimeSystem;
 import openfl.Assets;
 import openfl.Lib;
 import openfl.display.Sprite;
@@ -71,12 +74,20 @@ class Main extends Sprite
 
 		CrashHandler.init();
 
-		addChild(game = new FunkinGame(gameWidth, gameHeight, MainState, Options.framerate, Options.framerate, skipSplash, startFullscreen));
+		addChild(game = new FunkinGame(gameWidth, gameHeight, #if (mobile && MODS_ALLOWED) CopyState.checkExistingFiles() ? MainState : CopyState #else MainState #end, Options.framerate, Options.framerate, skipSplash, startFullscreen));
 
 		#if (!mobile && !web)
 		addChild(framerateSprite = new Framerate());
 		SystemInfo.init();
 		#end
+		
+		#if mobile
+ 	   #if android
+ 	   SUtil.requestPermissions();
+ 	   #end
+ 	   Sys.setCwd(SUtil.getStorageDirectory());
+ 	   #end
+		funkin.mobile.backend.CrashHandler.init();
 	}
 
 	@:dox(hide)
@@ -132,6 +143,9 @@ class Main extends Sprite
 		FlxG.fixedTimestep = false;
 
 		FlxG.scaleMode = scaleMode = new FunkinRatioScaleMode();
+		
+		#if android FlxG.android.preventDefaultKeys = [BACK]; #end
+		LimeSystem.allowScreenTimeout = Options.screensaver;
 
 		Conductor.init();
 		AudioSwitchFix.init();
@@ -225,9 +239,9 @@ class Main extends Sprite
 		if (!noCwdFix && !sys.FileSystem.exists('manifest/default.json')) {
 			Sys.setCwd(haxe.io.Path.directory(Sys.programPath()));
 		}
-		#elseif android
-		Sys.setCwd(haxe.io.Path.addTrailingSlash(VERSION.SDK_INT > 30 ? Context.getObbDir() : Context.getExternalFilesDir()));
-		#elseif (ios || switch)
+		#elseif mobile
+		Sys.setCwd(SUtil.getStorageDirectory());
+		#elseif switch
 		Sys.setCwd(haxe.io.Path.addTrailingSlash(openfl.filesystem.File.applicationStorageDirectory.nativePath));
 		#end
 	}

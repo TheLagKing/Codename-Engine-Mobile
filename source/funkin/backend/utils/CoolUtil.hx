@@ -109,6 +109,16 @@ final class CoolUtil
 	public static function parseJson(assetPath:String) {
 		return Json.parse(Assets.getText(assetPath));
 	}
+	
+	public static function showPopUp(message:String, title:String):Void
+	{
+		FlxG.stage.window.alert(message, title);
+	}
+
+	public static function getCPUThreadsCount():Int
+    {
+        return 1;
+	}
 
 	/**
 	 * Deletes a folder recursively

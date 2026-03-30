@@ -25,6 +25,9 @@ class Options
 	public static var ghostTapping:Bool = true;
 	public static var flashingMenu:Bool = true;
 	public static var camZoomOnBeat:Bool = true;
+	public static var screensaver:Bool = true;
+	public static var padalpha:Float = 0.5;
+	public static var hitboxalpha:Float = 0.2;
 	public static var fpsCounter:Bool = true;
 	public static var autoPause:Bool = true;
 	public static var antialiasing:Bool = true;
