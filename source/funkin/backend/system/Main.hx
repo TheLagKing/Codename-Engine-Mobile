@@ -74,7 +74,7 @@ class Main extends Sprite
 
 		CrashHandler.init();
 
-		addChild(game = new FunkinGame(gameWidth, gameHeight, #if (mobile && MODS_ALLOWED) CopyState.checkExistingFiles() ? MainState : CopyState #else MainState #end, Options.framerate, Options.framerate, skipSplash, startFullscreen));
+		addChild(game = new FunkinGame(gameWidth, gameHeight, #if (mobile && MOD_SUPPORT) CopyState.checkExistingFiles() ? MainState : CopyState #else MainState #end, Options.framerate, Options.framerate, skipSplash, startFullscreen));
 
 		#if (!mobile && !web)
 		addChild(framerateSprite = new Framerate());
