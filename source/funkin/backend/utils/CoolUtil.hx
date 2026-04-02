@@ -1045,7 +1045,7 @@ final class CoolUtil
 	 * @return  Bool
 	 */
 	public static function mouseOverlaps(sprite:FlxObject, ?camera:FlxCamera) {
-		var camToCheck:FlxCamera = camera ?? sprite.camera;
+		var camToCheck:FlxCamera = (camera != null ? camera : sprite.camera);
 		var posthing:FlxPoint = FlxG.mouse.getWorldPosition(camToCheck);
 
 		return posthing != null && FlxMath.inBounds(posthing.x, sprite.x, sprite.x + sprite.width) && FlxMath.inBounds(posthing.y, sprite.y, sprite.y + sprite.height);
