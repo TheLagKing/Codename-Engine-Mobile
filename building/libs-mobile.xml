@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<libraries checkVersion="update || all">
+	<if cond="update || all">
+		<print pretty="true">Preparing installation...</print>
+
+		<!-- OpenFL & Lime (Required for Flixel) -->
+		<git name="openfl" url="https://github.com/CodenameCrew/cne-openfl" ref="679d41a64d67cd8ffdc039695f1543584965a9d6" />
+		<git name="lime" url="https://github.com/kittycathy233/lime" />
+
+		<!-- Flixel -->
+		<git name="flixel" url="https://github.com/CodenameCrew/cne-flixel" ref="38c0f548e678714b2885f710c2b4454fa2ce7058" />
+		<git name="flixel-addons" url="https://github.com/CodenameCrew/cne-flixel-addons" />
+		<lib name="flixel-ui" version="2.6.1" />
+
+		<!-- Other Libraries -->
+		<git name="hscript-improved" url="https://github.com/CodenameCrew/hscript-improved" ref="b82aad097a8e295cefeff13c3d1953f27c4d5e11" />
+		<git name="flxanimate" url="https://github.com/CodenameCrew/cne-flxanimate" />
+		<git name="hxdiscord_rpc" url="https://github.com/CodenameCrew/cne-hxdiscord_rpc" skipDeps="true" />
+		<git name="funkin-modchart" url="https://github.com/TheoDevelops/FunkinModchart" ref="f30676579d8de7ccac7d12e13b664e8b2c42c6bf" skipDeps="true" />
+		<lib name="hxvlc" version="1.9.3" skipDeps="true" />
+		
+		<!-- Documentation and other features -->
+		<git name="away3d" url="https://github.com/CodenameCrew/away3d" />
+		<!-- <lib name="dox" /> -->
+		<lib name="markdown" />
+		<lib name="hxcpp-debug-server" />
+
+		<lib name="nape-haxe4" />
+
+		<!-- For building lime -->
+		<lib global="true" name="hxp" /> <lib name="hxp" />
+		<lib global="true" name="format" /> <lib name="format" />
+
+		<git name="hxcpp" url="https://github.com/CodenameCrew/cne-hxcpp" ref="5932340d095a7eea8635fe4d1355f1c0efd0b3c2" />
+	</if>
+
+</libraries>
