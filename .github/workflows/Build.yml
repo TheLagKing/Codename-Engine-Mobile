@@ -19,11 +19,7 @@ jobs:
       - name: Setup Haxe
         uses: krdlab/setup-haxe@master
         with:
-          haxe-version: 4.3.6
-
-      - name: Install Libraries
-        run: |
-          haxe -cp commandline -D analyzer-optimize --run Main setup -s
+          haxe-version: 4.2.5
 
       - name: Restore Cache
         uses: actions/cache@v4
@@ -35,6 +31,10 @@ jobs:
             export/release/android/obj/
           restore-keys: |
             cache-android-night 
+
+      - name: Install Libraries
+        run: |
+          haxe -cp commandline -D analyzer-optimize --run Main setup -s
 
       - name: Configure Android
         run: |
