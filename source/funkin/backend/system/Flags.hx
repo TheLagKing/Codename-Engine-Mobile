@@ -325,18 +325,11 @@ class Flags {
 	}
 
 	public static function parseFlags(flags:Map<String, String>) {
-		var parsed:Bool;
-		for (name => value in flags) switch (name) {
-			case "MOD_API_VERSION":
-				var version = Std.parseInt(value) ?? CURRENT_API_VERSION;
-				if (version > MOD_API_VERSION || MOD_API_VERSION == null) MOD_API_VERSION = version;
-			default:
-				if (!(parsed = parse(name, value))) customFlags.set(name, value);
-				if (!overridenFlags.exists(name)) overridenFlags.set(name, parsed);
-		}
-		#if MODCHARTING_FEATURES
+		for(name=>value in flags)
+			if(!parse(name, value))
+				customFlags.set(name, value);
+
 		Options.modchartingHoldSubdivisions = DEFAULT_MODCHART_HOLD_SUBDIVISIONS;
-		#end
 	}
 
 	/**
