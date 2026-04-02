@@ -337,7 +337,7 @@ class FunkinSprite extends FlxAnimate implements IBeatReceiver implements IOffse
 		return animation.name;
 
 	public inline function isAnimReversed():Bool
-		return animation.curAnim?.reversed ?? false;
+		return animateAtlas != null ? animateAtlas.anim.reversed : animation.curAnim != null ? animation.curAnim.reversed : false;
 
 	public inline function getNameList():Array<String>
 		return animation.getNameList();
