@@ -1,48 +1,58 @@
-name: Android Build
+name: Android Build Test
+
 on:
-  push:
-    branches: ['main']
   workflow_dispatch:
-  workflow_call:
+
 jobs:
-  build:
-    name: Android Build
-    permissions: write-all
-    runs-on: macos-15
+  Android:
+    runs-on: ubuntu-latest
     steps:
-      - name: Pulling the new commit
-        uses: actions/checkout@v4
-      - name: Setting up Haxe
-        uses: krdlab/setup-haxe@v2
+      - name: Checkout
+        uses: actions/checkout@main
+
+      - name: Setup Java JDK
+        uses: actions/setup-java@main
         with:
-          haxe-version: 4.3.7
-      - name: Restore existing build cache for faster compilation
-        uses: actions/cache@v4.2.3
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Haxe
+        uses: krdlab/setup-haxe@master
         with:
-          # not caching the bin folder to prevent asset duplication and stuff like that
-          key: cache-build-android
+          haxe-version: 4.3.6
+
+      - name: Install Libraries
+        run: |
+          haxe -cp commandline -D analyzer-optimize --run Main setup -s
+
+      - name: Restore Cache
+        uses: actions/cache@v4
+        with:
+          key: cache-android-night
           path: |
             .haxelib/
             export/release/android/haxe/
             export/release/android/obj/
-      - run: |
-          echo "HXCPP_COMPILE_CACHE=~/.hxcpp" >> $GITHUB_ENV
-      - name: Installing/Updating libraries
-        run: |
-          haxe -cp commandline -D analyzer-optimize --run Main setup -s
-      - name: Configuring Android
+          restore-keys: |
+            cache-android-night 
+
+      - name: Configure Android
         run: |
           haxelib run lime config ANDROID_SDK $ANDROID_HOME
           haxelib run lime config ANDROID_NDK_ROOT $ANDROID_NDK_LATEST_HOME
-          haxelib run lime config JAVA_HOME $JAVA_HOME_21_arm64
-          haxelib run lime config ANDROID_SETUP true
-      - name: Building the game
+          haxelib run lime config JAVA_HOME $JAVA_HOME
+          haxelib run lime config ANDROID_SETUP true 
+
+      - name: Compile
         run: haxelib run lime build android -final
-      - name: Uploading artifact (entire build)
-        uses: actions/upload-artifact@v4
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@main
         with:
           name: Codename Engine Android
-          path: export/release/android/bin/app/build/outputs/apk/release/*.apk
+          path: export/release/android/bin/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+
       - name: Clearing already existing cache
         uses: actions/github-script@v6
         with:
@@ -52,7 +62,7 @@ jobs:
               repo: context.repo.repo,
             })
             for (const cache of caches.data.actions_caches) {
-              if (cache.key == "cache-build-android") {
+              if (cache.key == "cache-build-night") {
                 console.log('Clearing ' + cache.key + '...')
                 await github.rest.actions.deleteActionsCacheById({
                   owner: context.repo.owner,
@@ -63,11 +73,13 @@ jobs:
               }
             }
       - name: Uploading new cache
-        uses: actions/cache@v4.2.3
+        uses: actions/cache@v4
         with:
           # caching again since for some reason it doesnt work with the first post cache shit
-          key: cache-build-android
+          key: cache-android-night
           path: |
             .haxelib/
             export/release/android/haxe/
             export/release/android/obj/
+          restore-keys: |
+            cache-android-night
