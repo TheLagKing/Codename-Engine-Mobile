@@ -36,6 +36,11 @@ jobs:
         run: |
           haxe -cp commandline -D analyzer-optimize --run Main setup -s
 
+      - name: Install Lime
+        run: |
+          haxelib install lime
+          haxelib run lime setup -alias -y
+
       - name: Configure Android
         run: |
           haxelib run lime config ANDROID_SDK $ANDROID_HOME
