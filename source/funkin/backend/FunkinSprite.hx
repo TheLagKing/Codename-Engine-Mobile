@@ -208,21 +208,27 @@ class FunkinSprite extends FlxAnimate implements IBeatReceiver implements IOffse
 	private inline function __shouldDoZoomFactor()
 		return zoomFactorEnabled && zoomFactor != 1;
 
-	private inline function __prepareZoomFactor(?rect:FlxRect, camera:FlxCamera):FlxRect {
-		if (Flags.USE_LEGACY_ZOOM_FACTOR)
-			return (rect ?? FlxRect.get()).set(
-				camera.width * 0.5,
-				camera.height * 0.5,
-				(camera.scaleX > 0 ? Math.max : Math.min)(0, FlxMath.lerp(1 / camera.scaleX, 1, zoomFactor)),
-				(camera.scaleY > 0 ? Math.max : Math.min)(0, FlxMath.lerp(1 / camera.scaleY, 1, zoomFactor))
-			);
-		else
-			return (rect ?? FlxRect.get()).set(
-				camera.width * 0.5 + camera.scroll.x * scrollFactor.x,
-				camera.height * 0.5 + camera.scroll.y * scrollFactor.y,
-				(camera.scaleX > 0 ? Math.max : Math.min)(0, FlxMath.lerp(1 / camera.scaleX, 1, zoomFactor)),
-				(camera.scaleY > 0 ? Math.max : Math.min)(0, FlxMath.lerp(1 / camera.scaleY, 1, zoomFactor))
-			);
+	public override function getScreenBounds(?newRect:FlxRect, ?camera:FlxCamera):FlxRect
+	{
+		if (camera == null)
+			camera = FlxG.camera;
+
+		var r = super.getScreenBounds(newRect, camera);
+
+		if(__shouldDoZoomFactor()) {
+			r.x -= camera.width / 2;
+			r.y -= camera.height / 2;
+
+			var ratio = (camera.zoom > 0 ? Math.max : Math.min)(0, FlxMath.lerp(1 / camera.zoom, 1, zoomFactor));
+			r.x *= ratio;
+			r.y *= ratio;
+			r.width *= ratio;
+			r.height *= ratio;
+
+			r.x += camera.width / 2;
+			r.y += camera.height / 2;
+		}
+		return r;
 	}
 
 	override public function isOnScreen(?camera:FlxCamera):Bool
@@ -237,6 +243,20 @@ class FunkinSprite extends FlxAnimate implements IBeatReceiver implements IOffse
 		if (bounds.width == 0 && bounds.height == 0)
 			return false;
 		return camera.containsRect(bounds);
+	}
+
+	// ZOOM FACTOR RENDERING
+	public override function doAdditionalMatrixStuff(matrix:FlxMatrix, camera:FlxCamera)
+	{
+		super.doAdditionalMatrixStuff(matrix, camera);
+		if(__shouldDoZoomFactor()) {
+			matrix.translate(-camera.width / 2, -camera.height / 2);
+
+			var requestedZoom = (camera.zoom >= 0 ? Math.max : Math.min)(FlxMath.lerp(1, camera.zoom, zoomFactor), 0);
+			var diff = requestedZoom / camera.zoom;
+			matrix.scale(diff, diff);
+			matrix.translate(camera.width / 2, camera.height / 2);
+		}
 	}
 
 	// OFFSETTING
@@ -326,10 +346,10 @@ class FunkinSprite extends FlxAnimate implements IBeatReceiver implements IOffse
 		animation.stop();
 
 	public inline function isAnimFinished()
-		return animation.curAnim?.finished ?? true;
+		return animateAtlas != null ? animateAtlas.anim.finished : (animation.curAnim != null ? animation.curAnim.finished : true);
 
 	public inline function isAnimAtEnd()
-		return animation.curAnim?.isAtEnd ?? false;
+		return animateAtlas != null ? animateAtlas.anim.isAtEnd : (animation.curAnim != null ? animation.curAnim.isAtEnd : false);
 
 	override function updateAnimation(elapsed:Float) {
 		if (animEnabled)
@@ -356,33 +376,10 @@ class FunkinSprite extends FlxAnimate implements IBeatReceiver implements IOffse
 	public function get_animateAtlas():FunkinSprite
     	return isAnimate ? this : null;
 
-	@:noCompletion private inline function get_globalCurFrame()
-		return animation.curAnim?.curFrame ?? 0;
-
+	@:noCompletion private inline function get_globalCurFrame() {
+		return animateAtlas != null ? (animateAtlas.anim.curFrame) : (animation.curAnim != null ? animation.curAnim.curFrame : 0);
+	}
 	@:noCompletion private inline function set_globalCurFrame(val:Int) {
-		if (animation.curAnim != null)
-			animation.curAnim.curFrame = val;
-		return val;
-	}
-
-	override function prepareDrawMatrix(matrix:FlxMatrix, camera:FlxCamera):Void {
-		super.prepareDrawMatrix(matrix, camera);
-
-		if (__shouldDoZoomFactor()) {
-			__prepareZoomFactor(_rect2, camera);
-			matrix.setTo(
-				matrix.a * _rect2.width, matrix.b * _rect2.height,
-				matrix.c * _rect2.width, matrix.d * _rect2.height,
-				(matrix.tx - _rect2.x) * _rect2.width + _rect2.x,
-				(matrix.ty - _rect2.y) * _rect2.height + _rect2.y,
-			);
-		}
-	}
-
-	override function checkFlipX() {
-		return super.checkFlipX() != camera.flipX;
-	}
-	override function checkFlipY() {
-		return super.checkFlipY() != camera.flipY;
+		return animateAtlas != null ? (animateAtlas.anim.curFrame = val) : (animation.curAnim != null ? animation.curAnim.curFrame = val : val);
 	}
 }
